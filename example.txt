@@ -1,0 +1,511 @@
+
+/*
+const config = {
+  schema,
+  url: 'ws://localhost:9076/app/engineData',
+  createSocket: url => new WebSocket(url),
+};
+
+var session = enigma.create(config).open().then((global) => {
+
+  return global.openDoc('Amira Finances.qvf');
+
+}).then(doc => doc.getLayout()).then(layout => {
+//doc.GetAllInfos()//no
+  //doc.getList({type:"FieldList"})//NO
+  //doc.getAppLayout() //YES
+  console.log('Object list', layout);
+
+}).catch(err => console.log('Something went wrong :(', err));
+*/
+
+/*
+doc
+.createObject(properties)
+.then(object => object.getLayout())
+.then(layout => console.log('App object list:', JSON.stringify(layout, null, '  ')))
+.then(() => session.close()));
+})
+.catch((error) => {
+console.log('Session: Failed to open socket:', error);
+process.exit(1);
+});
+
+
+
+  
+  // create a new session:
+  ws.on('open', function open() {
+  
+    ws.send(JSON.stringify({
+      "jsonrpc": "2.0",
+      "id": 0,
+      "method": "OpenDoc",
+      "handle": -1,
+      "params": [
+        "C:\\Users\\adamc\\Documents\\Qlik\\Sense\\Apps\\Executive Dashboard.qvf"
+      ]
+    }), function (data, err) {
+  
+      console.log(err);
+      
+      console.log('returned data ', data);
+  
+      //data.result.qReturn.qGenericId;
+      
+      ws.send(JSON.stringify({
+        "handle": 1,
+        "method": "GetAllInfos",
+        "params": {}
+      }), function (data, err) {
+  
+        console.log(err);
+        console.log('returned data ', data);
+        console.log(data);
+        //go through each document and extract the objects
+  
+      });
+  
+    });
+  
+  });
+  
+  
+
+  //const ws1 = new WebSocket('ws://localhost:4848/app/Amira Finances.qvf');
+
+
+
+  
+  
+  /*
+  
+  
+  
+  {
+    "handle": 1,
+    "method": "GetAllInfos",
+    "params": {},
+    "outKey": -1,
+    "id": 3
+  }
+  */
+
+
+
+/*
+// bind traffic events to log what is sent and received on the socket:
+session.on('traffic:sent', data => console.log('sent:', data));
+session.on('traffic:received', data => console.log('received:', data));
+ 
+// open the socket and eventually receive the QIX global API, and then close
+// the session:
+session.open()
+  .then(() => console.log('We are connected!'))
+  .then(() => console.log('hello'))
+ 
+ 
+ 
+ 
+// .then(() => session.close())
+// .then(() => console.log('Session closed'))
+// .catch(err => console.log('Something went wrong :(', err));
+ 
+//Get list of apps
+console.log(session);
+*/
+
+
+//Example of native dialo box for user input
+function showDialog() {
+  dialog.showOpenDialog({ defaultPath: '/Users/adamc/Desktop', buttonLabel: 'Select Logo', properties: ['openFile', 'multiSelections', 'createDirectory'] }, (openpath) => {
+    console.log(openPath)
+  });
+
+  //Example of ettin keyboard input
+  /*
+    globalShortcut.register('g', () => {
+      console.log('user pressed g');
+    })
+  
+    globalShortcut.unreisterAll()
+  */
+
+  //showSaveDialog
+  //showMessageBox
+  //showErrorBox
+
+}
+
+
+   /*
+    //sync example
+    ipcMain.on('sync-channel', (e, args) => {
+      console.log('sync message recieved');
+      e.returnValue = 'A sync response from the main process';
+    });
+*/
+
+
+
+
+/*
+    ipcMain.on('channel1', (event, args) => {
+      console.log(args);
+
+      event.sender.send('channel1', 'hello from the main process on channel 1');
+
+    });
+*/
+
+    /*
+    ipcMain.on('channel2', (event, args) => {
+      console.log(args);
+    
+      event.sender.send('channel2', 'Message recieved on  on channel 2');
+    
+    });
+    */
+
+    //console.log('Main page loaded.');
+
+
+  /*
+  //Session example
+  let mainSession = mainWindow.webContents.session;
+  //let altSession = altWindow.webContents.session;
+
+  console.log(Object.is(mainSession, appSession))
+
+
+
+  ///////////////////////////
+*/
+
+
+  /*
+  // Create the browser window.
+  childWindow = new BrowserWindow({
+    width: 400, height: 800, backgroundColor: '242628',
+    icon: path.join(__dirname, 'app_logo1.ico')
+  })
+*/
+
+  //win.setTitle()
+  //win.getTitle()
+  //win.reload()
+  //win.getParentWindow()
+
+
+/*test bcrypt */
+/*
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const someOtherPlaintextPassword = 'not_bacon';
+
+bcrypt.hash(myPlaintextPassword, saltRounds, function (err, hash) {
+  // Store hash in your password DB.
+  console.log("Hashed password: " + hash);
+});
+*/
+
+// Keep a global reference of the window object, if you don't, the window will
+// be closed automatically when the JavaScript object is garbage collected.
+
+
+/*
+console.log(app.getPath('desktop'));
+console.log(app.getPath('music'));
+console.log(app.getPath('temp'));
+//Useful path for storing data
+console.log(app.getPath('userData'));
+*/
+//App.setPath to overwrite default locations.
+
+
+
+
+/*
+setTimeout(function () {
+ 
+  console.log(app.isReady())
+}, 3000);
+*/
+
+
+/*
+//Listen for app to quit after 3 seconds
+app.on('browser-window-blur', function (event) {
+ 
+  setTimeout(app.quit, 3000);
+ 
+});
+*/
+
+// Set app icon badge count
+
+
+
+  electron.powerMonitor.on('suspend', () => {
+
+    console.log('system is going to sleep');
+
+  })
+
+
+  electron.powerMonitor.on('resume', () => {
+
+    console.log('system is waking up');
+
+  })
+
+
+  
+  //console.log('creating mainWindow');
+
+  let appSession = session.fromPartition('persist:partition1');
+  let defaultSession = session.defaultSession;
+
+  //Set cookie in the session
+  //optional expirationDate field
+  //Can apply filters in get({}) if wanted
+  /*
+  defaultSession.cookies.set({ url: 'https://myapp.com', name: 'cookie1', value: 'cookie_value', domain: 'myapp.com' }, (error) => {
+    console.log('cookies set');
+ 
+    defaultSession.cookies.get({ name: 'cookie1' }, (error, cookies) => {
+      console.log(cookies);
+    })
+ 
+ 
+  })
+*/
+
+
+
+  /*
+    altWindow = new BrowserWindow({
+      width: winState.Width,
+      height: winState.Height,
+      x: winState.x,
+      y: winState.y,
+      minHeight: 350, minWidth: 450,
+      icon: path.join(__dirname, 'app_logo1.ico'),
+      show: false,
+      title: "Wow1",
+      webPreferences: { session: appSession }
+    })
+  */
+
+
+
+
+  //Download management example
+  /*
+  defaultSession.on('will-download', (e, downloadItem, webContents) => {
+ 
+    let file = downloadItem.getFilename();
+    downloadItem.setSavePath('downloads/' + file)
+ 
+    let size = downloadItem.getTotalBytes()
+ 
+    downloadItem.on('updated', (e, state) => {
+ 
+      let progress = Math.round((downloadItem.getReceivedBytes() / size) * 100)
+ 
+      if (state === 'progressing') {
+        //console.log(progress + '%');
+ 
+        readline.clearLine(process.stdout, 0);
+        readline.cursorTo(process.stdout, 0, null);
+        let text = `waiting ... ${progress}%`;
+        process.stdout.write(text);
+      }
+ 
+ 
+    })
+ 
+    console.log(downloadItem.getFilename());
+ 
+    downloadItem.on('done', (e, state) => {
+      if (state === 'completed') {
+        //console.log(progress + '%');
+ 
+        process.stdout.write("\n");
+        console.log('Download Completed Successfully');
+      }
+ 
+    });
+ 
+  });
+*/
+
+
+
+
+  /*
+  altWindow.loadURL(url.format({
+    pathname: path.join(__dirname, 'index.html'),
+    protocol: 'file:',
+    slashes: true
+  }))
+*/
+
+  /*
+  // and load the index.html of the app.
+  childWindow.loadURL(url.format({
+    pathname: path.join(__dirname, 'child.html'),
+    protocol: 'file:',
+    slashes: true
+  }))
+*/
+
+
+
+
+  // Open the DevTools.
+
+  //altWindow.webContents.openDevTools()
+
+
+
+
+
+  /*
+  //webcontent examples
+  mainContents.on('new-window', (event, url) => {
+ 
+    console.log('New window created for ', url);
+ 
+  })
+ 
+  mainContents.on('will-navigate', (event, url) => {
+ 
+    console.log('will navigate to ', url);
+ 
+  })
+ 
+  mainContents.on('did-navigate', (event, url) => {
+ 
+    // console.log('did navigate to ', url);
+ 
+  })
+*/
+
+
+
+// Quit when all windows are closed.
+app.on('window-all-closed', function () {
+  // On OS X it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd + Q
+  if (process.platform !== 'darwin') {
+    app.quit()
+  }
+})
+
+app.on('activate', function () {
+  // On OS X it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+  if (mainWindow === null) {
+    createWindow()
+  }
+})
+
+
+app.on('unresponsive', function () {
+  // On OS X it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+  console.log('Its running slow');
+})
+
+app.on('responsive', function () {
+  // On OS X it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+  console.log('Alive again');
+})
+
+
+// In this file you can include the rest of your app's specific main process
+// code. You can also put them in separate files and require them here.
+
+
+
+
+
+
+//FIRST
+
+//Make first request
+
+
+
+      const ws = new WebSocket('ws://localhost:4848/app/engineData');
+
+
+  //Pull list of documents from Qlik
+  ws.on('open', function open() {
+
+    ws.send(JSON.stringify({
+	"method": "OpenDoc",
+	"handle": -1,
+  "id": 1,
+	"params": [
+		"C:\\Users\\adamc\\Documents\\Qlik\\Sense\\Apps\\Executive Dashboard.qvf"
+	],
+	"outKey": -1,
+	"id": 2
+}), function (data, err) {
+
+      //console.log('returned data ', data);
+      //data will come back on message
+      console.log(err);
+    });
+
+  });
+
+
+  //Wait for response and start request
+  ws.on('message', function incoming(data) {
+
+    //console.log(data);
+
+    var data = JSON.parse(data);
+
+
+    if (data.id == 1) {
+
+    ws.send(JSON.stringify({
+    "handle": 1,
+    "method": "GetAllInfos",
+    "params": {},
+    "outKey": -1,
+    "id": 3
+  }), function (data, err) {
+
+      //console.log('returned data ', data);
+      //data will come back on message
+      console.log(err);
+    });
+
+  });
+
+
+    }
+
+
+  })
+
+
+
+
+
+//SECOND
+
+  {
+    "handle": 1,
+    "method": "GetAllInfos",
+    "params": {},
+    "outKey": -1,
+    "id": 3
+  }

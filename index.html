@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+
+
+  <style>
+    * {
+      cursor: default;
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      overflow: hidden;
+      color: #ffffff;
+
+      /* font-family: 'Palanquin', sans-serif;*/
+      font: caption;
+    }
+
+
+
+    parentwrapper {
+      display: grid;
+      grid-template-columns: 220px 2fr;
+      grid-template-rows: 50px 1fr 50px;
+
+
+      height: 100vh;
+    }
+
+    messagebox {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 50px 1fr 50px;
+    }
+
+    .nohighlight {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      /* Webkit */
+      -moz-user-select: none;
+      /* Firefox */
+      -ms-user-select: none;
+      /* IE 10  */
+      /* Currently not supported in Opera but will be soon */
+      -o-user-select: none;
+      user-select: none;
+    }
+
+    top {
+      height: 50px;
+      grid-column-start: 1;
+      grid-column-end: 4;
+
+
+    }
+
+    #newMessage {
+
+
+      margin: 10px;
+      width: 95%;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid rgb(151, 147, 147);
+      border-radius: 10px;
+    }
+
+    side {
+      grid-column-start: 1;
+      grid-row-start: 2;
+      grid-row-end: 5;
+      background-color: #159eee;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 70px 1fr;
+    }
+
+    sidescrollable {
+      overflow: auto;
+      display: grid;
+      padding: 14px;
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(max-content, max-content);
+    }
+
+    channels {
+      display: grid;
+      grid-template-rows: repeat(auto-fit, 30px);
+    }
+
+
+    alerts {
+      display: grid;
+      grid-template-rows: repeat(auto-fit, 30px);
+    }
+
+    alert,
+    channelname,
+    chatmessage {
+      min-height: 30px;
+      margin-left: 15px;
+    }
+
+
+
+
+
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+
+      padding: 6px;
+      font-weight: 100;
+
+    }
+
+
+
+
+    /* 
+    /*notes expand unexpand*/
+
+    /*
+    body:hover alertsetting {
+      grid-column-start: 4;
+      grid-column-end: 5;
+    }
+
+    body:hover qlikobject {
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+    
+    body:hover notes {
+      grid-row-start: 2;
+      grid-row-end: 4;
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+  */
+
+    .brandcolor1 {
+      background-color: #001021;
+    }
+
+    .brandcolor2 {
+      background-color: #f9fafc;
+    }
+
+
+    @media screen and (max-width: 1000px) {
+
+
+
+
+      nestedwrapper {
+        display: grid;
+        overflow: auto;
+        grid-template-rows: 350px 200px minmax(max-content, 400px);
+        grid-template-columns: 1fr;
+        grid-row-start: 2;
+        grid-row-end: 5;
+      }
+
+
+      qlikobject {
+        background-color: #FCFCFC;
+
+      }
+
+      alertsetting {
+        margin-left: 7px;
+
+
+        background-color: #1481BA;
+      }
+
+
+      notes {
+
+
+        margin-top: 7px;
+        background-color: #FCFCFC;
+        color: black;
+        transition: all 1s;
+
+        /*grid-template-columns: 1fr;
+        grid-template-rows: 30px 1fr 50px;
+       /* grid-auto-columns: minmax(max-content, 2fr);
+        grid-template-rows: 100px 1fr;*/
+        padding: 10px;
+      }
+
+      chat {
+        /*overflow: auto;*/
+        display: grid;
+        /* grid-template-columns: 1fr;
+        grid-auto-columns: auto;
+        grid-template-rows: repeat(auto-fit, 30px);
+  */
+      }
+
+    }
+
+    @media screen and (min-width: 1001px) {
+
+
+
+      nestedwrapper {
+        display: grid;
+        grid-template-columns: 3fr 200px 40px;
+        grid-template-rows: 3fr 1fr 40px;
+        grid-row-start: 2;
+        grid-row-end: 6;
+
+      }
+
+
+      qlikobject {
+
+        background-color: #FCFCFC;
+        grid-row-start: 1;
+        grid-row-end: 2;
+
+      }
+
+      alertsetting {
+        margin-left: 7px;
+        grid-column-start: 2;
+        grid-column-end: 5;
+        grid-row-start: 1;
+        grid-row-end: 5;
+        background-color: #1481BA;
+      }
+
+
+      notes {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 2;
+        grid-row-end: 4;
+        margin-top: 7px;
+        background-color: #FCFCFC;
+        color: black;
+        transition: all 1s;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 30px 1fr 50px;
+        padding: 10px;
+      }
+
+      chat {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(auto-fit, 30px);
+
+      }
+
+    }
+
+
+    footer {
+      height: 50px;
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+
+
+
+    * {
+      padding: 0px solid #ffffff;
+
+
+    }
+
+    .nested {
+      border: 1px solid #ffec99;
+      border-radius: 5px;
+
+
+    }
+  </style>
+  <script>window.$ = window.jQuery = require('jquery');</script>
+  <script>
+
+    $(document).ready(function () {
+      console.log("ready!");
+
+      var shownotes = true;
+      var showalerts = true;
+
+      $('#notes_toggle').click(function () {
+
+        if (shownotes == true) {
+
+          console.log('Hide Notes');
+
+          $('notes').css({
+            "grid-row-start": "3"
+          })
+
+          $('qlikobject').css({
+            "grid-row-end": "3"
+          })
+
+          shownotes = false;
+
+        } else {
+          console.log('Show Notes');
+
+
+          $('notes').css({
+            "grid-row-start": "2"
+          })
+
+          $('qlikobject').css({
+            "grid-row-end": "2"
+          })
+
+          shownotes = true;
+
+        }
+
+      });
+
+
+      $('#alerts_toggle').click(function () {
+
+        if (showalerts == true) {
+
+          console.log('Hide Alerts');
+
+
+          /*
+body:hover alertsetting {
+  grid-column-start: 4;
+  grid-column-end: 5;
+}
+
+body:hover qlikobject {
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+ 
+body:hover notes {
+  grid-row-start: 2;
+  grid-row-end: 4;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+*/
+
+          $('alertsetting').css({
+            "grid-column-start": "4"
+          })
+
+          $('notes').css({
+            "grid-column-end": "4"
+          })
+
+          $('qlikobject').css({
+            "grid-column-start": "1",
+            "grid-column-end": "4"
+          })
+
+          showalerts = false;
+
+        } else {
+          console.log('Show Alerts');
+
+
+          $('alertsetting').css({
+            "grid-column-start": "2"
+          })
+
+          $('notes').css({
+            "grid-column-end": "2"
+          })
+
+          $('qlikobject').css({
+            "grid-column-start": "1",
+            "grid-column-end": "2"
+          })
+
+
+
+          showalerts = true;
+
+        }
+
+      });
+
+
+
+    });
+
+  </script>
+
+
+</head>
+
+<body class="brandcolor1">
+
+  <parentwrapper>
+    <top class="brandcolor1 nohighlight">
+      <img src='./app_logo1.png' style='height: 100%;' /> Alerts Engine
+    </top>
+    <side class="nohighlight">
+      <sidetopmenu>HELLO</sidetopmenu>
+      <sidescrollable>
+        <alerts>
+          <channelheader>
+            <h3>Alerts</h3>
+          </channelheader>
+          <alert>alerttitle1</alert>
+          <alert>alerttitle1</alert>
+          <alert>alerttitle1</alert>
+          <alert>alerttitle1</alert>
+          <alert>alerttitle1</alert>
+          <alert>alerttitle1</alert>
+
+        </alerts>
+        <channels>
+          <channelheader>
+            <h3>Charts</h3>
+          </channelheader>
+          
+          <select id="qlikapps" name="qlikapps">
+            <option value="">Select App</option>
+          </select>
+          <channellist  id="channellist">
+          <channelname>
+            <a href="https://www.google.com" target="_blank">channel 1</a>
+          </channelname>
+          <channelname>
+            <a href="about.html">test</a> 
+          </channelname>
+          <channelname>
+            <a href="https://drive.google.com/uc?export=download&id=0Bw8HgOhf0Mg5bVdOZWVfcE5qb1E">dog pic</a>
+          </channelname>
+        </channellist>
+        </channels>
+      </sidescrollable>
+    </side>
+
+    <nestedwrapper>
+      <qlikobject>
+        <webview style="display:inline-flex; height:100%; width: 100%;" src="http://localhost:4848/single/?appid=C%3A%5CUsers%5Cadamc%5CDocuments%5CQlik%5CSense%5CApps%5CVizlib%20Heatmap%20Demo.qvf&obj=BHTXyNM&opt=currsel&select=clearall">
+
+          <div class='indicator'></div>
+        </webview>
+      </qlikobject>
+      <alertsetting class="nohighlight">
+        <div id='alerts_toggle'>Button</div>
+        <h3>test</h3>
+        <newalertform>alert form</newalertform>
+        <existingalerts>existing alerts</existingalerts>
+      </alertsetting>
+      <notes>
+        <notesmenu>
+          <div id='notes_toggle'>Button</div>
+        </notesmenu>
+        <chat>
+          <chatmessage>Channel Nametest</chatmessage>
+          <chatmessage>Channel Nametest</chatmessage>
+          <chatmessage>Channel Nametest</chatmessage>
+          <chatmessage>Channel Nametest</chatmessage>
+          <chatmessage>Channel Nametest</chatmessage>
+          <chatmessage>Channel Nametest</chatmessage>
+          <chatmessage>Channel Nametest</chatmessage>
+          <chatmessage>Channel Nametest</chatmessage>
+          <chatmessage>Channel Nametest</chatmessage>
+          <chatmessage>Channel Nametest</chatmessage>
+          <chatmessage>Channel Nametest</chatmessage>
+        </chat>
+        <messagebox>
+          <input type="text" id="newMessage" name="newmessage" placeholder="newMessage">
+        </messagebox>
+      </notes>
+    </nestedwrapper>
+
+
+    <footer class="brandcolor1 nohighlight">footer</footer>
+  </parentwrapper>
+
+
+
+
+</body>
+<script>
+
+  require('./renderer.js');
+
+</script>
+
+</html>

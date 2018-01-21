@@ -188,10 +188,6 @@ function createLoaderWindow() {
     function checkQlikLogin() {
       return new Promise((resolve, reject) => {
 
-        //const ws = new WebSocket('ws://localhost:4848/app/engineData');
-
-        resolve('Check Qlik Authenticated user');
-
 
       })
     }
@@ -284,9 +280,6 @@ function itemPrinter(objectid) {
     })
 
     //bgWin.webContents.openDevTools()
-
-
-
 
 
     bgWin.loadURL(url.format({

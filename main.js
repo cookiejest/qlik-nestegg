@@ -18,10 +18,10 @@ var readline = require('readline');
 
 
 let mainMenu = Menu.buildFromTemplate(require('./controllers/mainMenu.js'))
-let mainWindow = require('./controllers/mainWindow')
-let mainLoader = require('./controllers/mainLoader')
+let startupController = require('./controllers/startupController')
+let qlikCommands = require('./controllers/qlikCommands')
 
-let loaderWindow
+
 //////////////////////////////
 
 //Public resource folder path
@@ -215,32 +215,9 @@ ipcMain.on('appobjectlist', (event, docId) => {
 app.on('ready', function (event) {
 
 
-//mainLoader.startUp();
+  startupController.startUp();
 
-var loaderWindow = mainLoader.create()
-    .then(mainLoader.establishDesktopConnection)
-    .then(mainLoader.checkQlikLogin)
-    /*
-    .then(mainWindow.create)
-    .then(values => {
-
-        console.log('ALL SET UP');
-
-    
-       // mainLoader.createTray();
-
-    }).catch(function (error) {
-        console.log(error);
-        return 'not connected';
-    })
-
-*/
   //itemPrinter('BHTXyNM')
-
-
-
-
-
 
 
 })

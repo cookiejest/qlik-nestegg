@@ -131,7 +131,7 @@ var self = module.exports = {
         })
     },
 
-    getDocObjects: function (docId) {
+    getAllDocObjects: function (docId) {
         return new Promise((resolve, reject) => {
             const qix = enigma.create({
                 schema,
@@ -150,21 +150,253 @@ var self = module.exports = {
                 })
                 .then((genericobjects) => {
                     //mainWindow.webContents.send('appobjectlist', genericobjects)
-                    var genericobjects = genericobjects
+
+
+
+
+                    return resolve(genericobjects)
                 })
                 .then(() => qix.close())
                 .then(() => {
-                    return (genericobjects)
                     console.log(' Qix Session closed')
                 })
                 .catch(err => {
                     console.log('Something went wrong :(', err)
-
+                    return reject(err)
                 });
 
         });
     },
+    getDocObjects: function (docId, objectTypesArray) {
+        return new Promise((resolve, reject) => {
+            const qix = enigma.create({
+                schema,
+                url: 'ws://localhost:4848/app/' + docId + '/engineData',
+                createSocket: url => new WebSocket(url)
+            });
 
+
+            qix.open()
+                .then(function (global) {
+
+                    return global.openDoc(docId, '', '', '', false)
+                })
+                .then((app) => {
+                    return app.getObjects({
+                        "qTypes": objectTypesArray, "qIncludeSessionObjects": false, "qData": {
+                            "title": "/title",
+                            "tags": "/tags"
+                        }
+                    })
+                })
+                .then((qlikobjects) => {
+                    //mainWindow.webContents.send('appobjectlist', genericobjects)
+
+
+                    return resolve(qlikobjects)
+                })
+                .then(() => qix.close())
+                .then(() => {
+                    console.log(' Qix Session closed')
+                })
+                .catch(err => {
+                    console.log('Something went wrong :(', err)
+                    return reject(err)
+                });
+
+        });
+    },
+    getDocTriggerItems: function (docId) {
+        return new Promise((resolve, reject) => {
+            const qix = enigma.create({
+                schema,
+                url: 'ws://localhost:4848/app/' + docId + '/engineData',
+                createSocket: url => new WebSocket(url)
+            });
+
+
+            qix.open()
+                .then(function (global) {
+
+                    return global.openDoc(docId, '', '', '', false)
+                })
+                .then((app) => {
+                    return app.createSessionObject({
+                        "qInfo": {
+                            "qId": "",
+                            "qType": "SessionLists"
+                        },
+                        "qFieldListDef": {
+                            "qShowSystem": true,
+                            "qShowHidden": true,
+                            "qShowSemantic": true,
+                            "qShowSrcTables": true,
+                            "qShowDerivedFields": true,
+                            "qShowImplicit": true
+                        },
+                        "qDimensionListDef": {
+                            "qType": "dimension",
+                            "qData": {}
+                        },
+                        "qVariableListDef": {
+                            "qType": "variable",
+                            "qShowReserved": true,
+                            "qShowConfig": true,
+                            "qData": {
+                                "tags": "/tags"
+                            }
+                        },
+                        "qMeasureListDef": {
+                            "qType": "measure",
+                            "qData": {
+                                "title": "/title",
+                                "tags": "/tags"
+                            }
+                        }
+                    })
+                })
+                .then((sessionObject) => {
+                    //mainWindow.webContents.send('appobjectlist', genericobjects)
+
+                    return sessionObject.getLayout()
+                }).then((itemslist) => {
+                    //mainWindow.webContents.send('appobjectlist', genericobjects)
+                    console.log(itemslist)
+                    return resolve(itemslist)
+                })
+                .then(() => qix.close())
+                .then(() => {
+                    console.log(' Qix Session closed')
+                })
+                .catch(err => {
+                    console.log('Something went wrong :(', err)
+                    return reject(err)
+                });
+
+        });
+    },
+    getDocSheets: function (docId) {
+        return new Promise((resolve, reject) => {
+            const qix = enigma.create({
+                schema,
+                url: 'ws://localhost:4848/app/' + docId + '/engineData',
+                createSocket: url => new WebSocket(url)
+            });
+
+
+            qix.open()
+                .then(function (global) {
+
+                    return global.openDoc(docId, '', '', '', false)
+                })
+                .then((app) => {
+                    return app.createSessionObject({
+                        "qInfo": {
+                            "qId": "",
+                            "qType": "SessionLists"
+                        },    getDocTriggerItems: function (docId) {
+                            return new Promise((resolve, reject) => {
+                                const qix = enigma.create({
+                                    schema,
+                                    url: 'ws://localhost:4848/app/' + docId + '/engineData',
+                                    createSocket: url => new WebSocket(url)
+                                });
+                    
+                    
+                                qix.open()
+                                    .then(function (global) {
+                    
+                                        return global.openDoc(docId, '', '', '', false)
+                                    })
+                                    .then((app) => {
+                                        return app.createSessionObject({
+                                            "qInfo": {
+                                                "qId": "",
+                                                "qType": "SessionLists"
+                                            },
+                                            "qFieldListDef": {
+                                                "qShowSystem": true,
+                                                "qShowHidden": true,
+                                                "qShowSemantic": true,
+                                                "qShowSrcTables": true,
+                                                "qShowDerivedFields": true,
+                                                "qShowImplicit": true
+                                            },
+                                            "qDimensionListDef": {
+                                                "qType": "dimension",
+                                                "qData": {}
+                                            }
+                                        })
+                                    })
+                                    .then((sessionObject) => {
+                                        //mainWindow.webContents.send('appobjectlist', genericobjects)
+                    
+                                        return sessionObject.getLayout()
+                                    }).then((itemslist) => {
+                                        //mainWindow.webContents.send('appobjectlist', genericobjects)
+                                        console.log(itemslist)
+                                        return resolve(itemslist)
+                                    })
+                                    .then(() => qix.close())
+                                    .then(() => {
+                                        console.log(' Qix Session closed')
+                                    })
+                                    .catch(err => {
+                                        console.log('Something went wrong :(', err)
+                                        return reject(err)
+                                    });
+                    
+                            });
+                        },
+                        "qFieldListDef": {
+                            "qShowSystem": true,
+                            "qShowHidden": true,
+                            "qShowSemantic": true,
+                            "qShowSrcTables": true,
+                            "qShowDerivedFields": true,
+                            "qShowImplicit": true
+                        },
+                        "qDimensionListDef": {
+                            "qType": "dimension",
+                            "qData": {}
+                        },
+                        "qVariableListDef": {
+                            "qType": "variable",
+                            "qShowReserved": true,
+                            "qShowConfig": true,
+                            "qData": {
+                                "tags": "/tags"
+                            }
+                        },
+                        "qMeasureListDef": {
+                            "qType": "measure",
+                            "qData": {
+                                "title": "/title",
+                                "tags": "/tags"
+                            }
+                        }
+                    })
+                })
+                .then((sessionObject) => {
+                    //mainWindow.webContents.send('appobjectlist', genericobjects)
+
+                    return sessionObject.getLayout()
+                }).then((itemslist) => {
+                    //mainWindow.webContents.send('appobjectlist', genericobjects)
+                    console.log(itemslist)
+                    return resolve(itemslist)
+                })
+                .then(() => qix.close())
+                .then(() => {
+                    console.log(' Qix Session closed')
+                })
+                .catch(err => {
+                    console.log('Something went wrong :(', err)
+                    return reject(err)
+                });
+
+        });
+    },
     getDocList: function () {
         return new Promise((resolve, reject) => {
 
@@ -182,13 +414,15 @@ var self = module.exports = {
                     return global.getDocList()
                 })
                 .then((docList) => {
+
+                    return resolve(docList);
                     /*console.log(docList);*/
-                    mainWindow.webContents.send('applistchannel', docList)
+
 
                 })
                 .then(() => qix.close())
                 .then(() => console.log(' Qix Session closed'))
-                .catch(err => console.log('Something went wrong :(', err));
+                .catch(err => { return resolve(err) });
 
         });
     }

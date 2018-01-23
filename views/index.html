@@ -420,12 +420,10 @@ body:hover notes {
           <channelheader>
             <h3>Alerts</h3>
           </channelheader>
-          <alert>alerttitle1</alert>
-          <alert>alerttitle1</alert>
-          <alert>alerttitle1</alert>
-          <alert>alerttitle1</alert>
-          <alert>alerttitle1</alert>
-          <alert>alerttitle1</alert>
+          <alert>alerttitle A <status>Active</status></alert>
+          <alert>alerttitle B <status>Disabled</status></alert>
+          <alert>alerttitle C <status>Active</status></alert>
+
 
         </alerts>
         <channels>
@@ -459,14 +457,47 @@ body:hover notes {
         </webview>
       </qlikobject>
       <alertsetting class="nohighlight">
-        <div id='alerts_toggle'>Button</div>
-        <h3>test</h3>
-        <newalertform>alert form</newalertform>
-        <existingalerts>existing alerts</existingalerts>
+        <div id='alerts_toggle'>New Alert</div>
+        <newalertform>
+            <alertinfo>
+              <h3>Alert Title</h3>
+                <input></input>
+                <h3>Alert Description</h3>
+                <textarea></textarea>
+              </alertinfo>
+          <alertriggerlist>
+              <h2>Alert Triggers</h2>
+              <alerttrigger>          <select>
+                  <option value="">Select Dimension, Measure or Variable</option>
+                </select><select>
+                    <option value="">Greater than</option>
+                    <option value="">Equal to</option>
+                    <option value="">Less than</option></select>
+                <triggercondition>Value:<input></input></triggercondition>
+ </alerttrigger>
+              <alerttrigger>2</alerttrigger>
+              <alerttrigger>3</alerttrigger>
+              <button>Add Field Trigger</button>
+              <button>Add Measure Trigger</button>
+              <button>Add Variable Trigger</button>
+              <button>Add Schedule Based Trigger</button>
+          </alertriggerlist>
+          <alertcontent>
+          <h2>Alert Content</h2>
+          <alertitem>item1</alertitem>
+          <alertitem>item2</alertitem>
+          <button>Add New Content</button>
+          </alertcontent>
+          <alertrecepientlist>
+              <h2>Alert Recipients</h2><input placeholder="email address"></input>
+              <button>Add Recipient</button>
+              </alertrecepientlist>
+          <button>Activate</button>
+        </newalertform>
       </alertsetting>
       <notes>
         <notesmenu>
-          <div id='notes_toggle'>Button</div>
+          <div id='notes_toggle'>Alert History</div>
         </notesmenu>
         <chat>
           <chatmessage>Channel Nametest</chatmessage>

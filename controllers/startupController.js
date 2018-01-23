@@ -142,9 +142,9 @@ var self = module.exports = {
             loaderWindow.hide();
 
 
-            qlikCommands.getDocList().then((result) => {
+            qlikCommands.getDocList().then((docObjectArray) => {
 
-                console.log(result);
+                mainWindow.webContents.send('appDocListChannel', docObjectArray)
 
             });
 

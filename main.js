@@ -87,10 +87,34 @@ app.on('browser-window-focus', function (event) {
 
 
 //Handle responses from renderer
+//Populate doc Object List
+ipcMain.on('docObjectListChannel', (event, docId) => {
 
-ipcMain.on('appobjectlist', (event, docId) => {
+  console.log('Get doc objects!');
+
+  qlikCommands.getDocObjects(docId, ["gauge", "table", "piechart", "listbox", "linechart", "sheet"]).then((docObjectArray) => {
+
+    //Filter doc objects array
+
+    mainWindow.webContents.send('docObjectListChannel', docObjectArray)
+
+  })
 
 
+  //Populate trigger item list
+  ipcMain.on('docTriggerItemsChannel', (event, docId) => {
+
+    console.log('Get doc objects!');
+
+    qlikCommands.getDocTriggerItems(docId).then((docTriggerItemArray) => {
+
+      //Filter doc objects array
+
+      mainWindow.webContents.send('docTriggerItemsChannel', docTriggerItemArray)
+
+    })
+
+  })
 
   //////////////////////
 

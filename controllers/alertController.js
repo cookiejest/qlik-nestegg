@@ -20,7 +20,10 @@ let qlikCommands = require('./qlikCommands')
 
 var self = module.exports = {
     create: function () {
+        return new Promise((resolve, reject) => {
 
+            
 
+        })
     }
 };

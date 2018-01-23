@@ -29,7 +29,7 @@ setTimeout(() => {
 console.log(remote.getGlobal('app_version'))
 
 
-ipcRenderer.on('applistchannel', (event, args) => {
+ipcRenderer.on('appDocListChannel', (event, args) => {
   console.log('Applist data');
   console.log(args);
 
@@ -48,29 +48,58 @@ ipcRenderer.on('applistchannel', (event, args) => {
 });
 
 
+
+
+
 $('#qlikapps').change(function () {
 
 
   alert($('#qlikapps option:selected').val());
-  ipcRenderer.send('appobjectlist', $('#qlikapps option:selected').val());
+  ipcRenderer.send('docObjectListChannel', $('#qlikapps option:selected').val());
 
 
 
 });
 
 //Handle response from appobjectlist
-ipcRenderer.on('appobjectlist', (event, args) => {
+ipcRenderer.on('docObjectListChannel', (event, args) => {
 
   console.log('Applist data');
   console.log(args);
   $("#channellist").empty();
 
   $.each(args, function (key, value) {
+    if (value.qInfo.qType == 'sheet') {
+      var title = value.qMeta.title
+    } else {
+      var title = value.qData.title
+    }
 
-    $("#channellist").append('<channelname>' + value.qId + '</channelname>');
+    if (title == '') {
+      var title = value.qInfo.qType + ' with no title'
+    }
+    $("#channellist").append('<channelname><a href="#" objecttype="'+ value.qInfo.qType + '" class="objectbutton ' + value.qInfo.qType + '" appid="' + $('#qlikapps option:selected').val() + '" objectid="' + value.qInfo.qId + '">' + title + '</a></channelname></br>');
   });
 
 
+  $('.objectbutton').click(function () {
+    
+    console.log($(this).attr('objectid'));
+
+    if($(this).attr('objecttype')=='sheet') {
+      var objecttype = 'sheet'
+    } else {
+      var objecttype = 'obj'
+    }
+
+    var srcstring= "http://localhost:4848/single/?appid=" + $(this).attr('appid') + "&"+ objecttype +"=" + $(this).attr('objectid') +"&opt=currsel&select=clearall"
+    
+
+    $("webview").attr("src",srcstring);
+    $("webview").attr("objectid",$(this).attr('objectid'));
+    $("webview").attr("appid", $(this).attr('appid'));
+    $("webview").attr("objecttype", $(this).attr('objecttype'));
+  })
 
 
 

@@ -19,8 +19,46 @@ let qlikCommands = require('./qlikCommands')
 
 
 var self = module.exports = {
-    create: function () {
+    create: function (Data) {
         return new Promise((resolve, reject) => {
+
+            //Dimension Alerts
+
+            //
+            
+
+        })
+    },
+    triggerCheck: function () {
+        return new Promise((resolve, reject) => {
+
+        //Create session object using specified dimension and measure/variable values
+
+
+        //Check value against specific Information
+
+        //Check measure
+            
+        //Destroy and close session
+
+        })
+    },
+    getContentItem: function (Data) {
+        return new Promise((resolve, reject) => {
+
+        //Create session object using specified dimension and measure/variable values
+
+
+        //Check value against specific Information
+
+        //Check measure
+            
+
+        })
+    },
+    createMessage: function (Data) {
+        return new Promise((resolve, reject) => {
+
 
             
 

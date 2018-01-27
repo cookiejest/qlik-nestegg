@@ -275,128 +275,6 @@ var self = module.exports = {
 
         });
     },
-    getDocSheets: function (docId) {
-        return new Promise((resolve, reject) => {
-            const qix = enigma.create({
-                schema,
-                url: 'ws://localhost:4848/app/' + docId + '/engineData',
-                createSocket: url => new WebSocket(url)
-            });
-
-
-            qix.open()
-                .then(function (global) {
-
-                    return global.openDoc(docId, '', '', '', false)
-                })
-                .then((app) => {
-                    return app.createSessionObject({
-                        "qInfo": {
-                            "qId": "",
-                            "qType": "SessionLists"
-                        },    getDocTriggerItems: function (docId) {
-                            return new Promise((resolve, reject) => {
-                                const qix = enigma.create({
-                                    schema,
-                                    url: 'ws://localhost:4848/app/' + docId + '/engineData',
-                                    createSocket: url => new WebSocket(url)
-                                });
-                    
-                    
-                                qix.open()
-                                    .then(function (global) {
-                    
-                                        return global.openDoc(docId, '', '', '', false)
-                                    })
-                                    .then((app) => {
-                                        return app.createSessionObject({
-                                            "qInfo": {
-                                                "qId": "",
-                                                "qType": "SessionLists"
-                                            },
-                                            "qFieldListDef": {
-                                                "qShowSystem": true,
-                                                "qShowHidden": true,
-                                                "qShowSemantic": true,
-                                                "qShowSrcTables": true,
-                                                "qShowDerivedFields": true,
-                                                "qShowImplicit": true
-                                            },
-                                            "qDimensionListDef": {
-                                                "qType": "dimension",
-                                                "qData": {}
-                                            }
-                                        })
-                                    })
-                                    .then((sessionObject) => {
-                                        //mainWindow.webContents.send('appobjectlist', genericobjects)
-                    
-                                        return sessionObject.getLayout()
-                                    }).then((itemslist) => {
-                                        //mainWindow.webContents.send('appobjectlist', genericobjects)
-                                        console.log(itemslist)
-                                        return resolve(itemslist)
-                                    })
-                                    .then(() => qix.close())
-                                    .then(() => {
-                                        console.log(' Qix Session closed')
-                                    })
-                                    .catch(err => {
-                                        console.log('Something went wrong :(', err)
-                                        return reject(err)
-                                    });
-                    
-                            });
-                        },
-                        "qFieldListDef": {
-                            "qShowSystem": true,
-                            "qShowHidden": true,
-                            "qShowSemantic": true,
-                            "qShowSrcTables": true,
-                            "qShowDerivedFields": true,
-                            "qShowImplicit": true
-                        },
-                        "qDimensionListDef": {
-                            "qType": "dimension",
-                            "qData": {}
-                        },
-                        "qVariableListDef": {
-                            "qType": "variable",
-                            "qShowReserved": true,
-                            "qShowConfig": true,
-                            "qData": {
-                                "tags": "/tags"
-                            }
-                        },
-                        "qMeasureListDef": {
-                            "qType": "measure",
-                            "qData": {
-                                "title": "/title",
-                                "tags": "/tags"
-                            }
-                        }
-                    })
-                })
-                .then((sessionObject) => {
-                    //mainWindow.webContents.send('appobjectlist', genericobjects)
-
-                    return sessionObject.getLayout()
-                }).then((itemslist) => {
-                    //mainWindow.webContents.send('appobjectlist', genericobjects)
-                    console.log(itemslist)
-                    return resolve(itemslist)
-                })
-                .then(() => qix.close())
-                .then(() => {
-                    console.log(' Qix Session closed')
-                })
-                .catch(err => {
-                    console.log('Something went wrong :(', err)
-                    return reject(err)
-                });
-
-        });
-    },
     getDocList: function () {
         return new Promise((resolve, reject) => {
 
@@ -425,5 +303,75 @@ var self = module.exports = {
                 .catch(err => { return resolve(err) });
 
         });
+    },
+    checkSessionObject: function () {
+        return new Promise((resolve, reject) => {
+
+
+            const qix = enigma.create({
+                schema,
+                url: 'ws://localhost:4848/app/' + docId + '/engineData',
+                createSocket: url => new WebSocket(url)
+            });
+
+
+            qix.open()
+                .then(function (global) {
+
+                    return global.openDoc(docId, '', '', '', false)
+                })
+                .then((app) => {
+                    return app.createObject({
+                        "qInfo": {
+                            "qType": 'my-straight-hypercube',
+                        },
+                        "qHyperCubeDef": {
+                            "qDimensions": [
+                                {
+                                    "qDef": { "qFieldDefs": ['ID'] },
+                                },
+                            ],
+                            "qMeasures": [
+                                {
+                                    "qDef": { "qDef": '=Sum(Value)' },
+                                },
+                            ],
+                            "qInitialDataFetch": [
+                                {
+                                    "qHeight": 5,
+                                    "qWidth": 2,
+                                }
+                            ],
+                        },
+                    })
+                })
+                .then((sessionObject) => {
+                    //mainWindow.webContents.send('appobjectlist', genericobjects)
+
+                    return sessionObject.getLayout()
+                }).then((itemslist) => {
+                    //mainWindow.webContents.send('appobjectlist', genericobjects)
+                    console.log('Hypercube data pages:', JSON.stringify(layout.qHyperCube.qDataPages, null, '  '))
+                    return resolve(itemslist)
+                })
+                .then(() => qix.close())
+                .then(() => {
+                    console.log(' Qix Session closed')
+                })
+                .catch(err => {
+                    console.log('Something went wrong :(', err)
+                    return reject(err)
+                    //Create session object using specified dimension and measure/variable values
+
+
+                    //Check value against specific Information
+
+                    //Check measure
+
+                    //Destroy and close session
+
+                })
+        })
     }
+
 }

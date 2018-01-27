@@ -4,7 +4,7 @@ const electron = require('electron')
 const { app, BrowserWindow, session, dialog, globalShortcut, Menu, MenuItem, Tray, ipcMain } = electron
 
 //For DEV
-require('electron-reload')(__dirname);
+//require('electron-reload')(__dirname);
 
 
 const path = require('path')

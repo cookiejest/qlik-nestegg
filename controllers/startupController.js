@@ -141,6 +141,20 @@ var self = module.exports = {
             mainWindow.show();
             loaderWindow.hide();
 
+            var alerttriggerdata = {
+                "dimensions": [{ "fieldname": "Product Group Desc", "value": "Beverages" }, { "fieldname": "Sales Rep Name", "value": "Amanda Honda" }],
+                "measures": [{ "expressionvalue": "=sum([YTD Sales Amount])", "limitvalue": 300, "operator": "<" }]
+            }
+
+
+            qlikCommands.checkSessionObject(
+                'C:\\Users\\adamc\\Documents\\Qlik\\Sense\\Apps\\Consumer Sales.qvf', alerttriggerdata).then((result) => {
+
+                    console.log(result);
+
+                });
+
+
 
             qlikCommands.getDocList().then((docObjectArray) => {
 

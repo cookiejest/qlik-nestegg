@@ -286,6 +286,12 @@ var self = module.exports = {
                 createSocket: url => new WebSocket(url)
             });
 
+
+            const DimensionArray = {
+                "qNullSuppression": true,
+                "qDef": { "qFieldDefs": ["=if([Sales Rep Name]='Amanda Honda', [Sales Rep Name], null())"] },
+            };
+
             qix.open()
                 .then((global) => {
 
@@ -304,8 +310,50 @@ var self = module.exports = {
 
         });
     },
-    checkSessionObject: function () {
+    formatDimension: function (dimension) {
         return new Promise((resolve, reject) => {
+            //Format dimensions for qlik hypercube
+
+            var string = "=if([" + dimension['fieldname'] + "]=" + "'" + dimension['value'] + "',[" + dimension['fieldname'] + "], null())";
+
+            resolve({
+                "qNullSuppression": true,
+                "qDef": { "qFieldDefs": [string] },
+            });
+
+
+        })
+    },
+    formatMeasure: function (measure) {
+        return new Promise((resolve, reject) => {
+            //Format dimensions for qlik hypercube
+
+            var string = measure['expressionvalue'];
+
+            resolve({
+                "qDef": { "qDef": string },
+            });
+
+        })
+    },
+
+    checkSessionObject: function (docId, triggerArray) {
+        return new Promise((resolve, reject) => {
+
+
+            console.log(triggerArray.dimensions.length);
+
+            let i;
+            let dimensionAddPromises = [];
+            let measureAddPromises = [];
+
+            for (i = 0; i < triggerArray.dimensions.length; ++i) {
+                dimensionAddPromises.push(self.formatDimension(triggerArray.dimensions[i]));
+            }
+
+            for (i = 0; i < triggerArray.measures.length; ++i) {
+                measureAddPromises.push(self.formatMeasure(triggerArray.measures[i]));
+            }
 
 
             const qix = enigma.create({
@@ -314,46 +362,49 @@ var self = module.exports = {
                 createSocket: url => new WebSocket(url)
             });
 
+            let qDimensionVals;
+            let qMeasureVals;
 
-            qix.open()
+
+            Promise.all(dimensionAddPromises)
+                .then((results) => {
+                    console.log('the reuslts', JSON.stringify(results));
+                    qDimensionVals = results;
+                    return 'dimensionsformatted';
+                }).then(() => Promise.all(measureAddPromises)
+                    .then((results) => {
+                        console.log('the reuslts2', JSON.stringify(results));
+                        qMeasureVals = results;
+                        return 'measuresformatted';
+                    }))
+                .then(() => qix.open())
                 .then(function (global) {
-
                     return global.openDoc(docId, '', '', '', false)
                 })
                 .then((app) => {
-                    return app.createObject({
+                    console.log(qDimensionVals);
+                    console.log(qMeasureVals)
+                    return app.createSessionObject({
                         "qInfo": {
-                            "qType": 'my-straight-hypercube',
+                            "qType": "alert-object",
                         },
                         "qHyperCubeDef": {
-                            "qDimensions": [
-                                {
-                                    "qDef": { "qFieldDefs": ['ID'] },
-                                },
-                            ],
-                            "qMeasures": [
-                                {
-                                    "qDef": { "qDef": '=Sum(Value)' },
-                                },
-                            ],
+                            "qDimensions": qDimensionVals,
+                            "qMeasures": qMeasureVals,
                             "qInitialDataFetch": [
                                 {
-                                    "qHeight": 5,
-                                    "qWidth": 2,
+                                    "qHeight": 100,
+                                    "qWidth": 10,
                                 }
-                            ],
-                        },
+                            ]
+                        }
                     })
-                })
-                .then((sessionObject) => {
-                    //mainWindow.webContents.send('appobjectlist', genericobjects)
-
-                    return sessionObject.getLayout()
-                }).then((itemslist) => {
-                    //mainWindow.webContents.send('appobjectlist', genericobjects)
-                    console.log('Hypercube data pages:', JSON.stringify(layout.qHyperCube.qDataPages, null, '  '))
-                    return resolve(itemslist)
-                })
+                }).then((object) => object.getLayout()
+                    // Select cells at position 0, 2 and 4 in the dimension.
+                    //.then(() => object.selectHyperCubeCells('/qHyperCubeDef', [0, 2, 4, 5], [0], false))
+                    // Get layout and view the selected values
+                    //.then(() => { return object.getLayout() })
+                    .then((layout) => console.log(layout.qHyperCube.qDataPages[0].qMatrix)))
                 .then(() => qix.close())
                 .then(() => {
                     console.log(' Qix Session closed')
@@ -371,6 +422,7 @@ var self = module.exports = {
                     //Destroy and close session
 
                 })
+
         })
     }
 

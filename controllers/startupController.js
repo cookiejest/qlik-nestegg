@@ -143,14 +143,15 @@ var self = module.exports = {
 
             var alerttriggerdata = {
                 "dimensions": [{ "fieldname": "Product Group Desc", "value": "Beverages" }, { "fieldname": "Sales Rep Name", "value": "Amanda Honda" }],
-                "measures": [{ "expressionvalue": "=sum([YTD Sales Amount])", "limitvalue": 300, "operator": "<" }]
+                "measures": [{ "expressionvalue": "sum([YTD Sales Amount])", "minvalue": 300, "maxvalue": 300 }, 
+                { "expressionvalue": "Sum([Sales Margin Amount])/Sum([Sales Amount])", "minvalue": 300, "maxvalue": 300 }]
             }
 
 
             qlikCommands.checkSessionObject(
                 'C:\\Users\\adamc\\Documents\\Qlik\\Sense\\Apps\\Consumer Sales.qvf', alerttriggerdata).then((result) => {
 
-                    console.log(result);
+                    console.log('FINAL OUTCOME', result);
 
                 });
 

@@ -331,7 +331,9 @@ var self = module.exports = {
             var string = measure['expressionvalue'];
 
             resolve({
-                "qDef": { "qDef": string },
+                "qDef": {
+                    "qDef": string
+                }
             });
 
         })
@@ -356,11 +358,16 @@ var self = module.exports = {
             }
 
 
+
             const qix = enigma.create({
                 schema,
                 url: 'ws://localhost:4848/app/' + docId + '/engineData',
                 createSocket: url => new WebSocket(url)
             });
+
+
+            //qix.on('traffic:*', (direction, msg) => console.log(direction, JSON.stringify(msg)));
+
 
             let qDimensionVals;
             let qMeasureVals;
@@ -384,6 +391,7 @@ var self = module.exports = {
                 .then((app) => {
                     console.log(qDimensionVals);
                     console.log(qMeasureVals)
+                    //Create session object to check numbers against
                     return app.createSessionObject({
                         "qInfo": {
                             "qType": "alert-object",
@@ -400,15 +408,47 @@ var self = module.exports = {
                         }
                     })
                 }).then((object) => object.getLayout()
-                    // Select cells at position 0, 2 and 4 in the dimension.
-                    //.then(() => object.selectHyperCubeCells('/qHyperCubeDef', [0, 2, 4, 5], [0], false))
+                    // Select measure ranges as defined by user
+                    .then(() => object.rangeSelectHyperCubeValues('/qHyperCubeDef',
+                        [{
+                            //Range array for each measure provided (seems to be flexible about not having both qMin and qMax)
+                            "qRange": {
+                                "qMin": 10000,
+                                "qMax": 9010
+                            },
+                            "qMeasureIx": 0
+                        },{
+                            "qRange": {
+                                "qMin": 0,
+                                "qMax": 0.9
+                            },
+                            "qMeasureIx": 1
+                        }]))
                     // Get layout and view the selected values
-                    //.then(() => { return object.getLayout() })
-                    .then((layout) => console.log(layout.qHyperCube.qDataPages[0].qMatrix)))
-                .then(() => qix.close())
+                    .then((result) => {
+
+                        //If nothing is selectable return false as does not match criteria
+                        if (result == false) {
+                            return 'no match';
+                        } else {
+                            return object.getLayout()
+                        }
+                    })
+                    .then((layout) => {
+                        //Check if the filtering still returns a row which means criteria is met
+                        if (layout == 'no match') {
+                            console.log('does not meet criteria')
+                            return resolve('does not meet criteria')
+                        } else {
+                            //If there is selectable return positive  result
+                            console.log(layout.qHyperCube.qDataPages[0].qMatrix)
+                            return resolve('meets criteria')
+                        }
+                    }))
+                /*.then(() => qix.close())
                 .then(() => {
                     console.log(' Qix Session closed')
-                })
+                })*/
                 .catch(err => {
                     console.log('Something went wrong :(', err)
                     return reject(err)

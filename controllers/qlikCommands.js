@@ -372,29 +372,49 @@ var self = module.exports = {
 
         })
     },
-    checkSessionObject: function (docId, triggerArray) {
+    createMeasureObject: function (docId, measureArray) {
         return new Promise((resolve, reject) => {
 
+            
 
-
-            console.log('checkSessionObject Fired');
+          //  console.log('checkSessionObject Fired');
 
             let i;
             let dimensionAddPromises = [];
             let measureAddPromises = [];
             let rangeAddPromises = [];
 
-            for (i = 0; i < triggerArray.dimensions.length; ++i) {
-                dimensionAddPromises.push(self.formatDimension(triggerArray.dimensions[i], i));
+            for (i = 0; i < measureArray.dimensions.length; ++i) {
+                dimensionAddPromises.push(self.formatDimension(measureArray.dimensions[i], i));
             }
 
-            for (i = 0; i < triggerArray.measures.length; ++i) {
-                measureAddPromises.push(self.formatMeasure(triggerArray.measures[i], i));
-            }
 
-            for (i = 0; i < triggerArray.measures.length; ++i) {
-                rangeAddPromises.push(self.formatRange(triggerArray.measures[i], i));
-            }
+
+            /////////////////////
+            var string = measureArray.measure['expressionvalue'];
+
+            var measureVal = {"qDef": {"qDef": string}};
+
+            //console.log('measureVal', measureVal)
+
+///////////////////
+
+                var rangeItem = {
+                    "qRange": {},
+                    "qMeasureIx": 0
+                };
+
+
+                if (measureArray.measure['minvalue']) {
+                    rangeItem.qRange.qMin = measureArray.measure['minvalue'];
+                }
+
+                if (measureArray.measure['maxvalue']) {
+                    rangeItem.qRange.qMax = measureArray.measure['maxvalue'];
+                }
+
+
+                //console.log('rangeItem', rangeItem)
 
 
             const qix = enigma.create({
@@ -408,30 +428,16 @@ var self = module.exports = {
 
 
             let qDimensionVals;
-            let qMeasureVals;
-            let qRangeVals;
 
             Promise.all(dimensionAddPromises)
                 .then((results) => {
-                    console.log('DIMENSION FORMAT OUTPUT', results);
+                    //console.log('DIMENSION FORMAT OUTPUT', results);
                     qDimensionVals = results;
                     return 'dimensionsformatted';
-                }).then(() => Promise.all(measureAddPromises)
-                    .then((results) => {
-                        console.log('MEASURE FORMAT OUTPUT', results);
-                        qMeasureVals = results;
-                        return 'measuresformatted';
-                    }))
-                    
-                .then(() => Promise.all(rangeAddPromises)
-                    .then((results) => {
-                        qRangeVals = results;
-                        console.log('RANGE FORMAT OUTPUT', qRangeVals);
-                        return 'rangesformatted';
-                    }))
+                })
                 .then(() => qix.open())
                 .then(function (global) {
-                    console.log('Open app')
+                   // console.log('Open app')
                     return global.openDoc(docId, '', '', '', false)
                 })
                 .then((app) => {
@@ -443,7 +449,7 @@ var self = module.exports = {
                         },
                         "qHyperCubeDef": {
                             "qDimensions": qDimensionVals,
-                            "qMeasures": qMeasureVals,
+                            "qMeasures": [measureVal],
                             "qInitialDataFetch": [
                                 {
                                     "qHeight": 100,
@@ -455,39 +461,33 @@ var self = module.exports = {
                 }).then((object) => object.getLayout()
                 
                     // Select first measure ranges as defined by user
-                    .then(() => object.rangeSelectHyperCubeValues('/qHyperCubeDef', [{
-                        "qRange": {
-                            "qMin": 300,
-                            "qMax": 1200
-                        },
-                        "qMeasureIx": 0
-                    }]))
+                    .then(() => object.rangeSelectHyperCubeValues('/qHyperCubeDef', [rangeItem]))
                     // Get layout and view the selected values
                     .then((result) => {
-                        console.log('FINAL RESULT', result)
+                        //console.log('FINAL RESULT', result)
                         //If nothing is selectable return false as does not match criteria
                         if (result == false) {
-                            return object.getLayout()
+                            return false
                         } else {
                             return object.getLayout()
                         }
                     })
                     .then((layout) => {
-                        console.log('THE LAYOUT', layout);
+                        //console.log('THE LAYOUT', layout);
                         //Check if the filtering still returns a row which means criteria is met
-                        if (layout == 'no match') {
-                            console.log('does not meet criteria')
+                        if (layout == false) {
+                            //console.log('does not meet criteria')
                             return resolve(false)
                         } else {
                             //If there is selectable return positive  result
-                            console.log(layout.qHyperCube.qDataPages[0].qMatrix)
+                            //console.log(layout.qHyperCube.qDataPages[0].qMatrix)
                             return resolve(true)
                         }
                     }))
-                /*.then(() => qix.close())
+                .then(() => qix.close())
                 .then(() => {
-                    console.log(' Qix Session closed')
-                })*/
+                    //console.log(' Qix Session closed')
+                })
                 .catch(err => {
                     console.log('Something went wrong :(', err)
                     return reject(err)
@@ -501,6 +501,83 @@ var self = module.exports = {
                     //Destroy and close session
 
                 })
+
+        
+        })
+    },
+    checkSessionObject: function (docId, triggerArray) {
+        return new Promise((resolve, reject) => {
+
+
+
+            //console.log('checkSessionObject Fired');
+
+            let i;
+            let measureSplitPromises = [];
+        
+            var interationNumber = 0;
+            var numberofmeasures = triggerArray.measures.length -1;
+            var measureNumber = 0;
+            var resultsarray = [];
+
+            //console.log(triggerArray);
+
+           // console.log('total number of measures', numberofmeasures)
+
+            executeMeasure(0, triggerArray);
+
+            function executeMeasure (measureNumber, triggerArray) {
+
+                //console.log('Measure Number:', measureNumber)
+
+                var individualMeasureData = {
+                    "dimensions": triggerArray.dimensions,
+                    "measure":  triggerArray.measures[measureNumber]
+                }
+
+
+                //console.log('individualMeasureData',individualMeasureData)
+
+
+                self.createMeasureObject(docId, individualMeasureData).then((data)=> {
+                    resultsarray.push(data);
+                    //console.log(measureNumber + ' result ' + data);
+
+                    if(measureNumber == numberofmeasures) {
+                       // console.log('Last measure');
+                       // console.log('resultsarray', resultsarray);
+                        if(resultsarray.includes(false)==true) {
+                            //Do not fire alert
+                            return resolve(false);
+                        } else {
+                            //Fire alert
+                            return resolve(true)
+                        }
+
+                    } else {
+
+
+
+                        measureNumber+=1;
+                    
+                        executeMeasure(measureNumber, triggerArray)
+
+                    }
+                    
+                
+                }).catch(err => {
+                    console.log('Something went wrong :(', err)
+                    return reject(err)
+                    //Create session object using specified dimension and measure/variable values
+    
+                })
+
+            }
+    
+
+
+            //qix.on('traffic:*', (direction, msg) => console.log(direction, JSON.stringify(msg)));
+
 
         })
     }

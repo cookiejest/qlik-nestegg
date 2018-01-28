@@ -141,11 +141,7 @@ var self = module.exports = {
             mainWindow.show();
             loaderWindow.hide();
 
-            var alerttriggerdata = {
-                "dimensions": [{ "fieldname": "Product Group Desc", "value": "Beverages" }, { "fieldname": "Sales Rep Name", "value": "Amanda Honda" }],
-                "measures": [{ "expressionvalue": "sum([YTD Sales Amount])", "minvalue": 300, "maxvalue": 300 }, 
-                { "expressionvalue": "Sum([Sales Margin Amount])/Sum([Sales Amount])", "minvalue": 300, "maxvalue": 300 }]
-            }
+
 
 
             qlikCommands.checkSessionObject(

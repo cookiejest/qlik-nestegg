@@ -316,6 +316,7 @@ var self = module.exports = {
 
             var string = "=if([" + dimension['fieldname'] + "]=" + "'" + dimension['value'] + "',[" + dimension['fieldname'] + "], null())";
 
+
             resolve({
                 "qNullSuppression": true,
                 "qDef": { "qFieldDefs": [string] },
@@ -324,39 +325,76 @@ var self = module.exports = {
 
         })
     },
-    formatMeasure: function (measure) {
+    formatMeasure: function (measure, measureOrder) {
         return new Promise((resolve, reject) => {
             //Format dimensions for qlik hypercube
 
             var string = measure['expressionvalue'];
 
+
             resolve({
-                "qDef": {
-                    "qDef": string
-                }
+                "qDef": {"qDef": string}
             });
 
         })
     },
+    formatRange: function (measure, measureOrder) {
+        return new Promise((resolve, reject) => {
+            //Format dimensions for qlik hypercube
 
+            var string = measure['expressionvalue'];
+
+
+            //Check if min or max exists
+            if (measure['minvalue'] != null || measure['maxvalue'] != null) {
+
+                var rangeItem = {
+                    "qRange": {},
+                    "qMeasureIx": measureOrder
+                };
+
+
+                if (measure['minvalue']) {
+                    rangeItem.qRange.qMin = measure['minvalue'];
+                }
+
+                if (measure['maxvalue']) {
+                    rangeItem.qRange.qMax = measure['maxvalue'];
+                }
+
+
+                resolve(rangeItem);
+
+            } else {
+                resolve();
+            }
+
+
+        })
+    },
     checkSessionObject: function (docId, triggerArray) {
         return new Promise((resolve, reject) => {
 
 
-            console.log(triggerArray.dimensions.length);
+
+            console.log('checkSessionObject Fired');
 
             let i;
             let dimensionAddPromises = [];
             let measureAddPromises = [];
+            let rangeAddPromises = [];
 
             for (i = 0; i < triggerArray.dimensions.length; ++i) {
-                dimensionAddPromises.push(self.formatDimension(triggerArray.dimensions[i]));
+                dimensionAddPromises.push(self.formatDimension(triggerArray.dimensions[i], i));
             }
 
             for (i = 0; i < triggerArray.measures.length; ++i) {
-                measureAddPromises.push(self.formatMeasure(triggerArray.measures[i]));
+                measureAddPromises.push(self.formatMeasure(triggerArray.measures[i], i));
             }
 
+            for (i = 0; i < triggerArray.measures.length; ++i) {
+                rangeAddPromises.push(self.formatRange(triggerArray.measures[i], i));
+            }
 
 
             const qix = enigma.create({
@@ -371,26 +409,33 @@ var self = module.exports = {
 
             let qDimensionVals;
             let qMeasureVals;
-
+            let qRangeVals;
 
             Promise.all(dimensionAddPromises)
                 .then((results) => {
-                    console.log('the reuslts', JSON.stringify(results));
+                    console.log('DIMENSION FORMAT OUTPUT', results);
                     qDimensionVals = results;
                     return 'dimensionsformatted';
                 }).then(() => Promise.all(measureAddPromises)
                     .then((results) => {
-                        console.log('the reuslts2', JSON.stringify(results));
+                        console.log('MEASURE FORMAT OUTPUT', results);
                         qMeasureVals = results;
                         return 'measuresformatted';
                     }))
+                    
+                .then(() => Promise.all(rangeAddPromises)
+                    .then((results) => {
+                        qRangeVals = results;
+                        console.log('RANGE FORMAT OUTPUT', qRangeVals);
+                        return 'rangesformatted';
+                    }))
                 .then(() => qix.open())
                 .then(function (global) {
+                    console.log('Open app')
                     return global.openDoc(docId, '', '', '', false)
                 })
                 .then((app) => {
-                    console.log(qDimensionVals);
-                    console.log(qMeasureVals)
+                    
                     //Create session object to check numbers against
                     return app.createSessionObject({
                         "qInfo": {
@@ -408,41 +453,35 @@ var self = module.exports = {
                         }
                     })
                 }).then((object) => object.getLayout()
-                    // Select measure ranges as defined by user
-                    .then(() => object.rangeSelectHyperCubeValues('/qHyperCubeDef',
-                        [{
-                            //Range array for each measure provided (seems to be flexible about not having both qMin and qMax)
-                            "qRange": {
-                                "qMin": 10000,
-                                "qMax": 9010
-                            },
-                            "qMeasureIx": 0
-                        },{
-                            "qRange": {
-                                "qMin": 0,
-                                "qMax": 0.9
-                            },
-                            "qMeasureIx": 1
-                        }]))
+                
+                    // Select first measure ranges as defined by user
+                    .then(() => object.rangeSelectHyperCubeValues('/qHyperCubeDef', [{
+                        "qRange": {
+                            "qMin": 300,
+                            "qMax": 1200
+                        },
+                        "qMeasureIx": 0
+                    }]))
                     // Get layout and view the selected values
                     .then((result) => {
-
+                        console.log('FINAL RESULT', result)
                         //If nothing is selectable return false as does not match criteria
                         if (result == false) {
-                            return 'no match';
+                            return object.getLayout()
                         } else {
                             return object.getLayout()
                         }
                     })
                     .then((layout) => {
+                        console.log('THE LAYOUT', layout);
                         //Check if the filtering still returns a row which means criteria is met
                         if (layout == 'no match') {
                             console.log('does not meet criteria')
-                            return resolve('does not meet criteria')
+                            return resolve(false)
                         } else {
                             //If there is selectable return positive  result
                             console.log(layout.qHyperCube.qDataPages[0].qMatrix)
-                            return resolve('meets criteria')
+                            return resolve(true)
                         }
                     }))
                 /*.then(() => qix.close())

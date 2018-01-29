@@ -310,17 +310,37 @@ var self = module.exports = {
 
         });
     },
+    libraryDimensionLookup: function (dimension) {
+        return new Promise((resolve, reject) => {
+
+        })
+    },
     formatDimension: function (dimension) {
         return new Promise((resolve, reject) => {
             //Format dimensions for qlik hypercube
 
+            //Library item
+            if(dimension['qLibraryId']) {
+                var value = {
+                    "qNullSuppression": true,
+                    "qLibraryId": ""
+                };
+
+            } else {
+
+
+
+            //Non library item
+
             var string = "=if([" + dimension['fieldname'] + "]=" + "'" + dimension['value'] + "',[" + dimension['fieldname'] + "], null())";
 
-
-            resolve({
+            var value = {
                 "qNullSuppression": true,
-                "qDef": { "qFieldDefs": [string] },
-            });
+                "qDef": { "qFieldDefs": [string] }
+            };
+
+        }
+            resolve(value);
 
 
         })

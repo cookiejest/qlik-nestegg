@@ -78,25 +78,27 @@ ipcRenderer.on('docObjectListChannel', (event, args) => {
     if (title == '') {
       var title = value.qInfo.qType + ' with no title'
     }
-    $("#channellist").append('<channelname><a href="#" objecttype="'+ value.qInfo.qType + '" class="objectbutton ' + value.qInfo.qType + '" appid="' + $('#qlikapps option:selected').val() + '" objectid="' + value.qInfo.qId + '">' + title + '</a></channelname></br>');
+    $("#channellist").append('<channelname><a href="#" objecttype="' + value.qInfo.qType + '" class="objectbutton ' + value.qInfo.qType + '" appid="' + $('#qlikapps option:selected').val() + '" objectid="' + value.qInfo.qId + '">' + title + '</a></channelname></br>');
   });
 
 
+
+
   $('.objectbutton').click(function () {
-    
+
     console.log($(this).attr('objectid'));
 
-    if($(this).attr('objecttype')=='sheet') {
+    if ($(this).attr('objecttype') == 'sheet') {
       var objecttype = 'sheet'
     } else {
       var objecttype = 'obj'
     }
 
-    var srcstring= "http://localhost:4848/single/?appid=" + $(this).attr('appid') + "&"+ objecttype +"=" + $(this).attr('objectid') +"&opt=currsel&select=clearall"
-    
+    var srcstring = "http://localhost:4848/single/?appid=" + $(this).attr('appid') + "&" + objecttype + "=" + $(this).attr('objectid') + "&opt=currsel&select=clearall"
 
-    $("webview").attr("src",srcstring);
-    $("webview").attr("objectid",$(this).attr('objectid'));
+
+    $("webview").attr("src", srcstring);
+    $("webview").attr("objectid", $(this).attr('objectid'));
     $("webview").attr("appid", $(this).attr('appid'));
     $("webview").attr("objecttype", $(this).attr('objecttype'));
   })

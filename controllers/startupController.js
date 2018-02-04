@@ -22,7 +22,8 @@ var self = module.exports = {
 
         self.createLoaderWindow()
             .then(self.attemptConnect)
-            .then(self.createMainWindow)
+            //.then(self.createMainWindow)
+            .then(self.createTestWindow)
             .catch(function (error) {
                 console.log(error);
 
@@ -144,12 +145,74 @@ var self = module.exports = {
 
 
 
-            qlikCommands.checkSessionObject(
-                'C:\\Users\\adamc\\Documents\\Qlik\\Sense\\Apps\\Consumer Sales.qvf', alerttriggerdata).then((result) => {
 
-                    console.log('FINAL OUTCOME', result);
 
-                });
+            qlikCommands.getDocList().then((docObjectArray) => {
+
+                mainWindow.webContents.send('appDocListChannel', docObjectArray)
+
+            });
+
+
+        })
+
+        return mainWindow;
+
+    },
+    createTestWindow: function () {
+
+        console.log('Main window open fired')
+
+
+        let winState = windowStateKeeper({
+            defaultWidth: 1200,
+            defaultHeight: 1200
+        });
+
+        // Create the browser window.
+        mainWindow = new BrowserWindow({
+            width: winState.Width,
+            height: winState.Height,
+            x: winState.x,
+            y: winState.y,
+            minHeight: 350, minWidth: 450,
+            icon: path.join(__dirname, 'app_logo1.ico'),
+            show: false,
+            title: "Wow"
+        })
+
+        winState.manage(mainWindow);
+
+        //load the index.html of the app.
+        mainWindow.loadURL(url.format({
+            pathname: path.join(global['viewsPath'], 'editor.html'),
+            protocol: 'file:',
+            slashes: true
+        }))
+
+        //Set top navigation
+        Menu.setApplicationMenu(mainMenu);
+
+        //Open Dev tools
+        mainWindow.webContents.openDevTools()
+
+        // Emitted when the window is closed.
+        mainWindow.on('closed', function () {
+            console.log('main window closed');
+            // Dereference the window object, usually you would store windows
+            // in an array if your app supports multi windows, this is the time
+            // when you should delete the corresponding element.
+            mainWindow = null
+        })
+
+
+        mainWindow.webContents.on('did-finish-load', () => {
+
+            mainWindow.show();
+            loaderWindow.hide();
+
+
+
 
 
 
@@ -165,6 +228,7 @@ var self = module.exports = {
         return mainWindow;
 
     },
+
 
     createTray: function () {
 

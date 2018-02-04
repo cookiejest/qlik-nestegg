@@ -1,0 +1,3 @@
+let w0w = require('../../controllers/qlikCommands');
+
+var expect = require('expect.js');

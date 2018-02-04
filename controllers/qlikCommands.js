@@ -525,7 +525,7 @@ var self = module.exports = {
         
         })
     },
-    checkSessionObject: function (docId, triggerArray) {
+    test: function (docId, triggerArray) {
         return new Promise((resolve, reject) => {
 
 

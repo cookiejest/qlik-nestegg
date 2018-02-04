@@ -19,6 +19,7 @@ var readline = require('readline');
 
 let mainMenu = Menu.buildFromTemplate(require('./controllers/mainMenu.js'))
 let startupController = require('./controllers/startupController')
+let testController = require('./controllers/testController')
 let qlikCommands = require('./controllers/qlikCommands')
 
 
@@ -84,6 +85,120 @@ app.on('browser-window-focus', function (event) {
 
 //////////////////////////////////////////////////////////////////////////////////
 
+ipcMain.on('new_test_channel', (event, new_test_name) => {
+
+  console.log('Create new Test file...', new_test_name);
+
+  testController.saveTestScript(new_test_name, '').then((result) => {
+
+    console.log(result);
+
+    event.sender.send('new_test_channel', new_test_name)
+    //mainWindow.webContents.send('new_test_channel', 'complete')
+
+  });
+
+
+})
+
+
+
+
+
+
+ipcMain.on('retrieve_tests', (event, value) => {
+
+  console.log('retrieve files please');
+
+  testController.retrieveTestDocs().then((result) => {
+
+    console.log(result);
+
+    event.sender.send('retrieve_tests', result)
+    //mainWindow.webContents.send('new_test_channel', 'complete')
+
+  });
+
+
+})
+
+
+
+ipcMain.on('save_test_data', (event, value) => {
+
+
+  testController.saveTestScript(value.fileName, value.fileContent).then((result) => {
+
+    console.log(result);
+
+    event.sender.send('save_test_data', result)
+
+
+
+  });
+
+
+})
+
+
+
+ipcMain.on('delete_test_data', (event, value) => {
+
+  console.log('filename from renderer', value)
+
+  testController.deleteTestScript(value).then((result) => {
+
+    console.log(result);
+
+    event.sender.send('delete_test_data', result)
+
+
+
+  });
+
+
+})
+
+
+
+
+ipcMain.on('load_file_data', (event, value) => {
+
+  console.log('retrieve file');
+
+  testController.retrieveTestContent(value).then((result) => {
+
+    console.log(result);
+
+    var content = { "filename": value, "filecontent": result };
+
+    event.sender.send('load_file_data', content)
+    //mainWindow.webContents.send('new_test_channel', 'complete')
+
+  });
+
+
+})
+
+
+
+ipcMain.on('run_test', (event, value) => {
+
+  console.log('Start the test');
+
+  testController.startTest(value).then((result) => {
+
+
+    console.log(result);
+
+
+    event.sender.send('run_test', result)
+    //mainWindow.webContents.send('new_test_channel', 'complete')
+
+  });
+
+
+})
 
 
 //Handle responses from renderer
@@ -99,6 +214,10 @@ ipcMain.on('docObjectListChannel', (event, docId) => {
     mainWindow.webContents.send('docObjectListChannel', docObjectArray)
 
   })
+
+
+
+
 
 
   //Populate trigger item list
@@ -239,7 +358,13 @@ ipcMain.on('docObjectListChannel', (event, docId) => {
 app.on('ready', function (event) {
 
 
+  //testController.saveTestScript('some new content', 'sometest1');
+
+
   startupController.startUp();
+
+
+  //testController.startTest();
 
   //itemPrinter('BHTXyNM')
 

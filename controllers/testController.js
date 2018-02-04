@@ -2,6 +2,8 @@ const electron = require('electron')
 // Module to control application life.
 const { app, BrowserWindow, session, dialog, globalShortcut, Menu, MenuItem, Tray, ipcMain } = electron
 
+const { ipcRenderer, remote } = require('electron')
+
 const path = require('path')
 const url = require('url')
 const WebSocket = require('ws');
@@ -70,7 +72,7 @@ var self = module.exports = {
                     console.log(err);
                     return reject(err);
                 } else {
-                    console.log(files);
+                   // console.log(files);
                     return resolve(files);
                 }
 
@@ -142,15 +144,15 @@ var self = module.exports = {
 
             //Create session object using specified dimension and measure/variable values
 
-            console.log('start test from within node');
+            console.log('start test from within test controller' ,fileName);
 
             var mocha = new Mocha({});
 
 
             // open source file for reading
-            var r = fs.createReadStream('./test/templates/header.txt');
+            //var r = fs.createReadStream('./test/templates/header.txt');
 
-            var r2 = fs.createReadStream('./test/scripts/' + fileName + '.w0w');
+            //var r2 = fs.createReadStream('./test/scripts/' + fileName + '.w0w');
 
             var headercontent;
 
@@ -160,20 +162,20 @@ var self = module.exports = {
                     process.exit(1);
                 } else {
 
-                    console.log(data);
+                    //console.log(data);
                     headercontent = data;
 
                 }
 
             });
 
-            fs.readFile(path.join('./test/scripts/sometest1.w0w'), 'utf8', function (err, data) {
+            fs.readFile(path.join('./test/scripts/' + fileName + '.w0w'), 'utf8', function (err, data) {
                 if (err) {
                     console.log(err);
                     process.exit(1);
                 } else {
 
-                    console.log(data);
+                    //console.log(data);
                     testcontent = data;
 
                 }
@@ -183,7 +185,7 @@ var self = module.exports = {
 
             var rundatetime = new Date();
 
-            this.createTestOutputFile('//Test started at ' + rundatetime, 'My Big Test')
+            this.createTestOutputFile('//Test started at ' + rundatetime, fileName)
                 .then((filePath) => {
                     //Append Header content
                     return self.appendTestOutputFile(filePath, headercontent);
@@ -199,27 +201,70 @@ var self = module.exports = {
                     //console.log('RUN MOCHA!');
                     mocha.addFile(filePath);
 
+                    var passcounter = 0;
+                    var failcounter = 0;
+                    var totalcounter = 0;
+
                     mocha.run()
                         .on('test', function (test) {
                             console.log('Test started: ' + test.title);
                             self.appendTestOutputFile(filePath, 'Test started: ' + test.title);
+                            //ipcRenderer.send('log_message', test.title);
+
+                            totalcounter+=1;
+                          //  electron.getWindow('windowName').webContents.send('info' , {msg:'hello from main process'});
+
                         })
                         .on('test end', function (test) {
                             //console.log('Test done: ' + test.title);
                             self.appendTestOutputFile(filePath, 'Result: ' + test.state);
+                            //mainWindow.webContents.send('log_message', test.state)
                         })
                         .on('pass', function (test) {
                             console.log('Test passed');
                             self.appendTestOutputFile(filePath, 'Test passed!');
+
+                            passcounter+=1;
+
+                            console.log(test);
+
+                            var data = {
+                                "type": "pass",
+                                "message": test.title + ' PASSED'
+                            }
+
+                            mainWindow.webContents.send('log_message', data)
                         })
                         .on('fail', function (test, err) {
                             console.log('Test fail');
                             //self.appendTestOutputFile(filePath, 'Test Failed!');
                             self.appendTestOutputFile(filePath, err);
+
+                            var data = {
+                                "type": "fail",
+                                "message": test.title + ' ' + ' FAILED',
+                                "error": err
+                            }
+
+                            failcounter+=1;
+
+                            mainWindow.webContents.send('log_message', data)
+
                             console.log(err);
                         })
                         .on('end', function () {
                             console.log('All done');
+
+                            var data = {
+                                "type": "complete",
+                                "message": 'Script Completed!',
+                                "passcounter": passcounter,
+                                "failcounter": failcounter,
+                                "totalcounter": totalcounter
+                            }
+
+                            mainWindow.webContents.send('log_message', data)
+
                             return resolve('done!');
                         })
                 })

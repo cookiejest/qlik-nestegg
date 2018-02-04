@@ -165,14 +165,10 @@ var self = module.exports = {
 
 
         let winState = windowStateKeeper({
-            defaultWidth: 1200,
-            defaultHeight: 1200
         });
 
         // Create the browser window.
         mainWindow = new BrowserWindow({
-            width: winState.Width,
-            height: winState.Height,
             x: winState.x,
             y: winState.y,
             minHeight: 350, minWidth: 450,

@@ -22,7 +22,7 @@ $(document).ready(function () {
 
     ipcRenderer.on('retrieve_tests', (event, files) => {
 
-        $("tests").empty();
+        $(".testnav").empty();
 
         $.each(files, function (key, value) {
 
@@ -30,13 +30,16 @@ $(document).ready(function () {
 
             if (cleanval == openfilename) {
 
-                var activestring = 'color: white;';
+                var activestring = ' is-active';
             } else {
 
                 var activestring = '';
             }
 
-            $("tests").append("<test style='margin-left: 15px;'><a class='filebutton' style='" + activestring + "' filename='" + cleanval + "' href='#'>" + cleanval + "</a></test></br>");
+
+            var navlink ='<a class="panel-block filebutton'+ activestring +'" filename="' + cleanval + '"><span class="panel-icon"><i class="fas fa-book"></i></span>' + cleanval  + '</a>'
+       
+            $(".testnav").append(navlink);
 
 
 
@@ -64,8 +67,16 @@ $(document).ready(function () {
         console.log('Start test!');
         ipcRenderer.send('run_test', openfilename);
 
+        var messagestring = '<a class="button is-small is-info"><span class="icon is-small"><i class="fas fa-play-circle"></i></span></a> Script Started!';
+
+        $("#logmessages").append(messagestring +"</br>");
+        var elem = document.getElementById('logmessages');
+        
+        elem.scrollTop = elem.scrollHeight;
+      
 
     })
+
 
     ipcRenderer.on('run_test', (event, data) => {
         $('#run_test_button').removeClass("is-loading");
@@ -112,7 +123,7 @@ $(document).ready(function () {
         //Load file data
 
         ipcRenderer.send('load_file_data', filename);
-        console.log('The open file nname is ', openfilename)
+        console.log('The open file name is ', openfilename)
         ipcRenderer.send('retrieve_tests', 'get');
 
     })
@@ -167,12 +178,39 @@ $(document).ready(function () {
 
 
 
-    ipcRenderer.on('log_message', (event, filename) => {
+    ipcRenderer.on('log_message', (event, data) => {
+
+        console.log(data);
+
+        if(data.type=='pass') {
+
+            
+
+            var messagestring = '<a class="button is-small is-success"><span class="icon is-small"><i class="fas fa-check"></i></span></a> <span class="is-success" >TEST: ' + data.message + "</span>";
+
+        } else if (data.type=='fail') {
 
 
-        $("log_messages").append("<log_message>" +  + "</log_message></br>");
+            var messagestring = '<a class="button is-small is-danger"><span class="icon is-small"><i class="fas fa-times"></i></span></a> <span class="is-danger" >TEST: ' + data.message + "</span>";
 
 
+        } else if (data.type=='complete') {
+
+            var messagestring = '<a class="button is-small is-info"><span class="icon is-small"><i class="fas fa-trophy"></i></span></a> <span class="is-danger" >' + data.message + " <b><span class='is-success button is-small '>" + data.passcounter + " pass</span> <span class='button is-small  is-danger'>" + data.failcounter  + " fail<span></b> out of <b>" + data.totalcounter + "</b></span>";
+
+
+
+
+        }
+
+
+
+        $("#logmessages").append(messagestring +"</br>");
+
+        var elem = document.getElementById('logmessages');
+
+        elem.scrollTop = elem.scrollHeight;
+      
 
         //Load the file into into javascript array
 
@@ -197,7 +235,7 @@ $(document).ready(function () {
 
 
 
-        editor.setValue("//Please create or select a load script to begin.");
+        editor.setValue("//Please create or select a test script to begin.");
         ipcRenderer.send('retrieve_tests', 'get');
         $('#delete_test_confirm').removeClass("is-loading");
 

@@ -106,13 +106,18 @@ ipcMain.on('new_test_channel', (event, new_test_name) => {
 
 
 
+
+
+
+
+
 ipcMain.on('retrieve_tests', (event, value) => {
 
-  console.log('retrieve files please');
+  //console.log('retrieve files please');
 
   testController.retrieveTestDocs().then((result) => {
 
-    console.log(result);
+    //console.log(result);
 
     event.sender.send('retrieve_tests', result)
     //mainWindow.webContents.send('new_test_channel', 'complete')
@@ -164,7 +169,7 @@ ipcMain.on('delete_test_data', (event, value) => {
 
 ipcMain.on('load_file_data', (event, value) => {
 
-  console.log('retrieve file');
+  //console.log('retrieve file');
 
   testController.retrieveTestContent(value).then((result) => {
 
@@ -189,7 +194,7 @@ ipcMain.on('run_test', (event, value) => {
   testController.startTest(value).then((result) => {
 
 
-    console.log(result);
+    console.log('Starting file..', value);
 
 
     event.sender.send('run_test', result)

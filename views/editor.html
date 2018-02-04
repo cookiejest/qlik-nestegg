@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <title>w0w.io Testing Engine</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../public./global.css">
     <link rel="stylesheet" href="../public./bulma.min.css">
@@ -17,35 +18,94 @@
             margin: 0;
         }
 
-        body {
+
+        .bodyclass {
+            margin: 0;
             overflow: hidden;
-
-
-            /* font-family: 'Palanquin', sans-serif;*/
-            font: caption;
         }
 
 
 
-        parentwrapper {
+
+        .sidebar {
+            grid-area: sidebar;
+            width: 220px;
+            background-color: var(--brand-color1);
+        }
+
+        .content {
+
+            grid-area: content;
             display: grid;
-            grid-template-columns: 220px 2fr;
-            grid-template-rows: 50px 1fr;
+            grid-template-rows: 2fr 200px;
+        }
+
+        .customheader {
+            grid-area: customheader;
 
 
+        }
+
+        .customfooter {
+            grid-area: customfooter;
+
+        }
+
+
+        .wrapper {
+            display: grid;
+
+            grid-template-columns: 220px repeat(2, 1fr);
+            grid-template-rows: 50px 1fr 50px;
+            grid-template-areas: "customheader customheader customheader" "sidebar content content" "customfooter  customfooter  customfooter";
+            background-color: #fff;
+            color: #444;
             height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
         }
 
-        nestedwrapper {
+
+
+
+
+
+
+        #texteditor {
+
+            grid-row-start: 1;
+            grid-row-end: 2;
+
+        }
+
+        #editor {
+            height: 100%;
+            width: 100%;
+        }
+
+        #logs {
             display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: 2fr 1fr;
-        }
-
-        logs {
+            grid-template-rows: 30px 2fr;
+            grid-row-start: 2;
+            grid-row-end: 3;
             color: black;
             background-color: var(--brand-color2);
+            overflow-y: hidden;
+
+
         }
+
+        #logmessages {
+            grid-row-start: 2;
+            grid-row-end: 2;
+            list-style: none;
+            border: 1px solid #000;
+            overflow-y: scroll;
+            max-height: 150px;
+            font-size: 13px;
+
+        }
+
 
         .headerfootercolor {
             background-color: var(--brand-color3);
@@ -64,46 +124,28 @@
             user-select: none;
         }
 
-        top {
-            height: 50px;
-            grid-column-start: 1;
-            grid-column-end: 4;
-        }
 
 
-        side {
-            grid-column-start: 1;
-            grid-row-start: 2;
-            grid-row-end: 5;
-            background-color: var(--brand-color1);
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: 80px 1fr;
-        }
+        /*
 
-
-        sidescrollable {
+        #sidescrollable {
             overflow: auto;
             display: grid;
             padding: 14px;
             grid-template-columns: 1fr;
-            grid-template-rows: minmax(max-content, max-content);
         }
 
+*/
+
+        /*
         channels {
             display: grid;
             grid-template-rows: repeat(auto-fit, 30px);
         }
-
-
-        alerts {
-            display: grid;
-            grid-template-rows: repeat(auto-fit, 30px);
-        }
+*/
 
         alert,
-        channelname,
-        chatmessage {
+        channelname {
             min-height: 30px;
             margin-left: 15px;
         }
@@ -123,11 +165,6 @@
 
 
 
-        footer {
-            height: 50px;
-            grid-column-start: 1;
-            grid-column-end: 3;
-        }
 
 
 
@@ -150,10 +187,11 @@
     <link rel="stylesheet" type="text/css" href="../public./component.css">
 </head>
 
-<body class="headerfootercolor">
+<body class="bodyclass headerfootercolor">
 
-    <parentwrapper>
-        <top class="headerfootercolor nohighlight">
+    <div id="parentwrapper" class="wrapper">
+
+        <div id="top" class="customheader headerfootercolor nohighlight">
             <nav class="level">
                 <p class="level-item has-text-centered">
 
@@ -186,13 +224,17 @@
 
                 </p>
                 <p class="level-item has-text-centered">
-                    <img src="https://bulma.io/images/bulma-type.png" alt="" style="height: 30px;">
+                    <img src="../public./mochalogo.svg" alt="" style="height: 30px;">
+                    <b style='color: white;'>+</b>
+                    <img src="../public./app_logo1.png" alt="" style="height: 30px;">
+
+
                 </p>
 
             </nav>
-        </top>
-        <side class="nohighlight">
-            <sidetopmenu>
+        </div>
+        <div id="side" class="sidebar nohighlight">
+            <div id="sidetopmenu">
 
 
                 <p style="margin: 30px;">
@@ -250,27 +292,37 @@
                 </div>
 
 
-            </sidetopmenu>
+            </div>
 
-            <sidescrollable>
-                <tests>
-                    <channelheader>
-                        <h3 style='color: white;'>
-                            <b>Test Scripts</b>
-                        </h3>
-                    </channelheader>
-                    <tests>
-                        <test style='margin-left: 15px;'>
-                            <a href="#">Test 1</a>
-                        </test>
-                    </tests>
-            </sidescrollable>
-        </side>
+            <div id="sidescrollable">
+                <div id="tests">
 
-        <nestedwrapper>
+                   
+                    <nav class="panel testnav">
+                        <p class="panel-heading">
+                                Test Scripts
+                        </p>
+                        <a class="panel-block is-active">
+                            <span class="panel-icon">
+                                <i class="fas fa-book"></i>
+                            </span>
+                            bulma
+                        </a>
+                        <a class="panel-block">
+                            <span class="panel-icon">
+                                <i class="fas fa-book"></i>
+                            </span>
+                            marksheet
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
 
-            <texteditor>
-                <div id="editor" style='height: 100%; width: 100%;'>some text</div>
+        <div id="nestedwrapper" class="content">
+
+            <div id="texteditor">
+                <div id="editor">some text</div>
                 <script src='../public./ace/ace.js' type="text/javascript" charset="utf-8"></script>
                 <script>
 
@@ -281,23 +333,30 @@
                     editor.setValue("//Please create or select a test script to begin.");
 
                 </script>
-            </texteditor>
+            </div>
 
-            <logs>
+            <div id="logs">
                 <logsmenu>
                     <div style='color: var(--brand-color3); '>
-                        <h3>OUTPUT</h3>
+                        <h3>RESULTS</h3>
                     </div>
                 </logsmenu>
-                <testlogs>
-                    <logmessage>Channel Nametest</logmessage>
-                </testlogs>
-            </logs>
-        </nestedwrapper>
+                <ul id="logmessages">
 
 
-        <footer class="headerfootercolor  nohighlight"></footer>
-    </parentwrapper>
+
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="customfooter headerfootercolor  nohighlight">
+
+            <h3 style='color: white;'>Designed and Developed by Adam Cooke @ w0w.io.
+                <b>Enterprise Version Available</b>
+            </h3>
+        </div>
+    </div>
 
 
 

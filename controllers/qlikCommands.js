@@ -525,7 +525,83 @@ var self = module.exports = {
         
         })
     },
-    test: function (docId, triggerArray) {
+    inRange: function (docId, triggerArray) {
+        return new Promise((resolve, reject) => {
+
+
+
+            //console.log('checkSessionObject Fired');
+
+            let i;
+            let measureSplitPromises = [];
+        
+            var interationNumber = 0;
+            var numberofmeasures = triggerArray.measures.length -1;
+            var measureNumber = 0;
+            var resultsarray = [];
+
+            //console.log(triggerArray);
+
+           // console.log('total number of measures', numberofmeasures)
+
+            executeMeasure(0, triggerArray);
+
+            function executeMeasure (measureNumber, triggerArray) {
+
+                //console.log('Measure Number:', measureNumber)
+
+                var individualMeasureData = {
+                    "dimensions": triggerArray.dimensions,
+                    "measure":  triggerArray.measures[measureNumber]
+                }
+
+
+                //console.log('individualMeasureData',individualMeasureData)
+
+
+                self.createMeasureObject(docId, individualMeasureData).then((data)=> {
+                    resultsarray.push(data);
+                    //console.log(measureNumber + ' result ' + data);
+
+                    if(measureNumber == numberofmeasures) {
+                       // console.log('Last measure');
+                       // console.log('resultsarray', resultsarray);
+                        if(resultsarray.includes(false)==true) {
+                            //Do not fire alert
+                            return resolve(false);
+                        } else {
+                            //Fire alert
+                            return resolve(true)
+                        }
+
+                    } else {
+
+
+
+                        measureNumber+=1;
+                    
+                        executeMeasure(measureNumber, triggerArray)
+
+                    }
+                    
+                
+                }).catch(err => {
+                    console.log('Something went wrong :(', err)
+                    return reject(err)
+                    //Create session object using specified dimension and measure/variable values
+    
+                })
+
+            }
+    
+
+
+            //qix.on('traffic:*', (direction, msg) => console.log(direction, JSON.stringify(msg)));
+
+
+        })
+    },
+    getValue: function (docId, triggerArray) {
         return new Promise((resolve, reject) => {
 
 

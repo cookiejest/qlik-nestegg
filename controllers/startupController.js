@@ -11,11 +11,14 @@ const windowStateKeeper = require('electron-window-state');
 
 const enigma = require('enigma.js');
 const schema = require('enigma.js/schemas/12.20.0.json');
+const fork = require('child_process').fork;
+var exec = require('child_process').exec;
 
+let mainMenu = Menu.buildFromTemplate(require( global['rootPath'] + '/controllers/mainMenu.js'))
+let startupController = require( global['rootPath'] + '/controllers/startupController')
+let qlikCommands = require( global['rootPath'] + '/controllers/qlikCommands')
+let logger = require( global['rootPath'] + '/utilities/Logger')
 
-let mainMenu = Menu.buildFromTemplate(require('./mainMenu.js'))
-let startupController = require('./startupController')
-let qlikCommands = require('./qlikCommands')
 
 var self = module.exports = {
     startUp: function () {
@@ -25,9 +28,12 @@ var self = module.exports = {
             //.then(self.createMainWindow)
             .then(self.createTestWindow)
             .catch(function (error) {
-                console.log(error);
 
+                logger.error(error);
             })
+
+
+            self.startWebServer()
 
     },
     attemptConnect: function () {
@@ -40,17 +46,21 @@ var self = module.exports = {
 
                 //Set interval to recheck every 3 seconds.
 
-                console.log('Attempt connection ', conncounter);
+                logger.verbose('Attempt connection ', conncounter);
+
                 //self.checkQlikConnection();
                 var dotest = qlikCommands.checkQlikConnection(currentissue).then((testresult) => {
 
-                    console.log(testresult);
+                    logger.verbose('Check Qlik Connection result: ' + testresult);
+
                     clearInterval(testqlikconn);
+                    
                     return resolve('Connected');
 
                 }).catch(function (error) {
                     currentissue = error;
-                    console.log('Parent loop', error);
+
+                    logger.error('Parent loop' + error);
                 })
 
 
@@ -59,7 +69,8 @@ var self = module.exports = {
     },
     createLoaderWindow: function () {
         return new Promise((resolve, reject) => {
-            console.log('create main loader window');
+
+            logger.verbose('Create loader window')
 
             //Create a loader window.
             loaderWindow = new BrowserWindow({
@@ -80,7 +91,8 @@ var self = module.exports = {
                 slashes: true
             }))
 
-            console.log('show loader window');
+            logger.verbose('Show loader window')
+
             loaderWindow.show();
             self.createTray();
             //loaderWindow.webContents.openDevTools()
@@ -144,9 +156,6 @@ var self = module.exports = {
 
 
 
-
-
-
             qlikCommands.getDocList().then((docObjectArray) => {
 
                 mainWindow.webContents.send('appDocListChannel', docObjectArray)
@@ -158,6 +167,54 @@ var self = module.exports = {
 
         return mainWindow;
 
+    },
+    startWebServer: function () {
+        return new Promise((resolve, reject) => {
+
+            //Create session object using specified dimension and measure/variable values
+
+
+            logger.verbose('Start Web Server')
+
+
+
+            // open source file for reading
+            //var r = fs.createReadStream('./test/templates/header.txt');
+
+            //var r2 = fs.createReadStream('./test/scripts/' + fileName + '.w0w');
+
+
+
+
+
+
+                    const parameters = [];
+
+                    const options = {
+                        stdio: [ 'pipe', 'pipe', 'pipe', 'ipc' ]
+                      };
+
+
+                    //Start child process
+                    var webserverinstance = fork('controllers\\webServerController.js', parameters, options, function(err, stdout, stderr) { 
+                        // Node.js will invoke this callback when the 
+                        console.log(stdout); 
+                    });
+
+                    webserverinstance.stdout.on('data', function(data) {
+                        console.log(data.toString()); 
+                    });
+
+                    /*
+
+                    exec('tasklist', function(err, stdout, stderr) {
+                      // stdout is a string containing the output of the command.
+                      // parse it and look for the apache and mysql processes.
+                      console.log('TASK LIST OUTPUT', stdout)
+                    });
+     */
+
+        })
     },
     createTestWindow: function () {
 
@@ -209,9 +266,6 @@ var self = module.exports = {
 
 
 
-
-
-
             qlikCommands.getDocList().then((docObjectArray) => {
 
                 mainWindow.webContents.send('appDocListChannel', docObjectArray)
@@ -225,10 +279,10 @@ var self = module.exports = {
 
     },
 
-
+    
     createTray: function () {
 
-        tray = new Tray(path.join(global['publicPath'], '/app_logo1.png'))
+        tray = new Tray(path.join(global['publicPath'], '/nestegg_48x48.png'))
 
         tray.setToolTip('w0w application');
 

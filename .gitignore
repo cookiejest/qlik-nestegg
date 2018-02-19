@@ -4,3 +4,5 @@ content/images
 test/scripts
 test/output
 .env
+dist/
+private/

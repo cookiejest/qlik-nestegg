@@ -4,8 +4,6 @@ const electron = require('electron')
 const { app, BrowserWindow, session, dialog, globalShortcut, Menu, MenuItem, Tray, ipcMain, Notification } = electron
 
 
-
-
 //For DEV
 //require('electron-reload')(__dirname);
 
@@ -22,16 +20,20 @@ var readline = require('readline');
 global['rootPath'] = __dirname;
 
 //Public resource folder path
-global['viewsPath'] = path.join(__dirname, 'views')
-global['publicPath'] = path.join(__dirname, 'public')
+global['viewsPath'] = path.join(global['rootPath'], 'views')
+global['publicPath'] = path.join(global['rootPath'], 'public')
 global['app_version'] = 1.1
 
-let mainMenu = Menu.buildFromTemplate(require(__dirname + '/controllers/mainMenu.js'))
-let startupController = require(__dirname + '/controllers/startupController')
-let testController = require(__dirname + '/controllers/testController')
-let qlikCommands = require(__dirname + '/controllers/qlikCommands')
+const updater = require('./updater')
 
-let logger = require(__dirname + '/utilities/Logger')
+
+
+let mainMenu = Menu.buildFromTemplate(require(global['rootPath'] + '/controllers/mainMenu.js'))
+let startupController = require(global['rootPath'] + '/controllers/startupController')
+let testController = require(global['rootPath'] + '/controllers/testController')
+let qlikCommands = require(global['rootPath'] + '/controllers/qlikCommands')
+
+let logger = require(global['rootPath'] + '/utilities/Logger')
 
 /*
 logger.debug('Debugging info');
@@ -64,6 +66,7 @@ var preventquitconfirmed = 'no';
 //Listen for app to quit
 app.on('before-quit', function (event) {
 
+  /*
   //console.log('App quiting... stopping quit!');
 
   logger.info('App quiting');
@@ -86,7 +89,7 @@ app.on('before-quit', function (event) {
     })
 
   }
-
+*/
 
 
 });
@@ -283,6 +286,11 @@ ipcMain.on('docObjectListChannel', (event, docId) => {
 app.on('ready', function (event) {
 
   logger.info('App ready, run startup controller..');
+
+
+  setTimeout(updater.check, 2000);
+
+
   /*
   let myNotification = new Notification('Title', {
     body: 'Lorem Ipsum Dolor Sit Amet'

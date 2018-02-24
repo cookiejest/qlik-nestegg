@@ -1,6 +1,0 @@
-process.env
-node_modules
-content/images
-test/scripts
-test/output
-.env

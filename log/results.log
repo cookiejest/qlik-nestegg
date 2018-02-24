@@ -1999,3 +1999,709 @@
 {"level":"debug","message":"C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\","timestamp":"18:09:30"}
 {"level":"verbose","message":"Test Docs Retrieved","timestamp":"18:09:30"}
 {"level":"debug","message":"Retrieve test scripts...Check values against measure.w0w,my first test.w0w,test3.w0w","timestamp":"18:09:30"}
+{"level":"info","message":"App ready, run startup controller..","timestamp":"22:46:16"}
+{"level":"verbose","message":"Create loader window","timestamp":"22:46:16"}
+{"level":"verbose","message":"Show loader window","timestamp":"22:46:17"}
+{"level":"verbose","message":"Start Web Server","timestamp":"22:46:17"}
+{"level":"verbose","message":"Attempt connection  1","timestamp":"22:46:20"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:46:22"}
+{"level":"verbose","message":"Attempt connection  2","timestamp":"22:46:24"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:46:25"}
+{"level":"verbose","message":"Attempt connection  3","timestamp":"22:46:27"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:46:28"}
+{"level":"verbose","message":"Attempt connection  4","timestamp":"22:46:30"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:46:31"}
+{"level":"verbose","message":"Attempt connection  5","timestamp":"22:46:33"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:46:34"}
+{"level":"verbose","message":"Attempt connection  6","timestamp":"22:46:36"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:46:37"}
+{"level":"verbose","message":"Attempt connection  7","timestamp":"22:46:39"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:46:40"}
+{"level":"info","message":"App ready, run startup controller..","timestamp":"22:51:46"}
+{"level":"verbose","message":"Create loader window","timestamp":"22:51:46"}
+{"level":"verbose","message":"Show loader window","timestamp":"22:51:46"}
+{"level":"verbose","message":"Start Web Server","timestamp":"22:51:46"}
+{"level":"verbose","message":"Attempt connection  1","timestamp":"22:51:49"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:51:51"}
+{"level":"verbose","message":"Attempt connection  2","timestamp":"22:51:53"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:51:54"}
+{"level":"verbose","message":"Attempt connection  3","timestamp":"22:51:56"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:51:57"}
+{"level":"verbose","message":"Attempt connection  4","timestamp":"22:51:59"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:00"}
+{"level":"verbose","message":"Attempt connection  5","timestamp":"22:52:02"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:03"}
+{"level":"verbose","message":"Attempt connection  6","timestamp":"22:52:05"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:06"}
+{"level":"verbose","message":"Attempt connection  7","timestamp":"22:52:08"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:09"}
+{"level":"verbose","message":"Attempt connection  8","timestamp":"22:52:11"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:12"}
+{"level":"verbose","message":"Attempt connection  9","timestamp":"22:52:14"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:15"}
+{"level":"verbose","message":"Attempt connection  10","timestamp":"22:52:17"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:18"}
+{"level":"verbose","message":"Attempt connection  11","timestamp":"22:52:20"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:21"}
+{"level":"verbose","message":"Attempt connection  12","timestamp":"22:52:23"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:24"}
+{"level":"verbose","message":"Attempt connection  13","timestamp":"22:52:26"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:27"}
+{"level":"verbose","message":"Attempt connection  14","timestamp":"22:52:29"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:30"}
+{"level":"verbose","message":"Attempt connection  15","timestamp":"22:52:32"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:33"}
+{"level":"verbose","message":"Attempt connection  16","timestamp":"22:52:35"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:36"}
+{"level":"verbose","message":"Attempt connection  17","timestamp":"22:52:38"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:39"}
+{"level":"verbose","message":"Attempt connection  18","timestamp":"22:52:41"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:42"}
+{"level":"verbose","message":"Attempt connection  19","timestamp":"22:52:44"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:45"}
+{"level":"verbose","message":"Attempt connection  20","timestamp":"22:52:47"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:48"}
+{"level":"verbose","message":"Attempt connection  21","timestamp":"22:52:50"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:51"}
+{"level":"verbose","message":"Attempt connection  22","timestamp":"22:52:53"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:54"}
+{"level":"verbose","message":"Attempt connection  23","timestamp":"22:52:56"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:52:57"}
+{"level":"verbose","message":"Attempt connection  24","timestamp":"22:52:59"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:00"}
+{"level":"verbose","message":"Attempt connection  25","timestamp":"22:53:02"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:03"}
+{"level":"verbose","message":"Attempt connection  26","timestamp":"22:53:05"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:06"}
+{"level":"verbose","message":"Attempt connection  27","timestamp":"22:53:08"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:09"}
+{"level":"verbose","message":"Attempt connection  28","timestamp":"22:53:11"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:12"}
+{"level":"verbose","message":"Attempt connection  29","timestamp":"22:53:14"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:15"}
+{"level":"verbose","message":"Attempt connection  30","timestamp":"22:53:17"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:18"}
+{"level":"verbose","message":"Attempt connection  31","timestamp":"22:53:20"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:21"}
+{"level":"verbose","message":"Attempt connection  32","timestamp":"22:53:23"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:24"}
+{"level":"verbose","message":"Attempt connection  33","timestamp":"22:53:26"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:27"}
+{"level":"verbose","message":"Attempt connection  34","timestamp":"22:53:29"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:30"}
+{"level":"verbose","message":"Attempt connection  35","timestamp":"22:53:32"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:33"}
+{"level":"verbose","message":"Attempt connection  36","timestamp":"22:53:35"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:36"}
+{"level":"verbose","message":"Attempt connection  37","timestamp":"22:53:38"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:39"}
+{"level":"verbose","message":"Attempt connection  38","timestamp":"22:53:41"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:42"}
+{"level":"verbose","message":"Attempt connection  39","timestamp":"22:53:44"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:45"}
+{"level":"verbose","message":"Attempt connection  40","timestamp":"22:53:47"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:48"}
+{"level":"verbose","message":"Attempt connection  41","timestamp":"22:53:50"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:51"}
+{"level":"verbose","message":"Attempt connection  42","timestamp":"22:53:53"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:54"}
+{"level":"verbose","message":"Attempt connection  43","timestamp":"22:53:56"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:53:57"}
+{"level":"verbose","message":"Attempt connection  44","timestamp":"22:53:59"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:00"}
+{"level":"verbose","message":"Attempt connection  45","timestamp":"22:54:02"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:04"}
+{"level":"verbose","message":"Attempt connection  46","timestamp":"22:54:05"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:07"}
+{"level":"verbose","message":"Attempt connection  47","timestamp":"22:54:09"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:10"}
+{"level":"verbose","message":"Attempt connection  48","timestamp":"22:54:12"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:13"}
+{"level":"verbose","message":"Attempt connection  49","timestamp":"22:54:15"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:16"}
+{"level":"verbose","message":"Attempt connection  50","timestamp":"22:54:18"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:19"}
+{"level":"verbose","message":"Attempt connection  51","timestamp":"22:54:21"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:22"}
+{"level":"verbose","message":"Attempt connection  52","timestamp":"22:54:24"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:25"}
+{"level":"verbose","message":"Attempt connection  53","timestamp":"22:54:27"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:28"}
+{"level":"verbose","message":"Attempt connection  54","timestamp":"22:54:30"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:31"}
+{"level":"verbose","message":"Attempt connection  55","timestamp":"22:54:33"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:34"}
+{"level":"verbose","message":"Attempt connection  56","timestamp":"22:54:36"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:37"}
+{"level":"verbose","message":"Attempt connection  57","timestamp":"22:54:39"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:40"}
+{"level":"verbose","message":"Attempt connection  58","timestamp":"22:54:42"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:43"}
+{"level":"verbose","message":"Attempt connection  59","timestamp":"22:54:45"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:46"}
+{"level":"verbose","message":"Attempt connection  60","timestamp":"22:54:48"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:49"}
+{"level":"verbose","message":"Attempt connection  61","timestamp":"22:54:51"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:52"}
+{"level":"verbose","message":"Attempt connection  62","timestamp":"22:54:54"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:55"}
+{"level":"verbose","message":"Attempt connection  63","timestamp":"22:54:57"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:54:58"}
+{"level":"verbose","message":"Attempt connection  64","timestamp":"22:55:00"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:01"}
+{"level":"verbose","message":"Attempt connection  65","timestamp":"22:55:03"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:04"}
+{"level":"verbose","message":"Attempt connection  66","timestamp":"22:55:06"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:07"}
+{"level":"verbose","message":"Attempt connection  67","timestamp":"22:55:09"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:10"}
+{"level":"verbose","message":"Attempt connection  68","timestamp":"22:55:12"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:13"}
+{"level":"verbose","message":"Attempt connection  69","timestamp":"22:55:15"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:16"}
+{"level":"verbose","message":"Attempt connection  70","timestamp":"22:55:18"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:19"}
+{"level":"verbose","message":"Attempt connection  71","timestamp":"22:55:21"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:22"}
+{"level":"verbose","message":"Attempt connection  72","timestamp":"22:55:24"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:25"}
+{"level":"verbose","message":"Attempt connection  73","timestamp":"22:55:27"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:28"}
+{"level":"verbose","message":"Attempt connection  74","timestamp":"22:55:30"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:31"}
+{"level":"verbose","message":"Attempt connection  75","timestamp":"22:55:33"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:34"}
+{"level":"verbose","message":"Attempt connection  76","timestamp":"22:55:36"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:37"}
+{"level":"verbose","message":"Attempt connection  77","timestamp":"22:55:39"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:40"}
+{"level":"verbose","message":"Attempt connection  78","timestamp":"22:55:42"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:43"}
+{"level":"verbose","message":"Attempt connection  79","timestamp":"22:55:45"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:46"}
+{"level":"verbose","message":"Attempt connection  80","timestamp":"22:55:48"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:49"}
+{"level":"verbose","message":"Attempt connection  81","timestamp":"22:55:51"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:52"}
+{"level":"verbose","message":"Attempt connection  82","timestamp":"22:55:54"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:55"}
+{"level":"verbose","message":"Attempt connection  83","timestamp":"22:55:57"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:55:58"}
+{"level":"verbose","message":"Attempt connection  84","timestamp":"22:56:00"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:01"}
+{"level":"verbose","message":"Attempt connection  85","timestamp":"22:56:03"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:04"}
+{"level":"verbose","message":"Attempt connection  86","timestamp":"22:56:06"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:07"}
+{"level":"verbose","message":"Attempt connection  87","timestamp":"22:56:09"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:10"}
+{"level":"verbose","message":"Attempt connection  88","timestamp":"22:56:12"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:13"}
+{"level":"verbose","message":"Attempt connection  89","timestamp":"22:56:15"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:16"}
+{"level":"verbose","message":"Attempt connection  90","timestamp":"22:56:18"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:19"}
+{"level":"verbose","message":"Attempt connection  91","timestamp":"22:56:21"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:22"}
+{"level":"verbose","message":"Attempt connection  92","timestamp":"22:56:24"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:25"}
+{"level":"verbose","message":"Attempt connection  93","timestamp":"22:56:27"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:28"}
+{"level":"verbose","message":"Attempt connection  94","timestamp":"22:56:30"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:31"}
+{"level":"verbose","message":"Attempt connection  95","timestamp":"22:56:33"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:34"}
+{"level":"verbose","message":"Attempt connection  96","timestamp":"22:56:36"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:37"}
+{"level":"verbose","message":"Attempt connection  97","timestamp":"22:56:39"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:40"}
+{"level":"verbose","message":"Attempt connection  98","timestamp":"22:56:42"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:43"}
+{"level":"verbose","message":"Attempt connection  99","timestamp":"22:56:45"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:46"}
+{"level":"verbose","message":"Attempt connection  100","timestamp":"22:56:48"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:49"}
+{"level":"verbose","message":"Attempt connection  101","timestamp":"22:56:51"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:52"}
+{"level":"verbose","message":"Attempt connection  102","timestamp":"22:56:54"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:55"}
+{"level":"verbose","message":"Attempt connection  103","timestamp":"22:56:57"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:56:58"}
+{"level":"verbose","message":"Attempt connection  104","timestamp":"22:57:00"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:01"}
+{"level":"verbose","message":"Attempt connection  105","timestamp":"22:57:03"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:04"}
+{"level":"verbose","message":"Attempt connection  106","timestamp":"22:57:06"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:07"}
+{"level":"verbose","message":"Attempt connection  107","timestamp":"22:57:09"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:10"}
+{"level":"verbose","message":"Attempt connection  108","timestamp":"22:57:12"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:13"}
+{"level":"verbose","message":"Attempt connection  109","timestamp":"22:57:15"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:16"}
+{"level":"verbose","message":"Attempt connection  110","timestamp":"22:57:18"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:19"}
+{"level":"verbose","message":"Attempt connection  111","timestamp":"22:57:21"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:22"}
+{"level":"verbose","message":"Attempt connection  112","timestamp":"22:57:24"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:25"}
+{"level":"verbose","message":"Attempt connection  113","timestamp":"22:57:27"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:28"}
+{"level":"verbose","message":"Attempt connection  114","timestamp":"22:57:30"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:31"}
+{"level":"verbose","message":"Attempt connection  115","timestamp":"22:57:33"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:34"}
+{"level":"verbose","message":"Attempt connection  116","timestamp":"22:57:36"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:37"}
+{"level":"verbose","message":"Attempt connection  117","timestamp":"22:57:39"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:40"}
+{"level":"verbose","message":"Attempt connection  118","timestamp":"22:57:42"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:43"}
+{"level":"verbose","message":"Attempt connection  119","timestamp":"22:57:45"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:46"}
+{"level":"verbose","message":"Attempt connection  120","timestamp":"22:57:48"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:49"}
+{"level":"verbose","message":"Attempt connection  121","timestamp":"22:57:51"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:52"}
+{"level":"verbose","message":"Attempt connection  122","timestamp":"22:57:54"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:55"}
+{"level":"verbose","message":"Attempt connection  123","timestamp":"22:57:57"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:57:58"}
+{"level":"verbose","message":"Attempt connection  124","timestamp":"22:58:00"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:01"}
+{"level":"verbose","message":"Attempt connection  125","timestamp":"22:58:03"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:04"}
+{"level":"verbose","message":"Attempt connection  126","timestamp":"22:58:06"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:07"}
+{"level":"verbose","message":"Attempt connection  127","timestamp":"22:58:09"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:10"}
+{"level":"verbose","message":"Attempt connection  128","timestamp":"22:58:12"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:13"}
+{"level":"verbose","message":"Attempt connection  129","timestamp":"22:58:15"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:16"}
+{"level":"verbose","message":"Attempt connection  130","timestamp":"22:58:18"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:19"}
+{"level":"verbose","message":"Attempt connection  131","timestamp":"22:58:21"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:22"}
+{"level":"verbose","message":"Attempt connection  132","timestamp":"22:58:24"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:25"}
+{"level":"verbose","message":"Attempt connection  133","timestamp":"22:58:27"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:28"}
+{"level":"verbose","message":"Attempt connection  134","timestamp":"22:58:30"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:31"}
+{"level":"verbose","message":"Attempt connection  135","timestamp":"22:58:33"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:34"}
+{"level":"verbose","message":"Attempt connection  136","timestamp":"22:58:36"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:37"}
+{"level":"verbose","message":"Attempt connection  137","timestamp":"22:58:39"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:40"}
+{"level":"verbose","message":"Attempt connection  138","timestamp":"22:58:42"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:43"}
+{"level":"verbose","message":"Attempt connection  139","timestamp":"22:58:45"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:46"}
+{"level":"verbose","message":"Attempt connection  140","timestamp":"22:58:48"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:49"}
+{"level":"verbose","message":"Attempt connection  141","timestamp":"22:58:51"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:52"}
+{"level":"verbose","message":"Attempt connection  142","timestamp":"22:58:54"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:55"}
+{"level":"verbose","message":"Attempt connection  143","timestamp":"22:58:57"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:58:58"}
+{"level":"verbose","message":"Attempt connection  144","timestamp":"22:59:00"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:01"}
+{"level":"verbose","message":"Attempt connection  145","timestamp":"22:59:03"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:04"}
+{"level":"verbose","message":"Attempt connection  146","timestamp":"22:59:06"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:07"}
+{"level":"verbose","message":"Attempt connection  147","timestamp":"22:59:09"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:10"}
+{"level":"verbose","message":"Attempt connection  148","timestamp":"22:59:12"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:13"}
+{"level":"verbose","message":"Attempt connection  149","timestamp":"22:59:15"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:16"}
+{"level":"verbose","message":"Attempt connection  150","timestamp":"22:59:18"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:19"}
+{"level":"verbose","message":"Attempt connection  151","timestamp":"22:59:21"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:22"}
+{"level":"verbose","message":"Attempt connection  152","timestamp":"22:59:24"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:25"}
+{"level":"verbose","message":"Attempt connection  153","timestamp":"22:59:27"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:28"}
+{"level":"verbose","message":"Attempt connection  154","timestamp":"22:59:30"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:31"}
+{"level":"verbose","message":"Attempt connection  155","timestamp":"22:59:33"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:34"}
+{"level":"verbose","message":"Attempt connection  156","timestamp":"22:59:36"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:37"}
+{"level":"verbose","message":"Attempt connection  157","timestamp":"22:59:39"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:40"}
+{"level":"verbose","message":"Attempt connection  158","timestamp":"22:59:42"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:43"}
+{"level":"verbose","message":"Attempt connection  159","timestamp":"22:59:45"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:46"}
+{"level":"verbose","message":"Attempt connection  160","timestamp":"22:59:48"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:49"}
+{"level":"verbose","message":"Attempt connection  161","timestamp":"22:59:51"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:52"}
+{"level":"verbose","message":"Attempt connection  162","timestamp":"22:59:54"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:55"}
+{"level":"verbose","message":"Attempt connection  163","timestamp":"22:59:57"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"22:59:58"}
+{"level":"verbose","message":"Attempt connection  164","timestamp":"23:00:00"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:01"}
+{"level":"verbose","message":"Attempt connection  165","timestamp":"23:00:03"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:04"}
+{"level":"verbose","message":"Attempt connection  166","timestamp":"23:00:06"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:07"}
+{"level":"verbose","message":"Attempt connection  167","timestamp":"23:00:09"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:10"}
+{"level":"verbose","message":"Attempt connection  168","timestamp":"23:00:12"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:13"}
+{"level":"verbose","message":"Attempt connection  169","timestamp":"23:00:15"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:16"}
+{"level":"verbose","message":"Attempt connection  170","timestamp":"23:00:18"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:19"}
+{"level":"verbose","message":"Attempt connection  171","timestamp":"23:00:21"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:22"}
+{"level":"verbose","message":"Attempt connection  172","timestamp":"23:00:24"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:25"}
+{"level":"verbose","message":"Attempt connection  173","timestamp":"23:00:27"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:28"}
+{"level":"verbose","message":"Attempt connection  174","timestamp":"23:00:30"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:31"}
+{"level":"verbose","message":"Attempt connection  175","timestamp":"23:00:33"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:34"}
+{"level":"verbose","message":"Attempt connection  176","timestamp":"23:00:36"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:37"}
+{"level":"verbose","message":"Attempt connection  177","timestamp":"23:00:39"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:40"}
+{"level":"verbose","message":"Attempt connection  178","timestamp":"23:00:42"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:43"}
+{"level":"verbose","message":"Attempt connection  179","timestamp":"23:00:45"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:46"}
+{"level":"verbose","message":"Attempt connection  180","timestamp":"23:00:48"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:49"}
+{"level":"verbose","message":"Attempt connection  181","timestamp":"23:00:51"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:52"}
+{"level":"verbose","message":"Attempt connection  182","timestamp":"23:00:54"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:55"}
+{"level":"verbose","message":"Attempt connection  183","timestamp":"23:00:57"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:00:58"}
+{"level":"verbose","message":"Attempt connection  184","timestamp":"23:01:00"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:01:01"}
+{"level":"verbose","message":"Attempt connection  185","timestamp":"23:01:03"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:01:04"}
+{"level":"verbose","message":"Attempt connection  186","timestamp":"23:01:06"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:01:07"}
+{"level":"verbose","message":"Attempt connection  187","timestamp":"23:01:09"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:01:10"}
+{"level":"info","message":"App ready, run startup controller..","timestamp":"23:04:10"}
+{"level":"verbose","message":"Create loader window","timestamp":"23:04:10"}
+{"level":"verbose","message":"Show loader window","timestamp":"23:04:10"}
+{"level":"verbose","message":"Start Web Server","timestamp":"23:04:10"}
+{"level":"verbose","message":"Attempt connection  1","timestamp":"23:04:35"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:04:37"}
+{"level":"verbose","message":"Attempt connection  2","timestamp":"23:04:39"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:04:40"}
+{"level":"verbose","message":"Attempt connection  3","timestamp":"23:04:42"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:04:43"}
+{"level":"verbose","message":"Attempt connection  4","timestamp":"23:04:45"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:04:46"}
+{"level":"verbose","message":"Attempt connection  5","timestamp":"23:04:48"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:04:49"}
+{"level":"verbose","message":"Attempt connection  6","timestamp":"23:04:51"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"23:04:52"}
+{"level":"verbose","message":"Attempt connection  7","timestamp":"23:04:54"}
+{"level":"error","message":"Parent loopUser needs to login!","timestamp":"23:04:54"}
+{"level":"verbose","message":"Attempt connection  8","timestamp":"23:04:57"}
+{"level":"error","message":"Parent loopUser needs to login!","timestamp":"23:04:57"}
+{"level":"verbose","message":"Attempt connection  9","timestamp":"23:05:00"}
+{"level":"error","message":"Parent loopUser needs to login!","timestamp":"23:05:00"}
+{"level":"verbose","message":"Attempt connection  10","timestamp":"23:05:03"}
+{"level":"error","message":"Parent loopUser needs to login!","timestamp":"23:05:03"}
+{"level":"verbose","message":"Attempt connection  11","timestamp":"23:05:06"}
+{"level":"verbose","message":"Check Qlik Connection result: true","timestamp":"23:05:06"}
+{"message":"ENOENT: no such file or directory, open 'C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w'","stack":"Error: ENOENT: no such file or directory, open 'C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w'","errno":-4058,"code":"ENOENT","syscall":"open","path":"C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w","level":"error","timestamp":"23:05:07"}
+{"message":"ENOENT: no such file or directory, open 'C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w'","stack":"Error: ENOENT: no such file or directory, open 'C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w'","errno":-4058,"code":"ENOENT","syscall":"open","path":"C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w","level":"warn","timestamp":"23:05:07"}
+{"level":"debug","message":"C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\","timestamp":"23:05:07"}
+{"level":"verbose","message":"Test Docs Retrieved","timestamp":"23:05:07"}
+{"level":"debug","message":"Retrieve test scripts...Check values against measure.w0w,my first test.w0w,test3.w0w","timestamp":"23:05:07"}
+{"level":"info","message":"App ready, run startup controller..","timestamp":"23:10:56"}
+{"level":"verbose","message":"Create loader window","timestamp":"23:10:56"}
+{"level":"verbose","message":"Show loader window","timestamp":"23:10:56"}
+{"level":"verbose","message":"Start Web Server","timestamp":"23:10:57"}
+{"level":"verbose","message":"Attempt connection  1","timestamp":"23:11:00"}
+{"level":"verbose","message":"Check Qlik Connection result: true","timestamp":"23:11:01"}
+{"message":"ENOENT: no such file or directory, open 'C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w'","stack":"Error: ENOENT: no such file or directory, open 'C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w'","errno":-4058,"code":"ENOENT","syscall":"open","path":"C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w","level":"error","timestamp":"23:11:01"}
+{"message":"ENOENT: no such file or directory, open 'C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w'","stack":"Error: ENOENT: no such file or directory, open 'C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w'","errno":-4058,"code":"ENOENT","syscall":"open","path":"C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w","level":"warn","timestamp":"23:11:01"}
+{"level":"debug","message":"C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\","timestamp":"23:11:01"}
+{"level":"verbose","message":"Test Docs Retrieved","timestamp":"23:11:01"}
+{"level":"debug","message":"Retrieve test scripts...Check values against measure.w0w,my first test.w0w,test3.w0w","timestamp":"23:11:01"}
+{"level":"info","message":"App ready, run startup controller..","timestamp":"23:16:26"}
+{"level":"verbose","message":"Create loader window","timestamp":"23:16:26"}
+{"level":"verbose","message":"Show loader window","timestamp":"23:16:26"}
+{"level":"verbose","message":"Start Web Server","timestamp":"23:16:26"}
+{"level":"verbose","message":"Attempt connection  1","timestamp":"23:16:30"}
+{"level":"verbose","message":"Check Qlik Connection result: true","timestamp":"23:16:31"}
+{"message":"ENOENT: no such file or directory, open 'C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w'","stack":"Error: ENOENT: no such file or directory, open 'C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w'","errno":-4058,"code":"ENOENT","syscall":"open","path":"C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w","level":"error","timestamp":"23:16:31"}
+{"message":"ENOENT: no such file or directory, open 'C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w'","stack":"Error: ENOENT: no such file or directory, open 'C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w'","errno":-4058,"code":"ENOENT","syscall":"open","path":"C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w","level":"warn","timestamp":"23:16:31"}
+{"level":"debug","message":"C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\","timestamp":"23:16:31"}
+{"level":"verbose","message":"Test Docs Retrieved","timestamp":"23:16:31"}
+{"level":"debug","message":"Retrieve test scripts...Check values against measure.w0w,my first test.w0w,test3.w0w","timestamp":"23:16:31"}
+{"level":"info","message":"App ready, run startup controller..","timestamp":"23:39:07"}
+{"level":"verbose","message":"Create loader window","timestamp":"23:39:07"}
+{"level":"verbose","message":"Show loader window","timestamp":"23:39:07"}
+{"level":"verbose","message":"Start Web Server","timestamp":"23:39:07"}
+{"level":"info","message":"App ready, run startup controller..","timestamp":"12:38:26"}
+{"level":"verbose","message":"Create loader window","timestamp":"12:38:26"}
+{"level":"verbose","message":"Show loader window","timestamp":"12:38:26"}
+{"level":"verbose","message":"Start Web Server","timestamp":"12:38:26"}
+{"level":"verbose","message":"Attempt connection  1","timestamp":"12:38:29"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"12:38:31"}
+{"level":"verbose","message":"Attempt connection  2","timestamp":"12:38:33"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"12:38:34"}
+{"level":"verbose","message":"Attempt connection  3","timestamp":"12:38:36"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"12:38:37"}
+{"level":"verbose","message":"Attempt connection  4","timestamp":"12:38:39"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"12:38:40"}
+{"level":"verbose","message":"Attempt connection  5","timestamp":"12:38:42"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"12:38:43"}
+{"level":"info","message":"App ready, run startup controller..","timestamp":"13:09:32"}
+{"level":"verbose","message":"Create loader window","timestamp":"13:09:32"}
+{"level":"verbose","message":"Show loader window","timestamp":"13:09:32"}
+{"level":"verbose","message":"Start Web Server","timestamp":"13:09:32"}
+{"level":"verbose","message":"Attempt connection  1","timestamp":"13:09:35"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"13:09:38"}
+{"level":"verbose","message":"Attempt connection  2","timestamp":"13:09:40"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"13:09:41"}
+{"level":"verbose","message":"Attempt connection  3","timestamp":"13:09:43"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"13:09:44"}
+{"level":"verbose","message":"Attempt connection  4","timestamp":"13:09:46"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"13:09:47"}
+{"level":"verbose","message":"Attempt connection  5","timestamp":"13:09:49"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"13:09:50"}
+{"level":"verbose","message":"Attempt connection  6","timestamp":"13:09:52"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"13:09:53"}
+{"level":"verbose","message":"Attempt connection  7","timestamp":"13:09:55"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"13:09:56"}
+{"level":"verbose","message":"Attempt connection  8","timestamp":"13:09:58"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"13:09:59"}
+{"level":"verbose","message":"Attempt connection  9","timestamp":"13:10:01"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"13:10:02"}
+{"level":"verbose","message":"Attempt connection  10","timestamp":"13:10:04"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"13:10:05"}
+{"level":"verbose","message":"Attempt connection  11","timestamp":"13:10:07"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"13:10:08"}
+{"level":"verbose","message":"Attempt connection  12","timestamp":"13:10:10"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"13:10:11"}
+{"level":"verbose","message":"Attempt connection  13","timestamp":"13:10:13"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"13:10:14"}
+{"level":"verbose","message":"Attempt connection  14","timestamp":"13:10:16"}
+{"level":"info","message":"App ready, run startup controller..","timestamp":"14:22:53"}
+{"level":"verbose","message":"Create loader window","timestamp":"14:22:53"}
+{"level":"verbose","message":"Show loader window","timestamp":"14:22:53"}
+{"level":"verbose","message":"Start Web Server","timestamp":"14:22:53"}
+{"level":"verbose","message":"Attempt connection  1","timestamp":"14:22:56"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"14:22:58"}
+{"level":"verbose","message":"Attempt connection  2","timestamp":"14:23:00"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"14:23:01"}
+{"level":"verbose","message":"Attempt connection  3","timestamp":"14:23:03"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"14:23:04"}
+{"level":"verbose","message":"Attempt connection  4","timestamp":"14:23:06"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"14:23:07"}
+{"level":"verbose","message":"Attempt connection  5","timestamp":"14:23:09"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"14:23:10"}
+{"level":"verbose","message":"Attempt connection  6","timestamp":"14:23:12"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"14:23:13"}
+{"level":"verbose","message":"Attempt connection  7","timestamp":"14:23:15"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"14:23:16"}
+{"level":"verbose","message":"Attempt connection  8","timestamp":"14:23:18"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"14:23:19"}
+{"level":"verbose","message":"Attempt connection  9","timestamp":"14:23:21"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"14:23:22"}
+{"level":"info","message":"App ready, run startup controller..","timestamp":"17:14:17"}
+{"level":"verbose","message":"Create loader window","timestamp":"17:14:17"}
+{"level":"verbose","message":"Show loader window","timestamp":"17:14:17"}
+{"level":"verbose","message":"Start Web Server","timestamp":"17:14:17"}
+{"level":"verbose","message":"Attempt connection  1","timestamp":"17:14:20"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"17:14:23"}
+{"level":"verbose","message":"Attempt connection  2","timestamp":"17:14:25"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"17:14:26"}
+{"level":"verbose","message":"Attempt connection  3","timestamp":"17:14:28"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"17:14:29"}
+{"level":"verbose","message":"Attempt connection  4","timestamp":"17:14:31"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"17:14:32"}
+{"level":"verbose","message":"Attempt connection  5","timestamp":"17:14:34"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"17:14:35"}
+{"level":"verbose","message":"Attempt connection  6","timestamp":"17:14:37"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"17:14:38"}
+{"level":"verbose","message":"Attempt connection  7","timestamp":"17:14:40"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"17:14:41"}
+{"level":"verbose","message":"Attempt connection  8","timestamp":"17:14:43"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"17:14:44"}
+{"level":"verbose","message":"Attempt connection  9","timestamp":"17:14:46"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"17:14:47"}
+{"level":"verbose","message":"Attempt connection  10","timestamp":"17:14:49"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"17:14:50"}
+{"level":"verbose","message":"Attempt connection  11","timestamp":"17:14:52"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"17:14:53"}
+{"level":"verbose","message":"Attempt connection  12","timestamp":"17:14:55"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"17:14:56"}
+{"level":"info","message":"App ready, run startup controller..","timestamp":"10:05:48"}
+{"level":"verbose","message":"Create loader window","timestamp":"10:05:48"}
+{"level":"verbose","message":"Show loader window","timestamp":"10:05:48"}
+{"level":"verbose","message":"Start Web Server","timestamp":"10:05:48"}
+{"level":"verbose","message":"Attempt connection  1","timestamp":"10:05:51"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:05:53"}
+{"level":"verbose","message":"Attempt connection  2","timestamp":"10:05:55"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:05:56"}
+{"level":"verbose","message":"Attempt connection  3","timestamp":"10:05:58"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:05:59"}
+{"level":"verbose","message":"Attempt connection  4","timestamp":"10:06:01"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:02"}
+{"level":"verbose","message":"Attempt connection  5","timestamp":"10:06:04"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:05"}
+{"level":"verbose","message":"Attempt connection  6","timestamp":"10:06:07"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:08"}
+{"level":"verbose","message":"Attempt connection  7","timestamp":"10:06:10"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:11"}
+{"level":"verbose","message":"Attempt connection  8","timestamp":"10:06:13"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:14"}
+{"level":"verbose","message":"Attempt connection  9","timestamp":"10:06:16"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:17"}
+{"level":"verbose","message":"Attempt connection  10","timestamp":"10:06:19"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:20"}
+{"level":"verbose","message":"Attempt connection  11","timestamp":"10:06:22"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:23"}
+{"level":"verbose","message":"Attempt connection  12","timestamp":"10:06:25"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:26"}
+{"level":"verbose","message":"Attempt connection  13","timestamp":"10:06:28"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:29"}
+{"level":"verbose","message":"Attempt connection  14","timestamp":"10:06:31"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:32"}
+{"level":"verbose","message":"Attempt connection  15","timestamp":"10:06:34"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:35"}
+{"level":"verbose","message":"Attempt connection  16","timestamp":"10:06:37"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:38"}
+{"level":"verbose","message":"Attempt connection  17","timestamp":"10:06:40"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:41"}
+{"level":"verbose","message":"Attempt connection  18","timestamp":"10:06:43"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:44"}
+{"level":"verbose","message":"Attempt connection  19","timestamp":"10:06:46"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:47"}
+{"level":"verbose","message":"Attempt connection  20","timestamp":"10:06:49"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:50"}
+{"level":"verbose","message":"Attempt connection  21","timestamp":"10:06:52"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:53"}
+{"level":"verbose","message":"Attempt connection  22","timestamp":"10:06:55"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:56"}
+{"level":"verbose","message":"Attempt connection  23","timestamp":"10:06:58"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:06:59"}
+{"level":"verbose","message":"Attempt connection  24","timestamp":"10:07:01"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:07:02"}
+{"level":"verbose","message":"Attempt connection  25","timestamp":"10:07:04"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:07:05"}
+{"level":"verbose","message":"Attempt connection  26","timestamp":"10:07:07"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:07:08"}
+{"level":"verbose","message":"Attempt connection  27","timestamp":"10:07:10"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:07:11"}
+{"level":"verbose","message":"Attempt connection  28","timestamp":"10:07:13"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:07:14"}
+{"level":"verbose","message":"Attempt connection  29","timestamp":"10:07:16"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:07:17"}
+{"level":"verbose","message":"Attempt connection  30","timestamp":"10:07:19"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:07:20"}
+{"level":"verbose","message":"Attempt connection  31","timestamp":"10:07:22"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:07:23"}
+{"level":"verbose","message":"Attempt connection  32","timestamp":"10:07:25"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:07:26"}
+{"level":"verbose","message":"Attempt connection  33","timestamp":"10:07:28"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:07:29"}
+{"level":"verbose","message":"Attempt connection  34","timestamp":"10:07:31"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:07:32"}
+{"level":"verbose","message":"Attempt connection  35","timestamp":"10:07:34"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:07:35"}
+{"level":"verbose","message":"Attempt connection  36","timestamp":"10:07:37"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:07:38"}
+{"level":"verbose","message":"Attempt connection  37","timestamp":"10:07:40"}
+{"level":"error","message":"Parent loopQlik Sense Desktop not open!","timestamp":"10:07:41"}
+{"level":"verbose","message":"Attempt connection  38","timestamp":"10:07:43"}
+{"level":"error","message":"Parent loopUser needs to login!","timestamp":"10:07:43"}
+{"level":"verbose","message":"Attempt connection  39","timestamp":"10:07:46"}
+{"level":"verbose","message":"Check Qlik Connection result: true","timestamp":"10:07:46"}
+{"level":"debug","message":"C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\","timestamp":"10:07:47"}
+{"message":"ENOENT: no such file or directory, open 'C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w'","stack":"Error: ENOENT: no such file or directory, open 'C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w'","errno":-4058,"code":"ENOENT","syscall":"open","path":"C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w","level":"error","timestamp":"10:07:47"}
+{"message":"ENOENT: no such file or directory, open 'C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w'","stack":"Error: ENOENT: no such file or directory, open 'C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w'","errno":-4058,"code":"ENOENT","syscall":"open","path":"C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\.w0w","level":"warn","timestamp":"10:07:47"}
+{"level":"verbose","message":"Test Docs Retrieved","timestamp":"10:07:47"}
+{"level":"debug","message":"Retrieve test scripts...Check values against measure.w0w,my first test.w0w,test3.w0w","timestamp":"10:07:47"}
+{"level":"verbose","message":"Retrieved test content","timestamp":"10:08:03"}
+{"level":"debug","message":"retrieve test content..","timestamp":"10:08:03"}
+{"level":"debug","message":"C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\test\\scripts\\","timestamp":"10:08:03"}
+{"level":"verbose","message":"Test Docs Retrieved","timestamp":"10:08:03"}
+{"level":"debug","message":"Retrieve test scripts...Check values against measure.w0w,my first test.w0w,test3.w0w","timestamp":"10:08:03"}
+{"level":"debug","message":"Save test script path: C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application/test/scripts/Check values against measure.w0w","timestamp":"10:09:01"}
+{"level":"verbose","message":"file saved!","timestamp":"10:09:01"}
+{"level":"debug","message":"Save test data script...C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application/test/scripts/Check values against measure.w0w","timestamp":"10:09:01"}
+{"level":"info","message":"Starting test file.. Check values against measure","timestamp":"10:09:01"}
+{"level":"verbose","message":"Start test from within test controller: Check values against measure","timestamp":"10:09:01"}
+{"level":"verbose","message":"header data retrieved","timestamp":"10:09:01"}
+{"level":"verbose","message":"test content retrieved","timestamp":"10:09:01"}
+{"level":"verbose","message":"C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application/test/output/Check values against measure 2018-02-21-10-09-01.txt","timestamp":"10:09:01"}
+{"level":"verbose","message":"Test output file saved!","timestamp":"10:09:01"}
+{"level":"verbose","message":"Header appended to content","timestamp":"10:09:01"}
+{"level":"verbose","message":"The data to append was added to file!","timestamp":"10:09:01"}
+{"level":"verbose","message":"Test script body appended to content","timestamp":"10:09:01"}
+{"level":"verbose","message":"The data to append was added to file!","timestamp":"10:09:01"}
+{"level":"verbose","message":"Test file combined...C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application/test/output/Check values against measure 2018-02-21-10-09-01.txt","timestamp":"10:09:01"}
+{"level":"verbose","message":"Create test runner child process..","timestamp":"10:09:01"}
+{"level":"verbose","message":"C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application\\testrunner.js","timestamp":"10:09:01"}
+{"level":"debug","message":"Test Runner Message: Logger loaded\n","timestamp":"10:09:02"}
+{"level":"debug","message":"Test Runner Message: 10:09:02 - \u001b[36mverbose\u001b[39m: Test runner child process created for C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application/test/output/Check values against measure 2018-02-21-10-09-01.txt\r\n","timestamp":"10:09:02"}
+{"level":"debug","message":"Test Runner Message: 10:09:02 - \u001b[36mverbose\u001b[39m: Create mocha instance\r\n","timestamp":"10:09:02"}
+{"level":"debug","message":"Test Runner Message: \n","timestamp":"10:09:02"}
+{"level":"debug","message":"Test Runner Message: \n","timestamp":"10:09:02"}
+{"level":"debug","message":"Test Runner Message: 10:09:02 - \u001b[36mverbose\u001b[39m: Test started: Does number of sales people look correct\r\n","timestamp":"10:09:02"}
+{"level":"verbose","message":"Test runner child process created for C:\\Users\\adamc\\Development\\w0w-alerts\\w0w-alerts-application/test/output/Check values against measure 2018-02-21-10-09-01.txt","timestamp":"10:09:02"}
+{"level":"verbose","message":"Create mocha instance","timestamp":"10:09:02"}
+{"level":"verbose","message":"Test started: Does number of sales people look correct","timestamp":"10:09:02"}
+{"level":"verbose","message":"The data to append was added to file!","timestamp":"10:09:02"}
+{"level":"debug","message":"Test Runner Message: 10:09:02 - \u001b[36mverbose\u001b[39m: The data to append was added to file!\r\n","timestamp":"10:09:02"}
+{"level":"verbose","message":"Test passed: Does number of sales people look correct","timestamp":"10:09:03"}
+{"level":"debug","message":"Test Runner Message:   √ Does number of sales people look correct (818ms)\n","timestamp":"10:09:03"}
+{"level":"verbose","message":"Message from testrunner child process[object Object]","timestamp":"10:09:03"}
+{"level":"debug","message":"Test Runner Message: 10:09:03 - \u001b[36mverbose\u001b[39m: Test passed: Does number of sales people look correct\r\n10:09:03 - \u001b[36mverbose\u001b[39m: Test done: Does number of sales people look correct\r\n10:09:03 - \u001b[36mverbose\u001b[39m: Test started: Does number of customers look correct\r\n","timestamp":"10:09:03"}
+{"level":"verbose","message":"Test done: Does number of sales people look correct","timestamp":"10:09:03"}
+{"level":"verbose","message":"Test started: Does number of customers look correct","timestamp":"10:09:03"}
+{"level":"debug","message":"Test Runner Message:   1) Does number of customers look correct\n","timestamp":"10:09:03"}
+{"level":"debug","message":"Test Runner Message: 10:09:03 - \u001b[36mverbose\u001b[39m: Test Failed\r\n","timestamp":"10:09:03"}
+{"level":"verbose","message":"Message from testrunner child process[object Object]","timestamp":"10:09:03"}
+{"level":"debug","message":"Test Runner Message: 10:09:03 - \u001b[36mverbose\u001b[39m: Test done: Does number of customers look correct\r\n","timestamp":"10:09:03"}
+{"level":"verbose","message":"Test Failed","timestamp":"10:09:03"}
+{"level":"debug","message":"{\n\t\"stack\": \"ReferenceError: test is not defined\\n    at Context.<anonymous> (test\\\\output\\\\Check values against measure 2018-02-21-10-09-01.txt:82:12)\",\n\t\"message\": \"test is not defined\"\n}","timestamp":"10:09:03"}
+{"level":"verbose","message":"Test done: Does number of customers look correct","timestamp":"10:09:03"}
+{"level":"debug","message":"Test Runner Message:   some text description\n","timestamp":"10:09:03"}
+{"level":"debug","message":"Test Runner Message: 10:09:03 - \u001b[36mverbose\u001b[39m: Test started: Check total budget records\r\n","timestamp":"10:09:03"}
+{"level":"verbose","message":"Test started: Check total budget records","timestamp":"10:09:03"}
+{"level":"debug","message":"Test Runner Message: 10:09:03 - \u001b[36mverbose\u001b[39m: The data to append was added to file!\r\n","timestamp":"10:09:03"}
+{"level":"verbose","message":"The data to append was added to file!","timestamp":"10:09:03"}
+{"level":"verbose","message":"The data to append was added to file!","timestamp":"10:09:03"}
+{"level":"debug","message":"Test Runner Message: 10:09:03 - \u001b[36mverbose\u001b[39m: The data to append was added to file!\r\n","timestamp":"10:09:03"}
+{"level":"verbose","message":"The data to append was added to file!","timestamp":"10:09:03"}
+{"level":"debug","message":"Test Runner Message: 10:09:03 - \u001b[36mverbose\u001b[39m: The data to append was added to file!\r\n","timestamp":"10:09:03"}
+{"level":"verbose","message":"The data to append was added to file!","timestamp":"10:09:03"}
+{"level":"verbose","message":"The data to append was added to file!","timestamp":"10:09:03"}
+{"level":"debug","message":"Test Runner Message: 10:09:03 - \u001b[36mverbose\u001b[39m: The data to append was added to file!\r\n10:09:03 - \u001b[36mverbose\u001b[39m: The data to append was added to file!\r\n","timestamp":"10:09:03"}
+{"level":"verbose","message":"The data to append was added to file!","timestamp":"10:09:03"}
+{"level":"debug","message":"Test Runner Message: 10:09:03 - \u001b[36mverbose\u001b[39m: The data to append was added to file!\r\n","timestamp":"10:09:03"}
+{"level":"verbose","message":"Test passed: Check total budget records","timestamp":"10:09:03"}
+{"level":"verbose","message":"Test done: Check total budget records","timestamp":"10:09:03"}
+{"level":"debug","message":"Test Runner Message:     √ Check total budget records (180ms)\n","timestamp":"10:09:03"}
+{"level":"verbose","message":"Message from testrunner child process[object Object]","timestamp":"10:09:03"}
+{"level":"verbose","message":"Test Script Complete!","timestamp":"10:09:03"}
+{"level":"debug","message":"Test Runner Message: 10:09:03 - \u001b[36mverbose\u001b[39m: Test passed: Check total budget records\r\n10:09:03 - \u001b[36mverbose\u001b[39m: Test done: Check total budget records\r\n\n\n  2 passing (1s)\n  1 failing\n\n","timestamp":"10:09:03"}
+{"level":"verbose","message":"The data to append was added to file!","timestamp":"10:09:03"}
+{"level":"verbose","message":"Message from testrunner child process[object Object]","timestamp":"10:09:03"}
+{"level":"debug","message":"Test Runner Message:   1) Does number of customers look correct:\n     ReferenceError: test is not defined\n      at Context.<anonymous> (test\\output\\Check values against measure 2018-02-21-10-09-01.txt:82:12)\n\n\n\n10:09:03 - \u001b[36mverbose\u001b[39m: Test Script Complete!\r\n","timestamp":"10:09:03"}
+{"level":"verbose","message":"The data to append was added to file!","timestamp":"10:09:03"}
+{"level":"debug","message":"Test Runner Message: 10:09:03 - \u001b[36mverbose\u001b[39m: The data to append was added to file!\r\n","timestamp":"10:09:03"}
+{"level":"debug","message":"Test Runner Message: 10:09:03 - \u001b[36mverbose\u001b[39m: The data to append was added to file!\r\n","timestamp":"10:09:03"}

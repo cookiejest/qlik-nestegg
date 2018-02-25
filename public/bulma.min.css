@@ -2572,6 +2572,14 @@
       width: auto;
     }
   }
+
+  /*CUSTOM*/
+  @media screen and (min-width: 1024px) {
+    .modal-content .container {
+      max-width: 640px;
+      width: 640px;
+    }
+  }
   
   @media screen and (max-width: 1215px) {
     .container.is-widescreen {
@@ -4500,6 +4508,7 @@
     border-radius: 3px;
     padding: 1.25rem 2.5rem 1.25rem 1.5rem;
     position: relative;
+    max-width: 640px;
   }
   
   .notification:not(:last-child) {
@@ -6273,7 +6282,7 @@
     max-height: calc(100vh - 160px);
     overflow: auto;
     position: relative;
-    width: 100%;
+    max-width: 640px;
   }
   
   @media screen and (min-width: 769px), print {

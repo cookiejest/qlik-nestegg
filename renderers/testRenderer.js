@@ -20,6 +20,8 @@ $(document).ready(function () {
     $('#delete_test_button').prop('disabled', true);
     $('#save_test').prop('disabled', true);
 
+    $('#stop_test_button').prop('disabled', true);
+
 
     ipcRenderer.send('retrieve_tests', 'get');
 
@@ -52,6 +54,8 @@ $(document).ready(function () {
         });
 
 
+        
+
         $('.filebutton').click(function () {
 
             console.log($(this).attr('filename'))
@@ -81,7 +85,9 @@ $(document).ready(function () {
 
 
         $('#run_test_button').addClass("is-loading");
+        $('#run_test_button').prop('disabled', true);
 
+        $('#stop_test_button').prop('disabled', false);
 
         console.log('Start test!');
 
@@ -158,12 +164,13 @@ $(document).ready(function () {
 
     ipcRenderer.on('load_file_data', (event, data) => {
 
-        console.log('File retrieved from main');
+
         console.log(data);
         $("#new_test_modal").removeClass("is-active");
         $('#confirm_new_test_button').removeClass("is-loading");
         console.log('Time to load the file!');
         ipcRenderer.send('retrieve_tests', 'get');
+        console.log(data.filecontent);
         editor.setValue(data.filecontent)
         //Load the file into into javascript array
 
@@ -228,6 +235,9 @@ $(document).ready(function () {
             var messagestring = '<a class="button is-small is-info"><span class="icon is-small"><i class="fas fa-trophy"></i></span></a> <span class="is-danger" >' + data.message + " <b><span class='is-success button is-small '>" + data.passcounter + " pass</span> <span class='button is-small  is-danger'>" + data.failcounter + " fail<span></b> out of <b>" + data.totalcounter + "</b></span>";
 
             $('#run_test_button').removeClass("is-loading");
+            $('#run_test_button').prop('disabled', false);
+            $('#stop_test_button').prop('disabled', true);
+
 
             $("#logmessages").append(messagestring + "</br>");
         } else if (data.type == 'script error') {
@@ -255,6 +265,22 @@ $(document).ready(function () {
 
 
     })
+
+
+    ipcRenderer.on('error_message', (event, message) => {
+
+
+
+        $('#error_modal').addClass("is-active");
+
+    
+  $("#error_message").html(message);
+
+    })
+
+
+
+
 
 
     ipcRenderer.on('delete_test_data', (event, filename) => {
@@ -321,6 +347,16 @@ $(document).ready(function () {
 
         $("#delete_test_modal").removeClass("is-active");
     })
+
+
+    $('#error_modal_close').click(function () {
+        
+        $(".button").removeClass("is-loading");
+        $("#error_modal").removeClass("is-active");
+    })
+
+
+
 
 
 

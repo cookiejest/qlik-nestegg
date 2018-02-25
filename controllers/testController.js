@@ -18,11 +18,49 @@ const schema = require('enigma.js/schemas/12.20.0.json');
 let qlikCommands = require(global['rootPath'] + '/controllers/qlikCommands')
 var Mocha = require('mocha');
 var moment = require('moment');
+var validFilename = require('valid-filename');
+
 
 let logger = require(global['rootPath'] + '/utilities/Logger')
 
 
 var self = module.exports = {
+    checkValidFileName: function (testName) {
+        return new Promise((resolve, reject) => {
+
+            if (testName.length > 0) {
+                if (validFilename(testName) == true) {
+
+                    return resolve(testName);
+
+                } else {
+                    return reject('Invalid Test Name.')
+                }
+            } else {
+
+                return reject('Test name too short.');
+            }
+        })
+    },
+    checkIfExists: function (testName) {
+        return new Promise((resolve, reject) => {
+
+            fs.access(global['rootPath'] + '/test/scripts/' + testName + '.w0w', (err) => {
+
+                logger.verbose(err)
+                if (!err) {
+
+                    return reject('Test with that name already exists. Must be unique.');
+                } else {
+
+                    return resolve(testName);
+
+                }
+            })
+
+
+        })
+    },
     saveTestScript: function (testName, testContent) {
         return new Promise((resolve, reject) => {
 
@@ -42,7 +80,7 @@ var self = module.exports = {
 
                     logger.verbose('file saved!');
 
-                    return resolve(filepath);
+                    return resolve(testName);
                 }
 
             });
@@ -54,11 +92,11 @@ var self = module.exports = {
 
 
             // The absolute path of the new file with its name
-            var filepath = global['testFolderPath'] + testName + '.w0w';
+            var filepath = global['rootPath'] + '/test/scripts/' + testName + '.w0w';
 
             fs.unlink(filepath, function (error) {
                 if (error) {
-                    logger.error(err);
+                    logger.error(error);
                     throw error;
                 } else {
                     return resolve(testName);
@@ -338,7 +376,7 @@ var self = module.exports = {
 
                                     //var childprocess_script = '.\\controllers\\testrunner.js';
 
-                                    var childprocess_script = global['rootPath'] +  '\\testrunner.js';
+                                    var childprocess_script = global['rootPath'] + '\\testrunner.js';
 
 
                                     logger.verbose(childprocess_script)
@@ -356,7 +394,7 @@ var self = module.exports = {
 
                                     });
 
-                                    
+
                                     testrunner.on('message', (msg) => {
 
                                         logger.verbose('Message from testrunner child process' + msg)
@@ -364,7 +402,7 @@ var self = module.exports = {
 
                                         mainWindow.webContents.send('log_message', msg)
                                     });
-                                    
+
 
 
                                     testrunner.on('error', (error) => {

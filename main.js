@@ -105,23 +105,84 @@ app.on('browser-window-focus', function (event) {
 
 //////////////////////////////////////////////////////////////////////////////////
 
-ipcMain.on('new_test_channel', (event, new_test_name) => {
+ipcMain.on('new_test_channel', (event, testName) => {
+
+  console.log('Create test file')
+  logger.info('Create new Test file...' + testName);
+
+  /*
+    testController.checkIfExists(new_test_name).then((result) => {
+      logger.info('Does file exist already?', result)
+    });
+  */
+
+  testController.checkValidFileName(testName)
+    .then((testName) => {
+
+      logger.verbose('File name is valid')
+
+      //Append Header content
+      return testController.checkIfExists(testName);
+
+    })
+    .then((testName) => {
 
 
-  logger.info('Create new Test file...' + new_test_name);
+      //Append Header content
+      logger.verbose('Filename does not already exist')
+      return testController.saveTestScript(testName, '')
+    
+    })
+    .then((testName) => {
+      
+      console.log(testName);
+      logger.verbose('Saved new test script'+ testName);
 
 
-  testController.saveTestScript(new_test_name, '').then((result) => {
-
-    logger.info('Save new test script...' + result);
+      event.sender.send('new_test_channel', testName)
 
 
+    }).catch(function (error) {
 
-    event.sender.send('new_test_channel', new_test_name)
-    //mainWindow.webContents.send('new_test_channel', 'complete')
+      console.log(error)
 
-  });
+      //logger.warn(error);
+      event.sender.send('error_message', error);
 
+    })
+
+  /*
+//Check file name is valid
+testController.checkValidFileName(new_test_name).then((result) => {
+
+  logger.info('Is valid filename?', result)
+
+}).catch(function (error) {
+
+  console.log(error)
+
+  //logger.warn(error);
+  event.sender.send('error_message', error);
+
+})
+
+
+//Save blank test
+testController.saveTestScript(new_test_name, '').then((result) => {
+
+  logger.info('Save new test script...' + result);
+
+
+
+  event.sender.send('new_test_channel', new_test_name)
+  //mainWindow.webContents.send('new_test_channel', 'complete')
+
+}).catch(function (error) {
+
+  //logger.warn(error);
+  event.sender.send('error_message', 'Could not create new file.')
+})
+*/
 
 })
 
@@ -138,8 +199,11 @@ ipcMain.on('retrieve_tests', (event, value) => {
     event.sender.send('retrieve_tests', result)
     //mainWindow.webContents.send('new_test_channel', 'complete')
 
-  });
+  }).catch(function (error) {
 
+    //logger.warn(error);
+    event.sender.send('error_message', 'Could not retrieve test scripts.')
+  })
 
 })
 

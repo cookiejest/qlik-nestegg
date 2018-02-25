@@ -22,10 +22,7 @@ var Mocha = require('mocha');
 let testController = require(global['rootPath'] + '/controllers/testController')
 
 
-let logger = require(global['rootPath'] + '/utilities/Logger')
-
-
-logger.verbose('Test runner child process created for ' + process.argv[2])
+console.log('Test runner child process created for ' + process.argv[2])
 
 
 
@@ -61,3 +58,26 @@ process.on('unhandledRejection', (reason) => {
 
     // application specific logging, throwing an error, or other logic here
 });
+
+
+/* Not supported on windows
+process.on('SIGTERM', function handleSigterm() {
+    console.log('Testrunner instance is closing nicely....')
+    //more cleanup code
+    //then truly exit.
+    process.exit();
+});
+*/
+
+process.on('message', (msg) => {
+    console.log('Message from parent:', msg);
+
+    if(msg.task=='kill') {
+
+        console.log('Test process is killed.')
+        process.exit();
+
+
+    }
+
+  });

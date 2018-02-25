@@ -17,7 +17,7 @@ var exec = require('child_process').exec;
 let mainMenu = Menu.buildFromTemplate(require( global['rootPath'] + '/controllers/mainMenu.js'))
 let startupController = require( global['rootPath'] + '/controllers/startupController')
 let qlikCommands = require( global['rootPath'] + '/controllers/qlikCommands')
-let logger = require( global['rootPath'] + '/utilities/Logger')
+let logger = require('electron-log');
 
 
 var self = module.exports = {
@@ -137,7 +137,7 @@ var self = module.exports = {
         Menu.setApplicationMenu(mainMenu);
 
         //Open Dev tools
-        mainWindow.webContents.openDevTools()
+        //mainWindow.webContents.openDevTools()
 
         // Emitted when the window is closed.
         mainWindow.on('closed', function () {
@@ -247,7 +247,7 @@ var self = module.exports = {
         Menu.setApplicationMenu(mainMenu);
 
         //Open Dev tools
-        mainWindow.webContents.openDevTools()
+        //mainWindow.webContents.openDevTools()
 
         // Emitted when the window is closed.
         mainWindow.on('closed', function () {
@@ -287,7 +287,6 @@ var self = module.exports = {
         tray.setToolTip('w0w application');
 
         const trayMenu = Menu.buildFromTemplate([
-            { label: 'test tray item' },
             { role: 'quit' },
             {
                 label: 'Open',
@@ -297,7 +296,7 @@ var self = module.exports = {
 
                     } else {
                         //Start the whole app
-                        self.createMainWindow();
+                        self.createTestWindow();
                     }
                 }
             }])
@@ -309,7 +308,7 @@ var self = module.exports = {
 
             } else {
                 //Start the whole app
-                self.createMainWindow();
+                self.createTestWindow();
             }
 
 

@@ -1,4 +1,4 @@
-const { ipcRenderer, remote, Notification } = require('electron')
+const { ipcRenderer, remote, Notification, shell } = require('electron')
 
 const { dialog, app } = require('electron').remote;
 
@@ -10,7 +10,7 @@ $(document).ready(function () {
 
     console.log("ready!");
 
-   var openfilename = '';
+    var openfilename = '';
 
     ipcRenderer.send('load_file_data', openfilename);
 
@@ -54,7 +54,7 @@ $(document).ready(function () {
         });
 
 
-        
+
 
         $('.filebutton').click(function () {
 
@@ -79,7 +79,7 @@ $(document).ready(function () {
         };
 
 
-        
+
 
         ipcRenderer.send('save_test_data', data);
 
@@ -93,12 +93,53 @@ $(document).ready(function () {
 
         setTimeout(() => {
             ipcRenderer.send('run_test', openfilename);
-          }
-          ,500)
+        }
+            , 500)
 
 
 
         var messagestring = '<a class="button is-small is-info"><span class="icon is-small"><i class="fas fa-play-circle"></i></span></a> Script Started!';
+
+        $("#logmessages").append(messagestring + "</br>");
+        var elem = document.getElementById('logmessages');
+
+        elem.scrollTop = elem.scrollHeight;
+
+
+    })
+
+
+    $('.adamcooke_link').click(function () {
+        console.log('Link clicked!');
+        shell.openExternal("https://www.linkedin.com/in/adamcooke1/")
+
+    });
+
+    $('#stop_test_button').click(function () {
+
+
+        var editorvalue = editor.getValue();
+
+        var data = {
+            "fileName": openfilename,
+            "fileContent": editorvalue
+        };
+
+
+
+
+        ipcRenderer.send('stop_test', 'end');
+
+
+        $('#run_test_button').removeClass("is-loading");
+        $('#run_test_button').prop('disabled', false);
+
+        $('#stop_test_button').prop('disabled', true);
+
+
+
+
+        var messagestring = '<a class="button is-small is-danger"><span class="icon is-small"><i class="fas fa-hand-paper"></i></span></a> Script Force Stopped!';
 
         $("#logmessages").append(messagestring + "</br>");
         var elem = document.getElementById('logmessages');
@@ -191,7 +232,7 @@ $(document).ready(function () {
 
 
 
-    
+
     ipcRenderer.on('save_test_data', (event, filename) => {
 
         setTimeout(function () {
@@ -245,7 +286,8 @@ $(document).ready(function () {
             var messagestring = '<a class="button is-small is-warning"><span class="icon is-small"><i class="fas fa-exclamation-triangle"></i></span></a> <span class="is-danger" >' + data.message + "</span> - <i>" + data.error.message + "</i>";
 
             $('#run_test_button').removeClass("is-loading");
-
+            $('#stop_test_button').prop('disabled', true);
+            $('#run_test_button').prop('disabled', false);
             $("#logmessages").append(messagestring + "</br>");
         }
 
@@ -273,8 +315,8 @@ $(document).ready(function () {
 
         $('#error_modal').addClass("is-active");
 
-    
-  $("#error_message").html(message);
+
+        $("#error_message").html(message);
 
     })
 
@@ -350,7 +392,7 @@ $(document).ready(function () {
 
 
     $('#error_modal_close').click(function () {
-        
+
         $(".button").removeClass("is-loading");
         $("#error_modal").removeClass("is-active");
     })

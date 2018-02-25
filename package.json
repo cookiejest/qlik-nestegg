@@ -50,7 +50,6 @@
     "moment": "2.20.1",
     "request": "2.83.0",
     "valid-filename": "^2.0.1",
-    "winston": "2.4.0",
     "ws": "4.0.0"
   }
 }

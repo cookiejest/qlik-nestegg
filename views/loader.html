@@ -14,7 +14,9 @@
 
 
     </style>
-
+    <link rel="stylesheet" type="text/css" href="../public/global.css">
+    <link rel="stylesheet" href="../public/bulma.min.css">
+    <script defer src="../public/font-awesome-all.js"></script>
 </head>
 <style>
 
@@ -26,7 +28,23 @@
 
 </style>
 <body>
-    <img class='centered' src='../public/nestegg-text.png_128x128.png' />
+    <div class="container">
+            <img class='centered' src='../public/nestegg-text.png_128x128.png' />
+          </div>
+          <section class="section">
+        <div class="container">
+          <div class="content has-text-centered">
+            <p style='font-size: 10px; color: white;'>
+              Version <span class='version_holder'></span>
+            </p>
+          </div>
+        </div>
+    </section>
+<script>window.$ = window.jQuery = require('jquery');</script>
+<script>
+
+        require('../renderers/globalRenderer.js');
+      </script>
 </body>
 
 </html>

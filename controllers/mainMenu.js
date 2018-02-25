@@ -2,9 +2,6 @@ module.exports = [
     {
         label: 'File',
         submenu: [
-            {
-                label: 'Preferences'
-            },
             { label: 'Close' },
             { label: 'Quit' }
         ]
@@ -12,12 +9,6 @@ module.exports = [
     {
         label: 'Edit',
         submenu: [
-            {
-                role: 'undo'
-            },
-            {
-                role: 'redo'
-            },
             {
                 role: 'copy'
             },

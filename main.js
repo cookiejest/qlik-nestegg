@@ -16,13 +16,16 @@ const enigma = require('enigma.js');
 const schema = require('enigma.js/schemas/12.20.0.json');
 //var senseUtilities = require('enigma.js/sense-utilities');
 var readline = require('readline');
+var pjson = require('./package.json');
 
 global['rootPath'] = __dirname;
 
 //Public resource folder path
 global['viewsPath'] = path.join(global['rootPath'], 'views')
 global['publicPath'] = path.join(global['rootPath'], 'public')
-global['app_version'] = 1.1
+global['app_version'] = pjson.version;
+
+global['userDataPath'] = (electron.app || electron.remote.app).getPath('userData');
 
 const updater = require('./updater')
 
@@ -33,7 +36,22 @@ let startupController = require(global['rootPath'] + '/controllers/startupContro
 let testController = require(global['rootPath'] + '/controllers/testController')
 let qlikCommands = require(global['rootPath'] + '/controllers/qlikCommands')
 
-let logger = require(global['rootPath'] + '/utilities/Logger')
+let logger = require('electron-log');
+
+console.log(userDataPath);
+
+
+//Check user data folders exist.. if not create them.
+if (!fs.existsSync(userDataPath +'/scripts')){
+  fs.mkdirSync(userDataPath +'/scripts');
+}
+
+
+if (!fs.existsSync(userDataPath +'/output')){
+  fs.mkdirSync(userDataPath +'/output');
+}
+
+
 
 /*
 logger.debug('Debugging info');
@@ -131,12 +149,12 @@ ipcMain.on('new_test_channel', (event, testName) => {
       //Append Header content
       logger.verbose('Filename does not already exist')
       return testController.saveTestScript(testName, '')
-    
+
     })
     .then((testName) => {
-      
+
       console.log(testName);
-      logger.verbose('Saved new test script'+ testName);
+      logger.verbose('Saved new test script' + testName);
 
 
       event.sender.send('new_test_channel', testName)
@@ -294,6 +312,25 @@ ipcMain.on('run_test', (event, value) => {
 
 
 })
+
+ipcMain.on('stop_test', (event, value) => {
+
+  logger.info('Stop test file..', value);
+
+
+
+  testController.stopTestProcess().then((result) => {
+
+    event.sender.send('stop_test', result)
+    //mainWindow.webContents.send('new_test_channel', 'complete')
+
+  });
+
+
+})
+
+
+
 
 
 //Handle responses from renderer

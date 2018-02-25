@@ -21,8 +21,8 @@ var moment = require('moment');
 var validFilename = require('valid-filename');
 
 
-let logger = require(global['rootPath'] + '/utilities/Logger')
-
+let logger = require('electron-log');
+var testrunner;
 
 var self = module.exports = {
     checkValidFileName: function (testName) {
@@ -45,7 +45,7 @@ var self = module.exports = {
     checkIfExists: function (testName) {
         return new Promise((resolve, reject) => {
 
-            fs.access(global['rootPath'] + '/test/scripts/' + testName + '.w0w', (err) => {
+            fs.access(global['userDataPath'] + '/scripts/' + testName + '.w0w', (err) => {
 
                 logger.verbose(err)
                 if (!err) {
@@ -67,7 +67,7 @@ var self = module.exports = {
             var fileContent = testContent;
 
             // The absolute path of the new file with its name
-            var filepath = global['rootPath'] + '/test/scripts/' + testName + '.w0w';
+            var filepath = global['userDataPath'] + '/scripts/' + testName + '.w0w';
 
             logger.debug('Save test script path: ' + filepath);
 
@@ -92,7 +92,7 @@ var self = module.exports = {
 
 
             // The absolute path of the new file with its name
-            var filepath = global['rootPath'] + '/test/scripts/' + testName + '.w0w';
+            var filepath = global['userDataPath'] + '/scripts/' + testName + '.w0w';
 
             fs.unlink(filepath, function (error) {
                 if (error) {
@@ -110,7 +110,7 @@ var self = module.exports = {
         return new Promise((resolve, reject) => {
             // The absolute path of the new file with its name
 
-            var testsfolder = global['rootPath'] + '\\test\\scripts\\';
+            var testsfolder = global['userDataPath'] + '\\scripts\\';
 
             logger.debug(testsfolder);
 
@@ -134,7 +134,7 @@ var self = module.exports = {
 
 
 
-            var filecontent = fs.readFile(global['rootPath'] + '/test/scripts/' + filename + '.w0w', function (err, f) {
+            var filecontent = fs.readFile(global['userDataPath'] + '/scripts/' + filename + '.w0w', function (err, f) {
                 if (err) {
                     logger.error(err);
                     return reject(err);
@@ -157,7 +157,7 @@ var self = module.exports = {
             var fileContent = testContent;
 
             // The absolute path of the new file with its name
-            var filePath = global['rootPath'] + '/test/output/' + testName + ' ' + formatted_rundatetime + '.txt';
+            var filePath = global['userDataPath'] + '/output/' + testName + ' ' + formatted_rundatetime + '.txt';
 
             logger.verbose(filePath);
 
@@ -182,7 +182,7 @@ var self = module.exports = {
 
             fs.appendFile(filePath, '\n' + dataToAppend, (err) => {
                 if (err) {
-                    logger.error(err);
+                    console.log(err);
                     return reject(err);
 
                 } else {
@@ -219,7 +219,7 @@ var self = module.exports = {
             mocha.run()
                 .on('test', function (test) {
 
-                    logger.verbose('Test started: ' + test.title);
+                    console.log('Test started: ' + test.title);
 
                     self.appendTestOutputFile(filePath, 'Test started: ' + test.title);
                     //ipcRenderer.send('log_message', test.title);
@@ -230,14 +230,14 @@ var self = module.exports = {
                 })
                 .on('test end', function (test) {
 
-                    logger.verbose('Test done: ' + test.title);
+                    console.log('Test done: ' + test.title);
 
                     self.appendTestOutputFile(filePath, 'Result: ' + test.state);
                     //mainWindow.webContents.send('log_message', test.state)
                 })
                 .on('pass', function (test) {
 
-                    logger.verbose('Test passed: ' + test.title);
+                    console.log('Test passed: ' + test.title);
 
 
                     self.appendTestOutputFile(filePath, 'Test passed!');
@@ -261,9 +261,9 @@ var self = module.exports = {
 
 
 
-                    logger.verbose('Test Failed');
+                    console.log('Test Failed');
 
-                    logger.debug(self.stringifyError(err, null, '\t'));
+                    console.log(self.stringifyError(err, null, '\t'));
 
                     var data = {
                         "type": "fail",
@@ -282,7 +282,7 @@ var self = module.exports = {
                 .on('end', function () {
 
 
-                    logger.verbose('Test Script Complete!');
+                    console.log('Test Script Complete!');
 
 
                     var data = {
@@ -296,7 +296,7 @@ var self = module.exports = {
                     //Send message to main process
                     process.send(data);
 
-                    // process.exit();
+                    process.exit();
 
                     return resolve('done!');
                 })
@@ -319,7 +319,7 @@ var self = module.exports = {
             // open source file for reading
             //var r = fs.createReadStream('./test/templates/header.txt');
 
-            //var r2 = fs.createReadStream('./test/scripts/' + fileName + '.w0w');
+            //var r2 = fs.createReadStream('./scripts/' + fileName + '.w0w');
 
             var headercontent;
 
@@ -334,7 +334,7 @@ var self = module.exports = {
                     headercontent = data;
 
 
-                    fs.readFile(global['rootPath'] + '/test/scripts/' + fileName + '.w0w', 'utf8', function (err, data) {
+                    fs.readFile(global['userDataPath'] + '/scripts/' + fileName + '.w0w', 'utf8', function (err, data) {
                         if (err) {
 
                             logger.error(err)
@@ -382,7 +382,9 @@ var self = module.exports = {
                                     logger.verbose(childprocess_script)
 
                                     //Start child process
-                                    var testrunner = fork(childprocess_script, parameters, options);
+                                    testrunner = fork(childprocess_script, parameters, options);
+
+
 
 
 
@@ -397,7 +399,7 @@ var self = module.exports = {
 
                                     testrunner.on('message', (msg) => {
 
-                                        logger.verbose('Message from testrunner child process' + msg)
+                                    //    logger.verbose('Message from testrunner child process' + JSON.stringify(msg))
 
 
                                         mainWindow.webContents.send('log_message', msg)
@@ -410,6 +412,10 @@ var self = module.exports = {
                                         logger.error(error);
 
                                     });
+
+                                    //Works
+                                    //testrunner.send({ task: 'kill' });
+
 
 
                                 }).catch(function (error) {
@@ -436,16 +442,16 @@ var self = module.exports = {
 
         })
     },
-    stopTest: function (Data) {
+    stopTestProcess: function () {
         return new Promise((resolve, reject) => {
 
             //Create session object using specified dimension and measure/variable values
-
-
+           logger.info('FIRE STOP TEST');
+            testrunner.send({ task: 'kill' });
             //Check value against specific Information
 
             //Check measure
-
+            resolve('stopped');
 
         })
     },

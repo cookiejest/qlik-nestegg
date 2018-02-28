@@ -1,8 +1,3 @@
-const electron = require('electron')
-// Module to control application life.
-const { app, BrowserWindow, session, dialog, globalShortcut, Menu, MenuItem, Tray, ipcMain } = electron
-
-const { ipcRenderer, remote } = require('electron')
 
 const path = require('path')
 const url = require('url')
@@ -182,7 +177,7 @@ var self = module.exports = {
 
             fs.appendFile(filePath, '\n' + dataToAppend, (err) => {
                 if (err) {
-                    console.log(err);
+                    logger.error(err);
                     return reject(err);
 
                 } else {
@@ -203,12 +198,21 @@ var self = module.exports = {
     },
     startTest: function (filePath) {
         return new Promise((resolve, reject) => {
+            //MUST BE RUN INSIDE CHILD PROCESS
 
 
-            logger.verbose('Create mocha instance');
+            if (process.send === undefined) {
+                logger.debug('started directly');
+                var startmode = 'stanalone'
+            } else {
+                logger.debug('started from fork()');
+                var startmode = 'childprocess';
+            }
 
+
+            logger.debug('Create mocha instance');
             var mocha = new Mocha({});
-
+            logger.log('THE FILE PATH', filePath)
 
             mocha.addFile(filePath);
 
@@ -216,12 +220,15 @@ var self = module.exports = {
             var failcounter = 0;
             var totalcounter = 0;
 
-            mocha.run()
+
+            mocha.run(function (failures) {
+            })
                 .on('test', function (test) {
 
-                    console.log('Test started: ' + test.title);
+                    //console.log('Test started: ' + test.title);
+                    logger.debug('Test started: ' + test.title);
 
-                    self.appendTestOutputFile(filePath, 'Test started: ' + test.title);
+                    // self.appendTestOutputFile(filePath, 'Test started: ' + test.title);
                     //ipcRenderer.send('log_message', test.title);
 
                     totalcounter += 1;
@@ -230,17 +237,17 @@ var self = module.exports = {
                 })
                 .on('test end', function (test) {
 
-                    console.log('Test done: ' + test.title);
 
-                    self.appendTestOutputFile(filePath, 'Result: ' + test.state);
-                    //mainWindow.webContents.send('log_message', test.state)
+                    logger.debug('Test done: ' + test.title)
+
+                    // self.appendTestOutputFile(filePath, 'Result: ' + test.state);
+                    // mainWindow.webContents.send('log_message', test.state)
                 })
                 .on('pass', function (test) {
 
-                    console.log('Test passed: ' + test.title);
 
+                    logger.debug('Test passed: ' + test.title)
 
-                    self.appendTestOutputFile(filePath, 'Test passed!');
 
                     passcounter += 1;
 
@@ -249,40 +256,54 @@ var self = module.exports = {
                         "message": test.title + ' PASSED'
                     }
 
+                    //console.log(data);
+                    // self.appendTestOutputFile(filePath, 'Test passed!');
+
+
+                    logger.debug(data)
+
                     //Send message to main process
-                    process.send(data);
+                    //Send message to main process
+
+                    //Only use process.send if child process
+                    if (startmode == 'childprocess') {
+                        process.send(data);
+                    }
+
+
+
                 })
                 .on('fail', function (test, err) {
 
+                    if (err) {
+                        //console.log(err)
+                        logger.debug(err)
+                        //process.send(err);
+                    } else {
 
-                    //self.appendTestOutputFile(filePath, 'Test Failed!');
-                    self.appendTestOutputFile(filePath, err);
+                        // self.appendTestOutputFile(filePath, err);
 
 
+                        var data = {
+                            "type": "fail",
+                            "message": test.title + ' ' + ' FAILED',
+                            "error": JSON.parse(self.stringifyError(err, null, '\t'))
+                        }
+
+                        logger.debug('Test Failed')
+
+                        if (startmode == 'childprocess') {
+                            process.send(data);
+                        }
 
 
-                    console.log('Test Failed');
-
-                    console.log(self.stringifyError(err, null, '\t'));
-
-                    var data = {
-                        "type": "fail",
-                        "message": test.title + ' ' + ' FAILED',
-                        "error": JSON.parse(self.stringifyError(err, null, '\t'))
                     }
-
-                    failcounter += 1;
-
-
-                    //Send message to main process
-                    process.send(data);
-
 
                 })
                 .on('end', function () {
 
 
-                    console.log('Test Script Complete!');
+                    logger.debug('Test Script Complete')
 
 
                     var data = {
@@ -294,13 +315,13 @@ var self = module.exports = {
                     }
 
                     //Send message to main process
-                    process.send(data);
+                    if (startmode == 'childprocess') {
+                        process.send(data);
+                    }
 
                     process.exit();
 
-                    return resolve('done!');
                 })
-
 
 
         })
@@ -338,6 +359,7 @@ var self = module.exports = {
                         if (err) {
 
                             logger.error(err)
+
                             process.exit(1);
                         } else {
                             logger.verbose('test content retrieved')
@@ -355,7 +377,6 @@ var self = module.exports = {
 
                                 })
                                 .then((filePath) => {
-                                    console.log('next step..')
                                     //Append Header content
                                     logger.verbose('Test script body appended to content')
                                     return self.appendTestOutputFile(filePath, testcontent + '\n \n //////////////////////////////////////////// \n //Start Of Logging');
@@ -377,7 +398,7 @@ var self = module.exports = {
                                     //var childprocess_script = '.\\controllers\\testrunner.js';
 
                                     var childprocess_script = global['rootPath'] + '\\testrunner.js';
-
+                                    logger.info(childprocess_script)
 
                                     logger.verbose(childprocess_script)
 
@@ -386,21 +407,18 @@ var self = module.exports = {
 
 
 
-
-
                                     testrunner.stdout.on('data', function (data) {
 
-                                        logger.debug('Test Runner Message: ' + data.toString())
+                                        logger.debug('Test Runner Message: ' + data)
 
-
+                                        // console.log(data);
 
                                     });
 
 
                                     testrunner.on('message', (msg) => {
 
-                                    //    logger.verbose('Message from testrunner child process' + JSON.stringify(msg))
-
+                                        logger.verbose('Message from testrunner child process' + JSON.stringify(msg))
 
                                         mainWindow.webContents.send('log_message', msg)
                                     });
@@ -412,6 +430,12 @@ var self = module.exports = {
                                         logger.error(error);
 
                                     });
+
+
+                                    testrunner.on('unhandledRejection', (reason) => {
+
+                                        logger.error(reason)
+                                    })
 
                                     //Works
                                     //testrunner.send({ task: 'kill' });
@@ -446,7 +470,7 @@ var self = module.exports = {
         return new Promise((resolve, reject) => {
 
             //Create session object using specified dimension and measure/variable values
-           logger.info('FIRE STOP TEST');
+            logger.info('FIRE STOP TEST');
             testrunner.send({ task: 'kill' });
             //Check value against specific Information
 

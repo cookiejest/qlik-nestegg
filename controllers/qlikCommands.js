@@ -1,7 +1,3 @@
-const electron = require('electron')
-// Module to control application life.
-const { app, BrowserWindow, session, dialog, globalShortcut, Menu, MenuItem, Tray, ipcMain } = electron
-
 const path = require('path')
 const url = require('url')
 const WebSocket = require('ws');
@@ -10,6 +6,8 @@ const fs = require('fs');
 
 const enigma = require('enigma.js');
 const schema = require('enigma.js/schemas/12.20.0.json');
+
+let logger = require('electron-log');
 
 var self = module.exports = {
     printObject: function (ObjectId, Format) {
@@ -42,22 +40,22 @@ var self = module.exports = {
 
 
 
-            console.log('loading is done')
+            logger.debug('loading is done')
 
-            console.log('contents finished loading');
+            logger.debug('contents finished loading');
 
             setTimeout(function () {
                 bgWin.webContents.capturePage(image => {
-                    //console.log(bgWin.getTitle())
+                    //logger.debug(bgWin.getTitle())
 
-                    console.log('take a picture');
+                    logger.debug('take a picture');
                     var img = image.toPNG()
 
 
 
                     fs.writeFile('test.png', img, (err) => {
-                        if (err) { console.log(err) } else {
-                            console.log('It\'s saved!');
+                        if (err) { logger.debug(err) } else {
+                            logger.debug('It\'s saved!');
                             bgWin.close();
                         }
                     })
@@ -94,7 +92,7 @@ var self = module.exports = {
 
                     if (err.parameter == 'User authentication failure') {
                         reject('User needs to login!');
-                        //console.log('User needs to login!')
+                        //logger.debug('User needs to login!')
                         if (currentissue != 'User needs to login!') {
                             loaderWindow.loadURL(url.format({
                                 pathname: path.join(global['viewsPath'], 'logintoqlikplease.html'),
@@ -108,8 +106,8 @@ var self = module.exports = {
                             loaderWindow.show();
                         }
                     } else if (err.error.code == 'ECONNREFUSED') {
-                        //console.log(err.error.code)
-                        // console.log('Qlik Sense Desktop not open!')
+                        //logger.debug(err.error.code)
+                        // logger.debug('Qlik Sense Desktop not open!')
                         reject('Qlik Sense Desktop not open!');
 
                         if (currentissue != 'Qlik Sense Desktop not open!') {
@@ -125,7 +123,7 @@ var self = module.exports = {
                         }
                     }
 
-                    // console.log(err);
+                    // logger.debug(err);
                 });
 
         })
@@ -158,10 +156,10 @@ var self = module.exports = {
                 })
                 .then(() => qix.close())
                 .then(() => {
-                    console.log(' Qix Session closed')
+                    logger.debug(' Qix Session closed')
                 })
                 .catch(err => {
-                    console.log('Something went wrong :(', err)
+                    logger.debug('Something went wrong :(', err)
                     return reject(err)
                 });
 
@@ -197,10 +195,10 @@ var self = module.exports = {
                 })
                 .then(() => qix.close())
                 .then(() => {
-                    console.log(' Qix Session closed')
+                    logger.debug(' Qix Session closed')
                 })
                 .catch(err => {
-                    console.log('Something went wrong :(', err)
+                    logger.debug('Something went wrong :(', err)
                     return reject(err)
                 });
 
@@ -261,15 +259,15 @@ var self = module.exports = {
                     return sessionObject.getLayout()
                 }).then((itemslist) => {
                     //mainWindow.webContents.send('appobjectlist', genericobjects)
-                    console.log(itemslist)
+                    logger.debug(itemslist)
                     return resolve(itemslist)
                 })
                 .then(() => qix.close())
                 .then(() => {
-                    console.log(' Qix Session closed')
+                    logger.debug(' Qix Session closed')
                 })
                 .catch(err => {
-                    console.log('Something went wrong :(', err)
+                    logger.debug('Something went wrong :(', err)
                     return reject(err)
                 });
 
@@ -278,7 +276,7 @@ var self = module.exports = {
     getDocList: function () {
         return new Promise((resolve, reject) => {
 
-            console.log('getDocList Fired');
+            logger.debug('getDocList Fired');
 
             const qix = enigma.create({
                 schema,
@@ -300,12 +298,12 @@ var self = module.exports = {
                 .then((docList) => {
 
                     return resolve(docList);
-                    /*console.log(docList);*/
+                    /*logger.debug(docList);*/
 
 
                 })
                 .then(() => qix.close())
-                .then(() => console.log(' Qix Session closed'))
+                .then(() => logger.debug(' Qix Session closed'))
                 .catch(err => { return resolve(err) });
 
         });
@@ -397,7 +395,7 @@ var self = module.exports = {
 
             
 
-          //  console.log('checkSessionObject Fired');
+          //  logger.debug('checkSessionObject Fired');
 
             let i;
             let dimensionAddPromises = [];
@@ -415,7 +413,7 @@ var self = module.exports = {
 
             var measureVal = {"qDef": {"qDef": string}};
 
-            //console.log('measureVal', measureVal)
+            //logger.debug('measureVal', measureVal)
 
 ///////////////////
 
@@ -434,7 +432,7 @@ var self = module.exports = {
                 }
 
 
-                //console.log('rangeItem', rangeItem)
+                //logger.debug('rangeItem', rangeItem)
 
 
             const qix = enigma.create({
@@ -444,20 +442,20 @@ var self = module.exports = {
             });
 
 
-            //qix.on('traffic:*', (direction, msg) => console.log(direction, JSON.stringify(msg)));
+            //qix.on('traffic:*', (direction, msg) => logger.debug(direction, JSON.stringify(msg)));
 
 
             let qDimensionVals;
 
             Promise.all(dimensionAddPromises)
                 .then((results) => {
-                    //console.log('DIMENSION FORMAT OUTPUT', results);
+                    //logger.debug('DIMENSION FORMAT OUTPUT', results);
                     qDimensionVals = results;
                     return 'dimensionsformatted';
                 })
                 .then(() => qix.open())
                 .then(function (global) {
-                   // console.log('Open app')
+                   // logger.debug('Open app')
                     return global.openDoc(docId, '', '', '', false)
                 })
                 .then((app) => {
@@ -484,7 +482,7 @@ var self = module.exports = {
                     .then(() => object.rangeSelectHyperCubeValues('/qHyperCubeDef', [rangeItem]))
                     // Get layout and view the selected values
                     .then((result) => {
-                        //console.log('FINAL RESULT', result)
+                        //logger.debug('FINAL RESULT', result)
                         //If nothing is selectable return false as does not match criteria
                         if (result == false) {
                             return false
@@ -493,23 +491,23 @@ var self = module.exports = {
                         }
                     })
                     .then((layout) => {
-                        //console.log('THE LAYOUT', layout);
+                        //logger.debug('THE LAYOUT', layout);
                         //Check if the filtering still returns a row which means criteria is met
                         if (layout == false) {
-                            //console.log('does not meet criteria')
+                            //logger.debug('does not meet criteria')
                             return resolve(false)
                         } else {
                             //If there is selectable return positive  result
-                            //console.log(layout.qHyperCube.qDataPages[0].qMatrix)
+                            //logger.debug(layout.qHyperCube.qDataPages[0].qMatrix)
                             return resolve(true)
                         }
                     }))
                 .then(() => qix.close())
                 .then(() => {
-                    //console.log(' Qix Session closed')
+                    //logger.debug(' Qix Session closed')
                 })
                 .catch(err => {
-                    console.log('Something went wrong :(', err)
+                    logger.debug('Something went wrong :(', err)
                     return reject(err)
                     //Create session object using specified dimension and measure/variable values
 
@@ -530,7 +528,7 @@ var self = module.exports = {
 
 
 
-            //console.log('checkSessionObject Fired');
+            //logger.debug('checkSessionObject Fired');
 
             let i;
             let measureSplitPromises = [];
@@ -540,15 +538,15 @@ var self = module.exports = {
             var measureNumber = 0;
             var resultsarray = [];
 
-            //console.log(triggerArray);
+            //logger.debug(triggerArray);
 
-           // console.log('total number of measures', numberofmeasures)
+           // logger.debug('total number of measures', numberofmeasures)
 
             executeMeasure(0, triggerArray);
 
             function executeMeasure (measureNumber, triggerArray) {
 
-                //console.log('Measure Number:', measureNumber)
+                //logger.debug('Measure Number:', measureNumber)
 
                 var individualMeasureData = {
                     "dimensions": triggerArray.dimensions,
@@ -556,16 +554,16 @@ var self = module.exports = {
                 }
 
 
-                //console.log('individualMeasureData',individualMeasureData)
+                //logger.debug('individualMeasureData',individualMeasureData)
 
 
                 self.createMeasureObject(docId, individualMeasureData).then((data)=> {
                     resultsarray.push(data);
-                    //console.log(measureNumber + ' result ' + data);
+                    //logger.debug(measureNumber + ' result ' + data);
 
                     if(measureNumber == numberofmeasures) {
-                       // console.log('Last measure');
-                       // console.log('resultsarray', resultsarray);
+                       // logger.debug('Last measure');
+                       // logger.debug('resultsarray', resultsarray);
                         if(resultsarray.includes(false)==true) {
                             //Do not fire alert
                             return resolve(false);
@@ -586,7 +584,7 @@ var self = module.exports = {
                     
                 
                 }).catch(err => {
-                    console.log('Something went wrong :(', err)
+                    logger.debug('Something went wrong :(', err)
                     return reject(err)
                     //Create session object using specified dimension and measure/variable values
     
@@ -596,7 +594,7 @@ var self = module.exports = {
     
 
 
-            //qix.on('traffic:*', (direction, msg) => console.log(direction, JSON.stringify(msg)));
+            //qix.on('traffic:*', (direction, msg) => logger.debug(direction, JSON.stringify(msg)));
 
 
         })
@@ -606,7 +604,7 @@ var self = module.exports = {
 
 
 
-            //console.log('checkSessionObject Fired');
+            //logger.debug('checkSessionObject Fired');
 
             let i;
             let measureSplitPromises = [];
@@ -616,15 +614,15 @@ var self = module.exports = {
             var measureNumber = 0;
             var resultsarray = [];
 
-            //console.log(triggerArray);
+            //logger.debug(triggerArray);
 
-           // console.log('total number of measures', numberofmeasures)
+           // logger.debug('total number of measures', numberofmeasures)
 
             executeMeasure(0, triggerArray);
 
             function executeMeasure (measureNumber, triggerArray) {
 
-                //console.log('Measure Number:', measureNumber)
+                //logger.debug('Measure Number:', measureNumber)
 
                 var individualMeasureData = {
                     "dimensions": triggerArray.dimensions,
@@ -632,16 +630,16 @@ var self = module.exports = {
                 }
 
 
-                //console.log('individualMeasureData',individualMeasureData)
+                //logger.debug('individualMeasureData',individualMeasureData)
 
 
                 self.createMeasureObject(docId, individualMeasureData).then((data)=> {
                     resultsarray.push(data);
-                    //console.log(measureNumber + ' result ' + data);
+                    //logger.debug(measureNumber + ' result ' + data);
 
                     if(measureNumber == numberofmeasures) {
-                       // console.log('Last measure');
-                       // console.log('resultsarray', resultsarray);
+                       // logger.debug('Last measure');
+                       // logger.debug('resultsarray', resultsarray);
                         if(resultsarray.includes(false)==true) {
                             //Do not fire alert
                             return resolve(false);
@@ -662,7 +660,7 @@ var self = module.exports = {
                     
                 
                 }).catch(err => {
-                    console.log('Something went wrong :(', err)
+                    logger.debug('Something went wrong :(', err)
                     return reject(err)
                     //Create session object using specified dimension and measure/variable values
     
@@ -672,7 +670,7 @@ var self = module.exports = {
     
 
 
-            //qix.on('traffic:*', (direction, msg) => console.log(direction, JSON.stringify(msg)));
+            //qix.on('traffic:*', (direction, msg) => logger.debug(direction, JSON.stringify(msg)));
 
 
         })

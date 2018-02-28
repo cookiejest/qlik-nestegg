@@ -1,78 +1,138 @@
-const electron = require('electron')
-// Module to control application life.
-const { app, BrowserWindow, session, dialog, globalShortcut, Menu, MenuItem, Tray, ipcMain } = electron
-
-const { ipcRenderer, remote } = require('electron')
-global['rootPath'] = __dirname;
-
-const path = require('path')
-const url = require('url')
-const WebSocket = require('ws');
-const fs = require('fs');
-const windowStateKeeper = require('electron-window-state');
-
-
-const enigma = require('enigma.js');
-const schema = require('enigma.js/schemas/12.20.0.json');
-
-
+let logger = require('electron-log');
 var Mocha = require('mocha');
 
+global['rootPath'] = __dirname;
 
-let testController = require(global['rootPath'] + '/controllers/testController')
+logger.info('Root path in testrunner.js is ' + global['rootPath']);
 
+//let testController = require(global['rootPath'] + '/controllers/testController')
 
-console.log('Test runner child process created for ' + process.argv[2])
-
-
-
-//process.send('hello!');
-
-//Get filename from parent process..
+//const enigma = require('enigma.js');
+//const schema = require('enigma.js/schemas/12.20.0.json');
+logger.info('Test runner child process created for ' + process.argv)
 
 
-
-//Start mocha test in this child process
-testController.startTest(process.argv[2]);
+var mocha = new Mocha({});
 
 
-process.on('unhandledRejection', (reason) => {
-    console.log('DUDDDEE!! reason:', reason);
+logger.debug('Create mocha instance');
+var mocha = new Mocha({});
+logger.log('THE FILE PATH', process.argv[2])
+
+mocha.addFile(process.argv[2]);
+
+var passcounter = 0;
+var failcounter = 0;
+var totalcounter = 0;
 
 
-    var data = {
-        "type": "script error",
-        "message": 'There is a script error',
-        "error": JSON.parse(testController.stringifyError(reason, null, '\t'))
-    }
+mocha.run()
+    .on('test', function (test) {
 
-    //Send message to main process
-    
-    process.send(data);
+        //console.log('Test started: ' + test.title);
+        logger.debug('Test started: ' + test.title);
 
+        // self.appendTestOutputFile(filePath, 'Test started: ' + test.title);
+        //ipcRenderer.send('log_message', test.title);
 
+        totalcounter += 1;
+        //  electron.getWindow('windowName').webContents.send('info' , {msg:'hello from main process'});
 
-    process.exit();
-
-
-
-    // application specific logging, throwing an error, or other logic here
-});
+    })
+    .on('test end', function (test) {
 
 
-/* Not supported on windows
-process.on('SIGTERM', function handleSigterm() {
-    console.log('Testrunner instance is closing nicely....')
-    //more cleanup code
-    //then truly exit.
-    process.exit();
-});
-*/
+        logger.debug('Test done: ' + test.title)
+
+        // self.appendTestOutputFile(filePath, 'Result: ' + test.state);
+        // mainWindow.webContents.send('log_message', test.state)
+    })
+    .on('pass', function (test) {
+
+
+        logger.debug('Test passed: ' + test.title)
+
+
+        passcounter += 1;
+
+        var data = {
+            "type": "pass",
+            "message": test.title + ' PASSED'
+        }
+
+        //console.log(data);
+        // self.appendTestOutputFile(filePath, 'Test passed!');
+
+
+        logger.debug(data)
+
+        //Send message to main process
+        //Send message to main process
+
+        //Only use process.send if child process
+
+        process.send(data);
+
+
+
+
+    })
+    .on('fail', function (test, err) {
+
+        if (err) {
+            //console.log(err)
+            logger.debug(err)
+            //process.send(err);
+        } else {
+
+            // self.appendTestOutputFile(filePath, err);
+
+
+            var data = {
+                "type": "fail",
+                "message": test.title + ' ' + ' FAILED',
+                "error": JSON.parse(self.stringifyError(err, null, '\t'))
+            }
+
+
+            logger.debug('Test Failed')
+
+
+            process.send(data);
+
+
+
+        }
+
+    })
+    .on('end', function () {
+
+
+        logger.debug('Test Script Complete')
+
+
+        var data = {
+            "type": "complete",
+            "message": 'Script Completed!',
+            "passcounter": passcounter,
+            "failcounter": failcounter,
+            "totalcounter": totalcounter
+        }
+
+
+        process.send(data);
+
+        process.exit();
+
+    })
+
+
+
 
 process.on('message', (msg) => {
     console.log('Message from parent:', msg);
 
-    if(msg.task=='kill') {
+    if (msg.task == 'kill') {
 
         console.log('Test process is killed.')
         process.exit();
@@ -80,4 +140,4 @@ process.on('message', (msg) => {
 
     }
 
-  });
+});

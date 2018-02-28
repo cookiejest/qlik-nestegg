@@ -1,4 +1,5 @@
 
+
 let w0w = require(global['rootPath'] + '/controllers/qlikCommands');
 
 var expect = require(global['rootPath'] + '/node_modules/expect.js');

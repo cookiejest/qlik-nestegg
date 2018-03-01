@@ -3,7 +3,6 @@ const path = require('path')
 const url = require('url')
 const WebSocket = require('ws');
 const fs = require('fs');
-const windowStateKeeper = require('electron-window-state');
 const fork = require('child_process').fork;
 
 const enigma = require('enigma.js');

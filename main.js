@@ -27,6 +27,13 @@ global['app_version'] = pjson.version;
 
 global['userDataPath'] = (electron.app || electron.remote.app).getPath('userData');
 
+global['environment'] = 'development';
+
+global['config'] = require('./config.js').get(global['environment']);
+
+
+console.log(global['config'].webservice)
+
 const updater = require('./updater')
 
 
@@ -40,6 +47,9 @@ let logger = require('electron-log');
 
 console.log(userDataPath);
 
+
+
+logger.info('Environment is ' + config)
 
 //Check user data folders exist.. if not create them.
 if (!fs.existsSync(userDataPath +'/scripts')){

@@ -1,0 +1,214 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../public/global.css">
+    <style>
+        @import url('../public/font.css');
+        * {
+            cursor: default;
+        }
+
+        body {
+            background-color: var(--brand-color3);
+            color: var(--brand-color2);
+
+
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="../public/global.css">
+    <link rel="stylesheet" href="../public/bulma.min.css">
+    <script defer src="../public/font-awesome-all.js"></script>
+</head>
+<style>
+    .centered {
+        position: absolute;
+        top: 136px;
+        left: 136px;
+    }
+
+    .error {
+        color: red;
+    }
+</style>
+
+<body>
+
+    <section class="hero is-info is-small is-bold">
+        <div class="hero-body">
+            <div class="container">
+                <img src='../public/nestegg3-white64x64.png' />
+                <h1 class="title">
+                    Registration
+                </h1>
+                <h2 class="subtitle">
+                    Lets get started.
+                </h2>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container ">
+            <form id="register_form" name="registration">
+                <!--
+                <div class="notification">
+                        This container is <strong>centered</strong> on desktop.
+                      </div>-->
+                      <article class="message is-danger">
+                            <div class="message-body" id="submiterror">
+                            </div>
+                          </article>
+
+                <div class="field">
+                    <div class="control has-icons-left">
+                        <input class="input form-control" required type="text" name="name" id="name" placeholder="Your Name">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="field">
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input form-control" required type="email" name="email" id="email" placeholder="Email Address">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        <!--
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </span>-->
+                    </div>
+                    <!--<p class="help is-danger">This email is invalid</p>-->
+                </div>
+
+                <div class="field">
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input form-control" required type="text" id="company" name="company" placeholder="Company">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-building"></i>
+                        </span>
+                        <!-- <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>-->
+                    </div>
+                    <!-- <p class="help is-success">This username is available</p>-->
+                </div>
+
+
+                <div class="field">
+                    <p class="control has-icons-left">
+                        <input class="input form-control" required type="password" id="password" name="password" placeholder="Password">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </p>
+                </div>
+
+                <!--
+            <div class="field">
+
+                <p class="control has-icons-left">
+                    <input class="input" type="tel" placeholder="Phone">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-phone"></i>
+                    </span>
+                </p>
+            </div>-->
+
+
+                <div class="field is-grouped">
+
+                    <div class="control">
+                        <button id="register_button" class="button is-link is-success">Register</button>
+
+                    </div>
+                    <div class="control">
+                        <a href="login.html" class="button is-text">Login</a>
+                    </div>
+
+                </div>
+                <a href=''>Terms and Conditions</a>
+            </form>
+        </div>
+    </section>
+
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <script defer src="../public/jquery.validate.min.js"></script>
+    <script>
+
+
+
+        // Wait for the DOM to be ready
+        $(function () {
+
+         $("#submiterror").hide()
+
+            // Initialize form validation on the registration form.
+            // It has the name attribute "registration"
+            $("form[name='registration']").validate({
+                errorClass: "help is-danger",
+                // Specify validation rules
+                rules: {
+                    // The key name on the left side is the name attribute
+                    // of an input field. Validation rules are defined
+                    // on the right side
+                    name: "required",
+                    company: "required",
+                    email: {
+                        required: true,
+                        // Specify that email should be validated
+                        // by the built-in "email" rule
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 5
+                    }
+                },
+                // Specify validation error messages
+                messages: {
+                    name: "Please enter your name",
+                    company: "Please enter your company",
+                    password: {
+                        required: "Please provide a password",
+                        minlength: "Your password must be at least 5 characters long"
+                    },
+                    email: "Please enter a valid email address"
+                },
+                // Make sure the form is submitted to the destination defined
+                // in the "action" attribute of the form when valid
+                submitHandler: function (form) {
+                    //form.submit();
+
+                    $.post("http://localhost:8083/authenticate/api/signup", {
+                        name: $('#name').val(),
+                        email: $('#email').val(),
+                        company: $('#company').val(),
+                        password: $('#password').val()
+                    })
+                        .done(function (data) {
+
+                            if (data.status == 'fail') {
+                                $("#submiterror").html(data.message)
+                                $("#submiterror").show()
+                            } else {
+
+                            }
+                            console.log(data)
+                            // alert("Data Loaded: " + data);
+                        });
+
+
+                }
+            });
+        });
+
+    </script>
+    <script>
+
+        require('../renderers/authRenderer.js');
+    </script>
+</body>
+
+</html>

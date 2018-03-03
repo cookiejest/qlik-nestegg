@@ -14,9 +14,9 @@ const schema = require('enigma.js/schemas/12.20.0.json');
 const fork = require('child_process').fork;
 var exec = require('child_process').exec;
 
-let mainMenu = Menu.buildFromTemplate(require( global['rootPath'] + '/controllers/mainMenu.js'))
-let startupController = require( global['rootPath'] + '/controllers/startupController')
-let qlikCommands = require( global['rootPath'] + '/controllers/qlikCommands')
+let mainMenu = Menu.buildFromTemplate(require(global['rootPath'] + '/controllers/mainMenu.js'))
+let startupController = require(global['rootPath'] + '/controllers/startupController')
+let qlikCommands = require(global['rootPath'] + '/controllers/qlikCommands')
 let logger = require('electron-log');
 
 
@@ -24,6 +24,7 @@ var self = module.exports = {
     startUp: function () {
 
         self.createLoaderWindow()
+            .then(self.createAuthWindow)
             .then(self.attemptConnect)
             //.then(self.createMainWindow)
             .then(self.createTestWindow)
@@ -33,7 +34,7 @@ var self = module.exports = {
             })
 
 
-            self.startWebServer()
+        self.startWebServer()
 
     },
     attemptConnect: function () {
@@ -54,7 +55,7 @@ var self = module.exports = {
                     logger.verbose('Check Qlik Connection result: ' + testresult);
 
                     clearInterval(testqlikconn);
-                    
+
                     return resolve('Connected');
 
                 }).catch(function (error) {
@@ -66,6 +67,43 @@ var self = module.exports = {
 
             }, 3000)
         });
+    },
+    createAuthWindow: function () {
+        return new Promise((resolve, reject) => {
+
+            logger.verbose('Create auth window')
+
+            //Create a loader window.
+            authWindow = new BrowserWindow({
+                width: 500,
+                height: 600,
+                minWidth: 500,
+                minHeight: 600,
+                maxWidth: 500,
+                maxHeight: 600,
+                frame: false,
+                backgroundColor: 'ffffff'
+            });
+
+
+            authWindow.loadURL(url.format({
+                pathname: path.join(global['viewsPath'], 'register.html'),
+                protocol: 'file:',
+                slashes: true
+            }))
+
+
+            logger.verbose('Show auth window')
+
+            authWindow.show();
+            loaderWindow.hide();
+
+            authWindow.webContents.openDevTools()
+
+            //resolve('Showing Auth Window');
+
+
+        })
     },
     createLoaderWindow: function () {
         return new Promise((resolve, reject) => {
@@ -97,8 +135,10 @@ var self = module.exports = {
             self.createTray();
             //loaderWindow.webContents.openDevTools()
 
-            resolve('Done first part');
+            setInterval(function () {
 
+                resolve('Done first part');
+            }, 2000);
 
         })
     },
@@ -188,31 +228,31 @@ var self = module.exports = {
 
 
 
-                    const parameters = [];
+            const parameters = [];
 
-                    const options = {
-                        stdio: [ 'pipe', 'pipe', 'pipe', 'ipc' ]
-                      };
+            const options = {
+                stdio: ['pipe', 'pipe', 'pipe', 'ipc']
+            };
 
 
-                    //Start child process
-                    var webserverinstance = fork('controllers\\webServerController.js', parameters, options, function(err, stdout, stderr) { 
-                        // Node.js will invoke this callback when the 
-                        console.log(stdout); 
-                    });
+            //Start child process
+            var webserverinstance = fork('controllers\\webServerController.js', parameters, options, function (err, stdout, stderr) {
+                // Node.js will invoke this callback when the 
+                console.log(stdout);
+            });
 
-                    webserverinstance.stdout.on('data', function(data) {
-                        console.log(data.toString()); 
-                    });
+            webserverinstance.stdout.on('data', function (data) {
+                console.log(data.toString());
+            });
 
-                    /*
+            /*
 
-                    exec('tasklist', function(err, stdout, stderr) {
-                      // stdout is a string containing the output of the command.
-                      // parse it and look for the apache and mysql processes.
-                      console.log('TASK LIST OUTPUT', stdout)
-                    });
-     */
+            exec('tasklist', function(err, stdout, stderr) {
+              // stdout is a string containing the output of the command.
+              // parse it and look for the apache and mysql processes.
+              console.log('TASK LIST OUTPUT', stdout)
+            });
+*/
 
         })
     },
@@ -279,7 +319,7 @@ var self = module.exports = {
 
     },
 
-    
+
     createTray: function () {
 
         tray = new Tray(path.join(global['publicPath'], '/nestegg_48x48.png'))

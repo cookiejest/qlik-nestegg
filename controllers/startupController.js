@@ -16,6 +16,7 @@ var exec = require('child_process').exec;
 
 let mainMenu = Menu.buildFromTemplate(require(global['rootPath'] + '/controllers/mainMenu.js'))
 let startupController = require(global['rootPath'] + '/controllers/startupController')
+let authController = require(global['rootPath'] + '/controllers/authController')
 let qlikCommands = require(global['rootPath'] + '/controllers/qlikCommands')
 let logger = require('electron-log');
 

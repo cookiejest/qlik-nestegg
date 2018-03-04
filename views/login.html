@@ -48,15 +48,15 @@
     </section>
     <section class="section">
         <div class="container ">
-            <form id="register_form" name="registration">
+            <form id="login_form" name="login">
                 <!--
                 <div class="notification">
                         This container is <strong>centered</strong> on desktop.
                       </div>-->
-                      <article class="message is-danger">
-                            <div class="message-body" id="submiterror">
-                            </div>
-                          </article>
+                <article class="message is-danger">
+                    <div class="message-body" id="submiterror">
+                    </div>
+                </article>
 
 
                 <div class="field">
@@ -99,7 +99,7 @@
                 <div class="field is-grouped">
 
                     <div class="control">
-                        <button id="register_button" class="button is-link is-success">Login</button>
+                        <button id="login_button" class="button is-link is-success">Login</button>
 
                     </div>
                     <div class="control">
@@ -114,80 +114,13 @@
 
     <script>window.$ = window.jQuery = require('jquery');</script>
     <script defer src="../public/jquery.validate.min.js"></script>
-    <script>
 
-
-
-        // Wait for the DOM to be ready
-        $(function () {
-
-         $("#submiterror").hide()
-
-            // Initialize form validation on the registration form.
-            // It has the name attribute "registration"
-            $("form[name='registration']").validate({
-                errorClass: "help is-danger",
-                // Specify validation rules
-                rules: {
-                    // The key name on the left side is the name attribute
-                    // of an input field. Validation rules are defined
-                    // on the right side
-                    name: "required",
-                    company: "required",
-                    email: {
-                        required: true,
-                        // Specify that email should be validated
-                        // by the built-in "email" rule
-                        email: true
-                    },
-                    password: {
-                        required: true,
-                        minlength: 5
-                    }
-                },
-                // Specify validation error messages
-                messages: {
-                    name: "Please enter your name",
-                    company: "Please enter your company",
-                    password: {
-                        required: "Please provide a password",
-                        minlength: "Your password must be at least 5 characters long"
-                    },
-                    email: "Please enter a valid email address"
-                },
-                // Make sure the form is submitted to the destination defined
-                // in the "action" attribute of the form when valid
-                submitHandler: function (form) {
-                    //form.submit();
-
-                    $.post("http://localhost:8083/authenticate/api/signup", {
-                        name: $('#name').val(),
-                        email: $('#email').val(),
-                        company: $('#company').val(),
-                        password: $('#password').val()
-                    })
-                        .done(function (data) {
-
-                            if (data.status == 'fail') {
-                                $("#submiterror").html(data.message)
-                                $("#submiterror").show()
-                            } else {
-
-                            }
-                            console.log(data)
-                            // alert("Data Loaded: " + data);
-                        });
-
-
-                }
-            });
-        });
-
-    </script>
     <script>
 
         require('../renderers/authRenderer.js');
     </script>
+
+
 </body>
 
 </html>

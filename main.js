@@ -13,6 +13,8 @@ const url = require('url')
 const WebSocket = require('ws');
 const fs = require('fs');
 const enigma = require('enigma.js');
+const machinenodeid = require('node-machine-id');
+const {machineId, machineIdSync} = machinenodeid;
 const schema = require('enigma.js/schemas/12.20.0.json');
 //var senseUtilities = require('enigma.js/sense-utilities');
 var readline = require('readline');
@@ -29,10 +31,15 @@ global['userDataPath'] = (electron.app || electron.remote.app).getPath('userData
 
 global['environment'] = 'development';
 
+global['machineid'] = machineIdSync();
+
+
+
 global['config'] = require('./config.js').get(global['environment']);
 
 
 console.log(global['config'].webservice)
+console.log(global['machineid'])
 
 const updater = require('./updater')
 

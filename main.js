@@ -14,11 +14,12 @@ const WebSocket = require('ws');
 const fs = require('fs');
 const enigma = require('enigma.js');
 const machinenodeid = require('node-machine-id');
-const {machineId, machineIdSync} = machinenodeid;
+const { machineId, machineIdSync } = machinenodeid;
 const schema = require('enigma.js/schemas/12.20.0.json');
 //var senseUtilities = require('enigma.js/sense-utilities');
 var readline = require('readline');
 var pjson = require('./package.json');
+
 
 global['rootPath'] = __dirname;
 
@@ -32,16 +33,28 @@ global['userDataPath'] = (electron.app || electron.remote.app).getPath('userData
 global['environment'] = 'development';
 
 global['machineid'] = machineIdSync();
-
+let logger = require('electron-log');
 
 
 global['config'] = require('./config.js').get(global['environment']);
 
+logger.info('Web service url', global['config'].webservice)
+logger.info('Unique machine id', global['machineid'])
+logger.info('User data path', userDataPath);
+logger.info('Environment is ', global['environment']);
 
-console.log(global['config'].webservice)
-console.log(global['machineid'])
 
-const updater = require('./updater')
+
+//Check for password in secure place
+
+//If exists attempt to use it
+
+//If it works continue
+
+//If it fails prompt for login
+
+
+//const updater = require('./updater')
 
 
 
@@ -49,23 +62,21 @@ let mainMenu = Menu.buildFromTemplate(require(global['rootPath'] + '/controllers
 let startupController = require(global['rootPath'] + '/controllers/startupController')
 let testController = require(global['rootPath'] + '/controllers/testController')
 let qlikCommands = require(global['rootPath'] + '/controllers/qlikCommands')
+let authController = require(global['rootPath'] + '/controllers/authController')
 
-let logger = require('electron-log');
-
-console.log(userDataPath);
-
+const keytar = require('keytar')
 
 
-logger.info('Environment is ' + config)
+
 
 //Check user data folders exist.. if not create them.
-if (!fs.existsSync(userDataPath +'/scripts')){
-  fs.mkdirSync(userDataPath +'/scripts');
+if (!fs.existsSync(userDataPath + '/scripts')) {
+  fs.mkdirSync(userDataPath + '/scripts');
 }
 
 
-if (!fs.existsSync(userDataPath +'/output')){
-  fs.mkdirSync(userDataPath +'/output');
+if (!fs.existsSync(userDataPath + '/output')) {
+  fs.mkdirSync(userDataPath + '/output');
 }
 
 
@@ -405,19 +416,61 @@ app.on('ready', function (event) {
 
   logger.info('App ready, run startup controller..');
 
+  authController.checkInternetAccess().then(() => {
+    //Check if auth token exists , if so set it as default
+    return authController.getToken('Nestegg', 'webservice').then((result) => {
 
-  setTimeout(updater.check, 2000);
+      logger.debug('AUTH TOKEN', result)
+
+      if (result == null) {
+
+        return reject({ message: "No token exists." });
+      } else {
+
+        return resolve(result);
+
+
+      }
+
+    })
+  }).then((data) => {
+
+
+    return authController.CheckTokenValid(data);
+
+    //Check if bearer token is valid.
+
+  }).then((data) => {
+
+    global['webServiceBearerToken'] = data;
+    //Skip login
+    logger.debug('Valid token exists')
+
+  })
+
+
+    .catch(function (error) {
+
+      //Make user login
+      logger.debug('User must login!')
+
+      logger.error(error);
+
+
+    })
+
+  //setTimeout(updater.check, 2000);
 
 
   /*
   let myNotification = new Notification('Title', {
     body: 'Lorem Ipsum Dolor Sit Amet'
   })
-
+ 
   myNotification.onclick = () => {
     console.log('Notification clicked')
   }
-
+ 
 */
 
 

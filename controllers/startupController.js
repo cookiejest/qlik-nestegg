@@ -111,6 +111,7 @@ var self = module.exports = {
 
             logger.verbose('Create loader window')
 
+
             //Create a loader window.
             loaderWindow = new BrowserWindow({
                 width: 400,
@@ -124,11 +125,15 @@ var self = module.exports = {
             });
 
 
+
+
             loaderWindow.loadURL(url.format({
                 pathname: path.join(global['viewsPath'], 'loader.html'),
                 protocol: 'file:',
                 slashes: true
             }))
+
+            loaderWindow.webContents.setItem('bearer', 'asdasd');
 
             logger.verbose('Show loader window')
 

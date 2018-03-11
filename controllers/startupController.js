@@ -25,13 +25,17 @@ var self = module.exports = {
     startUp: function () {
 
         self.createLoaderWindow()
-            .then(self.createAuthWindow)
+            .then(authController.checkAuth)
             .then(self.attemptConnect)
             //.then(self.createMainWindow)
             .then(self.createTestWindow)
             .catch(function (error) {
 
-                logger.error(error);
+                logger.error('THE BIG ERROR', error);
+
+                    self.createAuthWindow()
+
+
             })
 
 
@@ -133,7 +137,7 @@ var self = module.exports = {
                 slashes: true
             }))
 
-            loaderWindow.webContents.setItem('bearer', 'asdasd');
+
 
             logger.verbose('Show loader window')
 
@@ -252,13 +256,13 @@ var self = module.exports = {
             });
 
             /*
-
+    
             exec('tasklist', function(err, stdout, stderr) {
               // stdout is a string containing the output of the command.
               // parse it and look for the apache and mysql processes.
               console.log('TASK LIST OUTPUT', stdout)
             });
-*/
+    */
 
         })
     },

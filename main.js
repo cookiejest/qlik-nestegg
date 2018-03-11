@@ -402,6 +402,9 @@ ipcMain.on('docObjectListChannel', (event, docId) => {
 
   })
 
+
+
+
   //////////////////////
 
 
@@ -414,50 +417,38 @@ ipcMain.on('docObjectListChannel', (event, docId) => {
 // Some APIs can only be used after this event occurs.
 app.on('ready', function (event) {
 
-  logger.info('App ready, run startup controller..');
 
-  authController.checkInternetAccess().then(() => {
-    //Check if auth token exists , if so set it as default
-    return authController.getToken('Nestegg', 'webservice').then((result) => {
-
-      logger.debug('AUTH TOKEN', result)
-
-      if (result == null) {
-
-        return reject({ message: "No token exists." });
-      } else {
-
-        return resolve(result);
+  //Populate trigger item list
+  ipcMain.on('LoginAttempt', (event, username, password) => {
 
 
-      }
+    logger.debug('attempt user login');
+
+
+    authController.generateToken(username, password).then((result) => {
+
+
+      logger.debug(result);
+
+      // mainWindow.webContents.send('docTriggerItemsChannel', docTriggerItemArray)
+      //Redirect user to 
+      startupController.startUp()
+
+    }).catch(function (error) {
+
+
+      logger.error(error);
+      //Bounce back error to login page
 
     })
-  }).then((data) => {
-
-
-    return authController.CheckTokenValid(data);
-
-    //Check if bearer token is valid.
-
-  }).then((data) => {
-
-    global['webServiceBearerToken'] = data;
-    //Skip login
-    logger.debug('Valid token exists')
 
   })
 
 
-    .catch(function (error) {
-
-      //Make user login
-      logger.debug('User must login!')
-
-      logger.error(error);
+  logger.info('App ready, run startup controller..');
 
 
-    })
+
 
   //setTimeout(updater.check, 2000);
 

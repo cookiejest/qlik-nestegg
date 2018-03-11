@@ -8,7 +8,7 @@ const { session } = electron;
 
 const isOnline = require('is-online');
 var moment = require('moment');
-//var request = require('request');
+var request = require('request');
 //NEEDED TO ENABLE COOKIE SHARING BETWEEN REQUESTS
 var request = request.defaults({ jar: true })
 const keytar = require('keytar')
@@ -28,7 +28,16 @@ var self = module.exports = {
 
         return text;
     },
-    getToken: function (username, password) {
+    gup: function (name, url) {
+        //Get GET params from URL
+        if (!url) url = location.href;
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regexS = "[\\?&]" + name + "=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(url);
+        return results == null ? null : results[1];
+    },
+    generateToken: function (username, password) {
         return new Promise((resolve, reject) => {
 
             self.prepareOauthProcess(username, password).then((data) => {
@@ -60,6 +69,40 @@ var self = module.exports = {
                 })
         })
 
+    },
+    checkAuth: function () {
+        return new Promise((resolve, reject) => {
+            //Check internet access
+            self.checkInternetAccess().then(() => {
+
+                return self.getToken('Nestegg', 'webservice')
+            }).then((passwordresult) => {
+
+                return self.checkTokenValid(passwordresult)
+
+            }).then((result) => {
+
+                console.log('Final Outcome', JSON.parse(result))
+
+                var result = JSON.parse(result);
+
+                if (result.message == 'You are connected! Great Job.') {
+
+                    return resolve();
+
+                } else {
+
+                    reject(result.message)
+
+                }
+
+                //Redirect to user login.
+
+            }).catch(function (error) {
+                reject(error);
+                logger.error(error);
+            })
+        })
     },
     prepareOauthProcess: function (username, password) {
         return new Promise((resolve, reject) => {
@@ -189,16 +232,8 @@ var self = module.exports = {
                     //Returns output
 
 
-                    function gup(name, url) {
-                        if (!url) url = location.href;
-                        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-                        var regexS = "[\\?&]" + name + "=([^&#]*)";
-                        var regex = new RegExp(regexS);
-                        var results = regex.exec(url);
-                        return results == null ? null : results[1];
-                    }
 
-                    var code = gup('code', r.headers.location)
+                    var code = self.gup('code', r.headers.location)
                     data.code = code;
                     logger.debug('The Code', code);
                     return resolve(data);
@@ -241,16 +276,19 @@ var self = module.exports = {
                     return reject(e);
                 } else {
 
+                    if (body == 'Unauthorized') {
+                        return reject(body)
+                    } else {
+                        //  keytar.setPassword('Nestegg', 'webservice', body.access_token.value)
+                        logger.debug('THE BODY getoauthtoken', body)
+                        data.access_token = JSON.parse(body).access_token.value;
 
-                    //  keytar.setPassword('Nestegg', 'webservice', body.access_token.value)
-                    data.access_token = body.access_token.value;
-                    logger.info(body)
-                    //Returns output
+                        //Returns output
 
 
-                    return resolve(data);
+                        return resolve(data);
+                    }
                 }
-
             });
 
 
@@ -262,8 +300,10 @@ var self = module.exports = {
         return new Promise((resolve, reject) => {
 
 
-            keytar.setPassword('Nestegg', 'webservice', data.access_token).then((result) => {
+            logger.debug('Save token Data', data);
 
+            keytar.setPassword('Nestegg', 'webservice', data.access_token).then((result) => {
+                resolve('Complete');
 
                 return resolve(result);
             }).catch(function (error) {
@@ -280,10 +320,19 @@ var self = module.exports = {
 
 
             keytar.getPassword(service, account).then((result) => {
+                logger.debug('Get password val', result)
 
-                //Store in session
+                if (result == null) {
 
-                return resolve(result);
+                    return reject({ message: "No token exists." });
+                } else {
+
+                    logger.debug('Get password val', result)
+                    var passwordkey = result;
+                    return resolve(passwordkey);
+
+
+                }
 
 
             }).catch(function (error) {
@@ -293,13 +342,14 @@ var self = module.exports = {
             })
 
 
+
         })
     },
-    CheckTokenValid: function (bearerToken) {
+    checkTokenValid: function (bearerToken) {
         return new Promise((resolve, reject) => {
 
             var url = "http://localhost:8083/api/helloworld";
-
+            logger.debug('bearer token is', bearerToken)
 
             var options = {
                 method: 'GET',
@@ -316,9 +366,16 @@ var self = module.exports = {
                     logger.error(e)
                     return reject(e);
                 } else {
-                    logger.debug(body);
-                    //Returns output
-                    return resolve(bearerToken);
+
+                    logger.debug('THE BODY', body);
+
+                    if (body == 'Unauthorized') {
+                        return reject('Token not valid.')
+
+                    } else {
+                        //Returns output
+                        return resolve(body);
+                    }
                 }
 
             })
@@ -338,13 +395,20 @@ var self = module.exports = {
 
 
 
-            isOnline().then(online => {
-                console.log(online);
-                return resolve(result)
+            isOnline().then((online) => {
+
+                if (online == true) {
+                    return resolve(online)
+                } else {
+                    return reject('No Internet Connection')
+                }
+
+
             }).catch(function (error) {
 
-                return reject('No internet connection');
                 logger.error(error);
+                return reject(error);
+
 
 
             })

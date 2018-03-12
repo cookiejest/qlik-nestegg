@@ -6,6 +6,20 @@ const { ipcRenderer, remote } = require('electron')
 // Wait for the DOM to be ready
 $(function () {
 
+
+  ipcRenderer.on('error_message', (event, message) => {
+
+
+    console.log(message)
+
+    $('#login_button').removeClass('is-loading');
+
+
+    $("#submiterror").html(message);
+    $("#submiterror").show()
+})
+
+
   $("#submiterror").hide()
 
   // Initialize form validation on the registration form.
@@ -44,7 +58,7 @@ $(function () {
       $('#login_button').addClass('is-loading')
       console.log('Login form clicked!', form);
 
-      ipcRenderer.send('LoginAttempt', 'adamcooke@webofwork.com',  'Leander1337');
+      ipcRenderer.send('LoginAttempt', $('#email').val(),  $('#password').val());
 
     }
   });
@@ -105,6 +119,7 @@ $(function () {
             $("#submiterror").show()
           } else {
 
+            ipcRenderer.send('LoginAttempt', $('#email').val(),  $('#password').val());
 
           }
           console.log(data)

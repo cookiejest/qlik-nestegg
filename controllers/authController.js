@@ -60,9 +60,13 @@ var self = module.exports = {
 
                 return self.saveToken(data);
 
+            }).then(() => {
+                logger.debug('All Done!');
+                return resolve();
             })
                 .catch(function (error) {
 
+                    reject(error);
                     logger.error(error);
 
 
@@ -131,7 +135,7 @@ var self = module.exports = {
             //var url = "http://localhost:8083/authenticate/api/clients";
 
             var params = {
-                name: data.compname,
+                name: data.machinename,
                 id: data.id,
                 secret: data.secret
             }
@@ -152,9 +156,19 @@ var self = module.exports = {
                     logger.error(e)
                     return reject(e);
                 } else {
-                    logger.debug(body);
-                    //Returns output
-                    return resolve(data);
+
+                    if (body == 'Unauthorized') {
+
+                        return reject(body);
+
+                    } else {
+
+                        logger.debug(body);
+                        //Returns output
+                        return resolve(data);
+
+                    }
+
                 }
 
             })
@@ -189,8 +203,9 @@ var self = module.exports = {
                     return reject(e);
                 } else {
 
-                    data.transaction_id = JSON.parse(body).transaction_id;
                     logger.debug('The transaction_id', data.transaction_id);
+                    data.transaction_id = JSON.parse(body).transaction_id;
+
                     //Returns output
                     return resolve(data);
                 }

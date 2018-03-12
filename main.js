@@ -428,15 +428,16 @@ app.on('ready', function (event) {
     authController.generateToken(username, password).then((result) => {
 
 
-      logger.debug(result);
+      logger.debug('REsult from login', result);
 
       // mainWindow.webContents.send('docTriggerItemsChannel', docTriggerItemArray)
       //Redirect user to 
-      startupController.startUp()
-
+      app.relaunch()
+      app.exit(0);
+      
     }).catch(function (error) {
 
-
+      event.sender.send('error_message', error);
       logger.error(error);
       //Bounce back error to login page
 

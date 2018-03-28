@@ -132,7 +132,7 @@ var self = module.exports = {
         return new Promise((resolve, reject) => {
 
 
-            //var url = "http://localhost:8083/authenticate/api/clients";
+            var url = global['config'].webservice + "/authenticate/api/clients";
 
             var params = {
                 name: data.machinename,
@@ -143,7 +143,7 @@ var self = module.exports = {
 
             var options = {
                 method: 'POST',
-                uri: 'http://localhost:8083/authenticate/api/clients',
+                uri: url,
                 form: params,
                 headers: {
                     'Authorization': data.authheader
@@ -161,7 +161,12 @@ var self = module.exports = {
 
                         return reject(body);
 
+                    } else if (body.codeName == "DuplicateKey") {
+
+                        return reject("Machine already registered.");
+
                     } else {
+
 
                         logger.debug(body);
                         //Returns output
@@ -184,7 +189,7 @@ var self = module.exports = {
         return new Promise((resolve, reject) => {
 
 
-            var url = "http://localhost:8083" + "/authenticate/oauth2/authorize?client_id=" + data.id + "&response_type=code&redirect_uri=" + "http://localhost:8083" + "&immediate=true";
+            var url = global['config'].webservice + "/authenticate/oauth2/authorize?client_id=" + data.id + "&response_type=code&redirect_uri=" + "http://localhost:8083" + "&immediate=true";
 
 
             var options = {
@@ -218,7 +223,7 @@ var self = module.exports = {
     approveOauthTransaction: function (data) {
         return new Promise((resolve, reject) => {
 
-            var url = "http://localhost:8083/authenticate/oauth2/authorize";
+            var url = global['config'].webservice +"/authenticate/oauth2/authorize";
 
             var params = {
                 transaction_id: data.transaction_id,
@@ -264,7 +269,7 @@ var self = module.exports = {
         return new Promise((resolve, reject) => {
 
 
-            var url = "http://localhost:8083/authenticate/oauth2/token";
+            var url = global['config'].webservice + "/authenticate/oauth2/token";
 
             var params = {
                 code: data.code,
@@ -363,7 +368,7 @@ var self = module.exports = {
     checkTokenValid: function (bearerToken) {
         return new Promise((resolve, reject) => {
 
-            var url = "http://localhost:8083/api/helloworld";
+            var url = global['config'].webservice + "/api/helloworld";
             logger.debug('bearer token is', bearerToken)
 
             var options = {
@@ -388,6 +393,7 @@ var self = module.exports = {
                         return reject('Token not valid.')
 
                     } else {
+
                         //Returns output
                         return resolve(body);
                     }
@@ -421,7 +427,8 @@ var self = module.exports = {
 
             }).catch(function (error) {
 
-                logger.error(error);
+                logger.error('The error', error);
+
                 return reject(error);
 
 

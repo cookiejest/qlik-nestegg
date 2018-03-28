@@ -28,18 +28,54 @@ var self = module.exports = {
             .then(authController.checkAuth)
             .then(self.attemptConnect)
             //.then(self.createMainWindow)
-            .then(self.createTestWindow)
+            //.then(self.createTestWindow)
+            .then(self.createVueWindow)
             .catch(function (error) {
 
                 logger.error('THE BIG ERROR', error);
 
+                if (error == 'No Internet Connection') {
+
+                    self.noInternetWindow()
+                } else if (error.message.includes('Error: connect ECONNREFUSED')) {
+
+                    self.noAuthServer()
+
+                }  else {
+
                     self.createAuthWindow()
+
+
+
+                }
+
+
 
 
             })
 
 
         self.startWebServer()
+
+    },
+    noInternetWindow: function () {
+
+        loaderWindow.loadURL(url.format({
+            pathname: path.join(global['viewsPath'], 'nointernet.html'),
+            protocol: 'file:',
+            slashes: true
+        }))
+
+
+    },
+    noAuthServer: function () {
+
+        loaderWindow.loadURL(url.format({
+            pathname: path.join(global['viewsPath'], 'noauthserver.html'),
+            protocol: 'file:',
+            slashes: true
+        }))
+
 
     },
     attemptConnect: function () {
@@ -328,7 +364,73 @@ var self = module.exports = {
         return mainWindow;
 
     },
+    createVueWindow: function () {
 
+        console.log('Main window vue open fired')
+
+
+        let winState = windowStateKeeper({
+        });
+
+        // Create the browser window.
+        mainWindow = new BrowserWindow({
+            x: winState.x,
+            y: winState.y,
+            minHeight: 350, minWidth: 450,
+            icon: path.join(__dirname, 'app_logo1.ico'),
+            show: false,
+            title: "Wow Vue"
+        })
+
+        winState.manage(mainWindow);
+
+        //load the index.html of the app.
+     //   mainWindow.loadURL('http://localhost:8080')
+
+        
+        //load the index.html of the app.
+        mainWindow.loadURL(url.format({
+            pathname: path.join(global['viewsPath'],'app', 'index.html'),
+            protocol: 'file:',
+            slashes: true
+        }))
+
+
+        //Set top navigation
+        Menu.setApplicationMenu(mainMenu);
+
+        //Open Dev tools
+        //mainWindow.webContents.openDevTools()
+
+        // Emitted when the window is closed.
+        mainWindow.on('closed', function () {
+            console.log('main window closed');
+            // Dereference the window object, usually you would store windows
+            // in an array if your app supports multi windows, this is the time
+            // when you should delete the corresponding element.
+            mainWindow = null
+        })
+
+
+        mainWindow.webContents.on('did-finish-load', () => {
+
+            mainWindow.show();
+            loaderWindow.hide();
+
+
+
+            qlikCommands.getDocList().then((docObjectArray) => {
+
+                mainWindow.webContents.send('appDocListChannel', docObjectArray)
+
+            });
+
+
+        })
+
+        return mainWindow;
+
+    },
 
     createTray: function () {
 

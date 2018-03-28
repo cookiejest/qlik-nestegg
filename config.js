@@ -1,9 +1,9 @@
 var config = {
     "development": {
-        'webservice': 'http://127.0.0.1:8083'
+        'webservice': 'http://localhost:8083'
     },
     "staging": {
-        'webservice': 'http://someserver.com'
+        'webservice': 'https://nestegg-stage.herokuapp.com'
     },
     "production": {
         'webservice': 'http://someprodserver.com'

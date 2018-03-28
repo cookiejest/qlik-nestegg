@@ -2,12 +2,10 @@
 var express = require('express')
 var app = express()
 
-// respond with "hello world" when a GET request is made to the homepage
-app.get('/', function (req, res) {
-  console.log('THIS IS FROM THE CHILD PROCESS EXPRESS APP!')
-  res.send('hello world')
-})
 
+
+//Host vue.js app
+app.use('/', express.static('./app/dist'))
 
 
 // respond with "hello world" when a GET request is made to the homepage
@@ -18,6 +16,12 @@ app.get('/test/run', function (req, res) {
   res.send('hello world')
 })
 
+/*
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/helloworld', function (req, res) {
+  res.send('hello world1')
+})
+*/
 
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(3001, () => console.log('Example app listening on port 3001!'))

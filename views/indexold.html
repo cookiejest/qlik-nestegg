@@ -3,7 +3,11 @@
 
 <head>
   <meta charset="UTF-8">
-
+  <title>w0w.io Nestegg Testing Engine for Qlik Sense</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="../public/global.css">
+  <link rel="stylesheet" href="../public/bulma.min.css">
+  <script defer src="../public/font-awesome-all.js"></script>
 
   <style>
     * {
@@ -107,10 +111,6 @@
     }
 
 
-
-
-
-
     h1,
     h2,
     h3,
@@ -121,8 +121,6 @@
       font-weight: 100;
 
     }
-
-
 
 
     /* 
@@ -146,15 +144,6 @@
       grid-column-end: 4;
     }
   */
-
-    .brandcolor1 {
-      background-color: #001021;
-    }
-
-    .brandcolor2 {
-      background-color: #f9fafc;
-    }
-
 
     @media screen and (max-width: 1000px) {
 
@@ -420,9 +409,15 @@ body:hover notes {
           <channelheader>
             <h3>Alerts</h3>
           </channelheader>
-          <alert>alerttitle A <status>Active</status></alert>
-          <alert>alerttitle B <status>Disabled</status></alert>
-          <alert>alerttitle C <status>Active</status></alert>
+          <alert>alerttitle A
+            <status>Active</status>
+          </alert>
+          <alert>alerttitle B
+            <status>Disabled</status>
+          </alert>
+          <alert>alerttitle C
+            <status>Active</status>
+          </alert>
 
 
         </alerts>
@@ -430,21 +425,21 @@ body:hover notes {
           <channelheader>
             <h3>Charts</h3>
           </channelheader>
-          
+
           <select id="qlikapps" name="qlikapps">
             <option value="">Select App</option>
           </select>
-          <channellist  id="channellist">
-          <channelname>
-            <a href="https://www.google.com" target="_blank">channel 1</a>
-          </channelname>
-          <channelname>
-            <a href="about.html">test</a> 
-          </channelname>
-          <channelname>
-            <a href="https://drive.google.com/uc?export=download&id=0Bw8HgOhf0Mg5bVdOZWVfcE5qb1E">dog pic</a>
-          </channelname>
-        </channellist>
+          <channellist id="channellist">
+            <channelname>
+              <a href="https://www.google.com" target="_blank">channel 1</a>
+            </channelname>
+            <channelname>
+              <a href="about.html">test</a>
+            </channelname>
+            <channelname>
+              <a href="https://drive.google.com/uc?export=download&id=0Bw8HgOhf0Mg5bVdOZWVfcE5qb1E">dog pic</a>
+            </channelname>
+          </channellist>
         </channels>
       </sidescrollable>
     </side>
@@ -459,39 +454,45 @@ body:hover notes {
       <alertsetting class="nohighlight">
         <div id='alerts_toggle'>New Alert</div>
         <newalertform>
-            <alertinfo>
-              <h3>Alert Title</h3>
-                <input></input>
-                <h3>Alert Description</h3>
-                <textarea></textarea>
-              </alertinfo>
+          <alertinfo>
+            <h3>Alert Title</h3>
+            <input></input>
+            <h3>Alert Description</h3>
+            <textarea></textarea>
+          </alertinfo>
           <alertriggerlist>
-              <h2>Alert Triggers</h2>
-              <alerttrigger>          <select>
-                  <option value="">Select Dimension, Measure or Variable</option>
-                </select><select>
-                    <option value="">Greater than</option>
-                    <option value="">Equal to</option>
-                    <option value="">Less than</option></select>
-                <triggercondition>Value:<input></input></triggercondition>
- </alerttrigger>
-              <alerttrigger>2</alerttrigger>
-              <alerttrigger>3</alerttrigger>
-              <button>Add Field Trigger</button>
-              <button>Add Measure Trigger</button>
-              <button>Add Variable Trigger</button>
-              <button>Add Schedule Based Trigger</button>
+            <h2>Alert Triggers</h2>
+            <alerttrigger>
+              <select>
+                <option value="">Select Dimension, Measure or Variable</option>
+              </select>
+              <select>
+                <option value="">Greater than</option>
+                <option value="">Equal to</option>
+                <option value="">Less than</option>
+              </select>
+              <triggercondition>Value:
+                <input></input>
+              </triggercondition>
+            </alerttrigger>
+            <alerttrigger>2</alerttrigger>
+            <alerttrigger>3</alerttrigger>
+            <button>Add Field Trigger</button>
+            <button>Add Measure Trigger</button>
+            <button>Add Variable Trigger</button>
+            <button>Add Schedule Based Trigger</button>
           </alertriggerlist>
           <alertcontent>
-          <h2>Alert Content</h2>
-          <alertitem>item1</alertitem>
-          <alertitem>item2</alertitem>
-          <button>Add New Content</button>
+            <h2>Alert Content</h2>
+            <alertitem>item1</alertitem>
+            <alertitem>item2</alertitem>
+            <button>Add New Content</button>
           </alertcontent>
           <alertrecepientlist>
-              <h2>Alert Recipients</h2><input placeholder="email address"></input>
-              <button>Add Recipient</button>
-              </alertrecepientlist>
+            <h2>Alert Recipients</h2>
+            <input placeholder="email address"></input>
+            <button>Add Recipient</button>
+          </alertrecepientlist>
           <button>Activate</button>
         </newalertform>
       </alertsetting>

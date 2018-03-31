@@ -245,6 +245,7 @@ ipcMain.on('retrieve_tests', (event, value) => {
     event.sender.send('retrieve_tests', result)
     //mainWindow.webContents.send('new_test_channel', 'complete')
 
+
   }).catch(function (error) {
 
     //logger.warn(error);

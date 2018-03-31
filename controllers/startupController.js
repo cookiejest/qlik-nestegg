@@ -385,16 +385,16 @@ var self = module.exports = {
         winState.manage(mainWindow);
 
         //load the index.html of the app.
-     //   mainWindow.loadURL('http://localhost:8080')
+       mainWindow.loadURL('http://localhost:3001')
 
-        
+        /*
         //load the index.html of the app.
         mainWindow.loadURL(url.format({
             pathname: path.join(global['viewsPath'],'app', 'index.html'),
             protocol: 'file:',
             slashes: true
         }))
-
+*/
 
         //Set top navigation
         Menu.setApplicationMenu(mainMenu);

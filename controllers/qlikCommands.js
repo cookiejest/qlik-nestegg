@@ -308,9 +308,53 @@ var self = module.exports = {
 
         });
     },
-    libraryDimensionLookup: function (dimension) {
+    getAppFields: function (docId) {
         return new Promise((resolve, reject) => {
 
+
+            const qix = enigma.create({
+                schema,
+                url: 'ws://localhost:4848/app/' + docId + '/engineData',
+                createSocket: url => new WebSocket(url)
+            });
+
+
+            qix.open()
+                .then(function (global) {
+
+                    return global.openDoc(docId, '', '', '', false)
+                })
+                .then((app) => {
+
+                    //Create session object to check numbers against
+                    return app.createSessionObject({
+                        "qInfo": {
+                            "qId": "",
+                            "qType": "FieldList"
+                        },
+                        "qFieldListDef": {
+                            "qShowSystem": true,
+                            "qShowHidden": true,
+                            "qShowSemantic": true,
+                            "qShowSrcTables": true
+                        }
+
+                    })
+                }).then((object) => object.getLayout()
+                    .then((qlikobjects) => {
+                        //mainWindow.webContents.send('appobjectlist', genericobjects)
+
+                        return resolve(qlikobjects)
+                    })
+                    .then(() => qix.close())
+                    .then(() => {
+                        logger.debug(' Qix Session closed')
+                    })
+                    .catch(err => {
+                        logger.debug('Something went wrong :(', err)
+                        return reject(err)
+                    })
+                )
         })
     },
     formatDimension: function (dimension) {
@@ -318,7 +362,7 @@ var self = module.exports = {
             //Format dimensions for qlik hypercube
 
             //Library item
-            if(dimension['qLibraryId']) {
+            if (dimension['qLibraryId']) {
                 var value = {
                     "qNullSuppression": true,
                     "qLibraryId": ""
@@ -328,16 +372,16 @@ var self = module.exports = {
 
 
 
-            //Non library item
+                //Non library item
 
-            var string = "=if([" + dimension['fieldname'] + "]=" + "'" + dimension['value'] + "',[" + dimension['fieldname'] + "], null())";
+                var string = "=if([" + dimension['fieldname'] + "]=" + "'" + dimension['value'] + "',[" + dimension['fieldname'] + "], null())";
 
-            var value = {
-                "qNullSuppression": true,
-                "qDef": { "qFieldDefs": [string] }
-            };
+                var value = {
+                    "qNullSuppression": true,
+                    "qDef": { "qFieldDefs": [string] }
+                };
 
-        }
+            }
             resolve(value);
 
 
@@ -351,7 +395,7 @@ var self = module.exports = {
 
 
             resolve({
-                "qDef": {"qDef": string}
+                "qDef": { "qDef": string }
             });
 
         })
@@ -393,9 +437,9 @@ var self = module.exports = {
     createMeasureObject: function (docId, measureArray) {
         return new Promise((resolve, reject) => {
 
-            
 
-          //  logger.debug('checkSessionObject Fired');
+
+            //  logger.debug('checkSessionObject Fired');
 
             let i;
             let dimensionAddPromises = [];
@@ -411,28 +455,28 @@ var self = module.exports = {
             /////////////////////
             var string = measureArray.measure['expressionvalue'];
 
-            var measureVal = {"qDef": {"qDef": string}};
+            var measureVal = { "qDef": { "qDef": string } };
 
             //logger.debug('measureVal', measureVal)
 
-///////////////////
+            ///////////////////
 
-                var rangeItem = {
-                    "qRange": {},
-                    "qMeasureIx": 0
-                };
-
-
-                if (measureArray.measure['minvalue']) {
-                    rangeItem.qRange.qMin = measureArray.measure['minvalue'];
-                }
-
-                if (measureArray.measure['maxvalue']) {
-                    rangeItem.qRange.qMax = measureArray.measure['maxvalue'];
-                }
+            var rangeItem = {
+                "qRange": {},
+                "qMeasureIx": 0
+            };
 
 
-                //logger.debug('rangeItem', rangeItem)
+            if (measureArray.measure['minvalue']) {
+                rangeItem.qRange.qMin = measureArray.measure['minvalue'];
+            }
+
+            if (measureArray.measure['maxvalue']) {
+                rangeItem.qRange.qMax = measureArray.measure['maxvalue'];
+            }
+
+
+            //logger.debug('rangeItem', rangeItem)
 
 
             const qix = enigma.create({
@@ -455,11 +499,11 @@ var self = module.exports = {
                 })
                 .then(() => qix.open())
                 .then(function (global) {
-                   // logger.debug('Open app')
+                    // logger.debug('Open app')
                     return global.openDoc(docId, '', '', '', false)
                 })
                 .then((app) => {
-                    
+
                     //Create session object to check numbers against
                     return app.createSessionObject({
                         "qInfo": {
@@ -477,7 +521,7 @@ var self = module.exports = {
                         }
                     })
                 }).then((object) => object.getLayout()
-                
+
                     // Select first measure ranges as defined by user
                     .then(() => object.rangeSelectHyperCubeValues('/qHyperCubeDef', [rangeItem]))
                     // Get layout and view the selected values
@@ -520,7 +564,7 @@ var self = module.exports = {
 
                 })
 
-        
+
         })
     },
     inRange: function (docId, triggerArray) {
@@ -532,39 +576,39 @@ var self = module.exports = {
 
             let i;
             let measureSplitPromises = [];
-        
+
             var interationNumber = 0;
-            var numberofmeasures = triggerArray.measures.length -1;
+            var numberofmeasures = triggerArray.measures.length - 1;
             var measureNumber = 0;
             var resultsarray = [];
 
             //logger.debug(triggerArray);
 
-           // logger.debug('total number of measures', numberofmeasures)
+            // logger.debug('total number of measures', numberofmeasures)
 
             executeMeasure(0, triggerArray);
 
-            function executeMeasure (measureNumber, triggerArray) {
+            function executeMeasure(measureNumber, triggerArray) {
 
                 //logger.debug('Measure Number:', measureNumber)
 
                 var individualMeasureData = {
                     "dimensions": triggerArray.dimensions,
-                    "measure":  triggerArray.measures[measureNumber]
+                    "measure": triggerArray.measures[measureNumber]
                 }
 
 
                 //logger.debug('individualMeasureData',individualMeasureData)
 
 
-                self.createMeasureObject(docId, individualMeasureData).then((data)=> {
+                self.createMeasureObject(docId, individualMeasureData).then((data) => {
                     resultsarray.push(data);
                     //logger.debug(measureNumber + ' result ' + data);
 
-                    if(measureNumber == numberofmeasures) {
-                       // logger.debug('Last measure');
-                       // logger.debug('resultsarray', resultsarray);
-                        if(resultsarray.includes(false)==true) {
+                    if (measureNumber == numberofmeasures) {
+                        // logger.debug('Last measure');
+                        // logger.debug('resultsarray', resultsarray);
+                        if (resultsarray.includes(false) == true) {
                             //Do not fire alert
                             return resolve(false);
                         } else {
@@ -576,22 +620,22 @@ var self = module.exports = {
 
 
 
-                        measureNumber+=1;
-                    
+                        measureNumber += 1;
+
                         executeMeasure(measureNumber, triggerArray)
 
                     }
-                    
-                
+
+
                 }).catch(err => {
                     logger.debug('Something went wrong :(', err)
                     return reject(err)
                     //Create session object using specified dimension and measure/variable values
-    
+
                 })
 
             }
-    
+
 
 
             //qix.on('traffic:*', (direction, msg) => logger.debug(direction, JSON.stringify(msg)));
@@ -608,39 +652,39 @@ var self = module.exports = {
 
             let i;
             let measureSplitPromises = [];
-        
+
             var interationNumber = 0;
-            var numberofmeasures = triggerArray.measures.length -1;
+            var numberofmeasures = triggerArray.measures.length - 1;
             var measureNumber = 0;
             var resultsarray = [];
 
             //logger.debug(triggerArray);
 
-           // logger.debug('total number of measures', numberofmeasures)
+            // logger.debug('total number of measures', numberofmeasures)
 
             executeMeasure(0, triggerArray);
 
-            function executeMeasure (measureNumber, triggerArray) {
+            function executeMeasure(measureNumber, triggerArray) {
 
                 //logger.debug('Measure Number:', measureNumber)
 
                 var individualMeasureData = {
                     "dimensions": triggerArray.dimensions,
-                    "measure":  triggerArray.measures[measureNumber]
+                    "measure": triggerArray.measures[measureNumber]
                 }
 
 
                 //logger.debug('individualMeasureData',individualMeasureData)
 
 
-                self.createMeasureObject(docId, individualMeasureData).then((data)=> {
+                self.createMeasureObject(docId, individualMeasureData).then((data) => {
                     resultsarray.push(data);
                     //logger.debug(measureNumber + ' result ' + data);
 
-                    if(measureNumber == numberofmeasures) {
-                       // logger.debug('Last measure');
-                       // logger.debug('resultsarray', resultsarray);
-                        if(resultsarray.includes(false)==true) {
+                    if (measureNumber == numberofmeasures) {
+                        // logger.debug('Last measure');
+                        // logger.debug('resultsarray', resultsarray);
+                        if (resultsarray.includes(false) == true) {
                             //Do not fire alert
                             return resolve(false);
                         } else {
@@ -652,22 +696,22 @@ var self = module.exports = {
 
 
 
-                        measureNumber+=1;
-                    
+                        measureNumber += 1;
+
                         executeMeasure(measureNumber, triggerArray)
 
                     }
-                    
-                
+
+
                 }).catch(err => {
                     logger.debug('Something went wrong :(', err)
                     return reject(err)
                     //Create session object using specified dimension and measure/variable values
-    
+
                 })
 
             }
-    
+
 
 
             //qix.on('traffic:*', (direction, msg) => logger.debug(direction, JSON.stringify(msg)));

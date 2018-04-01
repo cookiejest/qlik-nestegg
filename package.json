@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "bcrypt": "^1.0.3",
+    "cors": "^2.8.4",
     "electron-log": "2.2.14",
     "electron-titlebar": "0.0.3",
     "electron-updater": "2.20.1",
@@ -55,6 +56,7 @@
     "moment": "2.20.1",
     "node-machine-id": "^1.1.10",
     "picasso.js": "^0.5.3",
+    "pouchdb": "^6.4.3",
     "request": "2.83.0",
     "valid-filename": "^2.0.1",
     "vue": "^2.5.16",

@@ -21,6 +21,7 @@ var readline = require('readline');
 var pjson = require('./package.json');
 
 
+
 global['rootPath'] = __dirname;
 
 //Public resource folder path

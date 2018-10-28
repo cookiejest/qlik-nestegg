@@ -1,6 +1,6 @@
 # qlik-nestegg
 
-This is a desktop tool that works with Qlik Sense Desktop to let you create mocha tests for Qlik Sense.
+This is a standalone desktop tool that works with Qlik Sense Desktop to let you create mocha tests for Qlik Sense.
 
 Main use cases:
 
